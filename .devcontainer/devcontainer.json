@@ -51,7 +51,7 @@
                         "workflows": "write"
                     }
                 },
-                "microsoft/gatsby-remark-makecode": {
+                "jacdac/gatsby-remark-makecode": {
                     "permissions": {
                         "contents": "write",
                         "pull_requests": "write",

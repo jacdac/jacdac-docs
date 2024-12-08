@@ -9,7 +9,7 @@
 	url = https://github.com/jacdac/node-red-contrib-jacdac
 [submodule "gatsby-remark-makecode"]
 	path = gatsby-remark-makecode
-	url = https://github.com/microsoft/gatsby-remark-makecode
+	url = https://github.com/jacdac/gatsby-remark-makecode
 [submodule "react-jacdac"]
 	path = react-jacdac
 	url = https://github.com/jacdac/react-jacdac
