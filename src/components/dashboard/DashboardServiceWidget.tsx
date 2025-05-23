@@ -52,6 +52,7 @@ import {
     SRV_GPIO,
     SRV_ROS,
     SRV_INDEXED_SCREEN,
+    SRV_BITMAP
 } from "../../../jacdac-ts/src/jdom/constants"
 import { JDService } from "../../../jacdac-ts/src/jdom/service"
 import { CircularProgress, SvgIconProps } from "@mui/material"
@@ -66,6 +67,7 @@ import DashboardGamepad from "./DashboardGamepad"
 import useServiceServer from "../hooks/useServiceServer"
 import Suspense from "../ui/Suspense"
 import DashboardServiceDefaultWidget from "./DashboardServiceDefaultWidget"
+import DashboardBitmap from "./DashboardBitmap"
 
 // lazy devices
 const DashboardServo = lazy(() => import("./DashboardServo"))
@@ -186,6 +188,11 @@ const serviceViews: {
     },
     [SRV_INDEXED_SCREEN]: {
         component: DashboardIndexedScreen,
+        weight: () => 3,
+        expandable: true
+    },
+    [SRV_BITMAP]: {
+        component: DashboardBitmap,
         weight: () => 3,
         expandable: true
     },
