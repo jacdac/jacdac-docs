@@ -16,7 +16,7 @@ It is built on top of the [JavaScript package](/clients/javascript).
 Before getting into the details of the setup, let's build a tiny app that lets you control the
 background color of a `div` using a Jacdac slider. (If you want to skip ahead, read the [setup](/clients/javascript/react/setup) page).
 
-We start by retreiving any potentiometer attached to the bus using the `useServices` hook.
+We start by retrieving any potentiometer attached to the bus using the `useServices` hook.
 The `useServices` hook returns list of a [potentiometer service nodes](/services/potentiometer/) (`SRV_POTENTIOMETER`) on the bus.
 The service JDOM nodes mirror the state of the physical services (although we could support multiple sliders, we simply grab the first).
 

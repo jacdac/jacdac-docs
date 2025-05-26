@@ -1,0 +1,64 @@
+---
+title: Creating a New Service
+---
+
+#  Service specification
+
+See the [service language specification](/reference/service-specification/) 
+for more details about the syntax and semantics of services. 
+The [current set of specifications](https://github.com/jacdac/jacdac/tree/main/services)
+are quite helpful. 
+
+We first describe the process for authoring a specification and creating the associated
+assets that drive the web side of Jacdac; we then turn to the firmware support for
+the service. To better understand the process, we suggest you open 
+https://github.com/jacdac/jacdac-docs in a CodeSpace (via the green `Code` button).
+
+## Assets (automatically created)
+
+Before going into the author process, let's first examine the 
+[magnetic field level specification](https://github.com/jacdac/jacdac/blob/main/services/magneticfieldlevel.md) and the assets created from it.
+
+Search for the string `MAGNETIC_FIELD_LEVEL` in the CodeSpace. This identifier
+is created from the name of the service (as given in the first line of the markdown file)
+and appears in various contexts to refer to parts of the service specification.
+
+- jacdac-spec/dist
+  - magneticfieldlevel.h
+  - specconstants.ts
+  - specconstants.sts
+
+- pxt-jacdac/magnetic-field-level
+  - client.g.ts
+  - pxt.json (MakeCode extension metadata)
+  - constants.ts
+
+## Assets (manually created/modified)
+
+- jacdac-ts/src/servers
+  - magneticfieldlevelserver.ts
+  - servers.ts
+
+- [TypeScript servers](https://github.com/jacdac/jacdac-ts/tree/main/src/servers) and [associated factory](https://github.com/jacdac/jacdac-ts/tree/main/src/servers/servers.ts)
+
+
+  service specification in the [service editor](/tools/service-editor/)
+- submit a pull request (PR), using the service editor
+- after PR is merged, [implement the service firmware](#implementing-service-firmware)
+
+
+## Implementing service firmware
+
+If you need to implement a new service, we again recommend that you start with an existing service
+implementation, as found in the [services directory](https://github.com/jacdac/jacdac-c/tree/main/services)
+of the jacdac-c repo:
+* [services/servo.c](https://github.com/jacdac/jacdac-c/tree/main/services/servo.c) has a simple example of registers
+* [services/buzzer.c](https://github.com/jacdac/jacdac-c/tree/main/services/buzzer.c) has a simple example of how a command is handled (in `buzzer_handle_packet()`)
+* [services/thermometer.c](https://github.com/jacdac/jacdac-c/tree/main/services/thermometer.c) is a very simple sensor
+* [services/power.c](https://github.com/jacdac/jacdac-c/tree/main/services/power.c) is a more involved sensor (with custom registers)
+
+Once you add a service, make sure to add its `*_init()` function to 
+[services/jd_services.h](https://github.com/jacdac/jacdac-c/tree/main/services/jd_services.h).
+
+The Jacdac runtime contains a set of helper functions for working with the
+components of a Jacdac service: registers, commands, and events.
