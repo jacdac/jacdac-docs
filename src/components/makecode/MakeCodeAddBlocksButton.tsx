@@ -27,7 +27,7 @@ export default function MakeCodeAddBlocksButton() {
     const disabledTooltip =
         "This button becomes available if you have devices connected that don't have their matching blocks added to the 'Modules' drawer"
 
-    if (!isMakeCodeTool) return null
+    // if (!isMakeCodeTool) return null
 
     return (
         <Tooltip

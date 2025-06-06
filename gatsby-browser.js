@@ -19,7 +19,7 @@ function tryUpdate(force) {
         ) {
             console.debug(`jacdac: check for updates`)
             try {
-                const req = await fetch("/jacdac-docs/version.json")
+                const req = await fetch("/pxt-jacdac/version.json")
                 if (!req.ok) {
                     console.debug(`fetch version.json failed, probably offline`)
                     return

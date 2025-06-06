@@ -168,7 +168,7 @@ function LayoutWithDarkMode(props: LayoutProps) {
     const { element, props: pageProps } = props
     const { pageContext, path } = pageProps
     const { frontmatter } = pageContext || {}
-    const makeCodeTool = /tools\/makecode-/.test(path)
+    const makeCodeTool = true
     const { fullScreen } = frontmatter || {
         fullScreen: makeCodeTool,
     }
@@ -218,12 +218,13 @@ function LayoutWithContext(props: LayoutProps) {
     const isHosted = UIFlags.hosted
     const footer = UIFlags.footer
     const tools = /^\/tools\//.test(path)
-    const makeCodeTool = /tools\/makecode-/.test(path)
+    const makeCodeTool = true
     const deviceScriptTool = /tools\/devicescript-/.test(path)
     const devicesPage = /^\/devices\/$/.test(path)
     const fullWidthTools =
+        makeCodeTool ||
         /^\/tools\/console\/$/.test(path) ||
-        /^\/(tools\/(makecode-|player|devicescript-)|dashboard)/.test(path) ||
+        /^\/(tools\/(player|devicescript-)|dashboard)/.test(path) ||
         !!frontmatter?.fullWidth
     const { hideMainMenu = false, hideBreadcrumbs = false } = frontmatter || {
         hideMainMenu: isHosted || makeCodeTool || deviceScriptTool,

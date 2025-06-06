@@ -105,20 +105,7 @@ async function createServicePages(graphql, actions, reporter) {
     })
 }
 
-async function createRedirects(actions) {
-    const { createRedirect } = actions
-    const rs = [
-        {
-            fromPath: `/tools/module-tester`,
-            toPath: `/tools/device-tester`,
-        },
-        {
-            fromPath: `/clients/p5js`,
-            toPath: `/clients/javascript/p5js`,
-        },
-    ]
-    rs.forEach(r => createRedirect(r))
-}
+
 
 async function createDeviceQRPages(actions) {
     console.log(`generating device QR pages`)
@@ -337,12 +324,11 @@ async function createVersions() {
 // create pages.
 exports.createPages = async ({ graphql, actions, reporter }) => {
     await generateServicesJSON()
-    await createServicePages(graphql, actions, reporter)
-    await createDevicePages(graphql, actions, reporter)
-    await createDeviceQRPages(actions, reporter)
+    //await createServicePages(graphql, actions, reporter)
+    //await createDevicePages(graphql, actions, reporter)
+    //await createDeviceQRPages(actions, reporter)
     await createWorkers()
     await createVersions()
-    await createRedirects(actions)
 }
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
@@ -396,6 +382,9 @@ exports.onCreateWebpackConfig = ({ stage, actions, getConfig }) => {
                 fallback,
             },
             plugins,
+            //output: {
+            //    publicPath: "./"
+            //}
         })
     }
 
@@ -409,46 +398,6 @@ exports.onCreateWebpackConfig = ({ stage, actions, getConfig }) => {
     //console.log({ webpack: getConfig() })
 }
 
-// generate a full list of pages for compliance
 exports.onPostBuild = async ({ graphql }) => {
-    console.log(`compliance step`)
-    const { data } = await graphql(`
-        {
-            pages: allSitePage {
-                nodes {
-                    path
-                }
-            }
-        }
-    `)
 
-    await fs.writeFile(
-        path.resolve(__dirname, ".cache/all-pages.csv"),
-        data.pages.nodes
-            .map(
-                node =>
-                    `${
-                        "https://jacdac.github.io/jacdac-docs" + node.path
-                    }, ${node.path.slice(1)}`
-            )
-            .join("\n")
-    )
-
-    await fs.writeFile(
-        path.resolve(__dirname, ".cache/top-pages.csv"),
-        data.pages.nodes
-            .filter(
-                node =>
-                    node.path.slice(1).replace(/\/$/, "").split(/\//g).length <
-                        2 &&
-                    node.path.indexOf("offline-plugin-app-shell-fallback") < 0
-            )
-            .map(
-                node =>
-                    `${
-                        "https://jacdac.github.io/jacdac-docs" + node.path
-                    }, ${node.path.slice(1)}`
-            )
-            .join("\n")
-    )
 }
