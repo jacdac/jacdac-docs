@@ -10,4 +10,8 @@
 [submodule "pxt-jacdac"]
 	path = pxt-jacdac
 	url = https://github.com/jacdac/pxt-jacdac
+[submodule "gatsby-remark-makecode"]
+	path = gatsby-remark-makecode
+	url = https://github.com/jacdac/gatsby-remark-makecode
+
 
