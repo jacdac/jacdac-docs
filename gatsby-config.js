@@ -98,6 +98,14 @@ module.exports = {
                     remarkPlugins: [require(`remark-gfm`)],
                 },
                 gatsbyRemarkPlugins: [
+                    wsl || offline
+                        ? undefined
+                        : {
+                              resolve: "gatsby-remark-makecode",
+                              options: {
+                                  editorUrl: "https://makecode.microbit.org/",
+                              },
+                          },
                     "gatsby-remark-autolink-headers",
                     "gatsby-remark-external-links",
                     {
