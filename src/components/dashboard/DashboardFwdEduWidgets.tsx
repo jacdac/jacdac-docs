@@ -24,6 +24,7 @@ import { CircularProgress } from "@mui/material"
 import {
     createLEDWidget,
     createLightsWidget,
+    createPirWidget,
     createPumpWidget,
     createServoWidget,
 } from "./DashboardFwdUniqueComponents"
@@ -41,6 +42,8 @@ import FwdDcVoltageWidget from "../widgets/FwdDcVoltageWidget"
 import FwdPhWidget from "../widgets/FwdPhWidget"
 import FwdTemperatureWidget from "../widgets/FwdTemperatureWidget"
 import FwdFloatWidget from "../widgets/FwdFloatWidget"
+import FwdEcWidget from "../widgets/FwdEcWidget"
+import FwdPirWidget from "../widgets/FwdPirWidget"
 
 enum ProductId {
     BreakoutBoard1 = 873600795,
