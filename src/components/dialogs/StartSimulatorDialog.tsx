@@ -38,6 +38,8 @@ import DialogTitleWithClose from "../ui/DialogTitleWithClose"
 import useKeyboardNavigationProps from "../hooks/useKeyboardNavigationProps"
 import useSnackbar from "../hooks/useSnackbar"
 import useBus from "../../jacdac/useBus"
+import { JDBus } from "../../../jacdac-ts/src/jacdac"
+import { translateLang, translateServer } from "../translations"
 
 const miniSearchOptions = {
     fields: ["name", "description"],
@@ -47,6 +49,33 @@ const miniSearchOptions = {
         boost: { name: 5, description: 1 },
     },
 }
+
+let serviceProviderDefinitionsCache: ServiceProviderDefinition[] = null
+function uniqueServiceProviderDefinitionsFromCatalog(bus: JDBus) {
+    if (serviceProviderDefinitionsCache)
+        return serviceProviderDefinitionsCache
+    const seen: ServiceProviderDefinition[] = []
+    const deviceSpecs = bus.deviceCatalog.specifications()
+    for (const devSpec of deviceSpecs) {
+        // find a matching service provider definition 
+        // that contains all the services in the devSpec
+        const matchingProviders = serviceProviderDefinitions().filter(sp =>
+            !devSpec.tags?.includes("brain") &&
+            (devSpec.hardwareTags ? devSpec.hardwareTags.includes(sp.name): true) &&
+            devSpec.services?.length === sp.services().length &&           
+            devSpec.services?.every(svc => sp.serviceClasses.includes(svc)) &&
+            sp.serviceClasses.every(sc => devSpec.services?.includes(sc))
+        )
+        for (const provider of matchingProviders) {
+            if (!seen.includes(provider)) {
+                seen.push(provider)
+            }
+        }
+    }
+    serviceProviderDefinitionsCache = seen
+    return seen
+}
+
 export default function StartSimulatorDialog(props: {
     open: boolean
     onClose: () => void
@@ -72,7 +101,7 @@ export default function StartSimulatorDialog(props: {
         simulator?: HostedSimulatorDefinition
     }[] = useMemo(
         () => [
-            ...serviceProviderDefinitions()
+            ...uniqueServiceProviderDefinitionsFromCatalog(bus)
                 .filter(
                     server =>
                         !sensor ||
@@ -94,6 +123,7 @@ export default function StartSimulatorDialog(props: {
                         .join(", "),
                     server,
                 })),
+            /*
             ...hostedSimulatorDefinitions()
                 .filter(() => !sensor)
                 .map(simulator => ({
@@ -101,7 +131,7 @@ export default function StartSimulatorDialog(props: {
                     name: simulator.name,
                     description: simulator.url,
                     simulator,
-                })),
+                })),*/
         ],
         [sensor]
     )
@@ -164,14 +194,14 @@ export default function StartSimulatorDialog(props: {
             scroll="paper"
         >
             <DialogTitleWithClose onClose={onClose} id={deviceHostLabelId}>
-                Start a simulator
+                {translateLang("startAsimulator")}
             </DialogTitleWithClose>
             <DialogContent ref={contentRef}>
                 <TextField
                     tabIndex={0}
                     id={searchId}
                     sx={{ mt: "8px" }}
-                    label="Filter simulators"
+                    label={translateLang("filterSimulators")}
                     inputProps={{
                         "aria-label": "Filter textbox for simulators",
                     }}
@@ -196,7 +226,7 @@ export default function StartSimulatorDialog(props: {
                             }
                             {...keyboardProps}
                         >
-                            {name}
+                            {translateServer(name)}
                         </ListItem>
                     ))}
                 </List>

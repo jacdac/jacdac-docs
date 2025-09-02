@@ -20,6 +20,7 @@ import StartMissingSimulatorsButton from "../buttons/StartMissingSimulatorsButto
 import useBusWithMode from "../../jacdac/useBusWithMode"
 import PacketsContext from "../PacketsContext"
 import DevicePowerChips from "../devices/DevicePowerChips"
+import { translateLang } from "../translations"
 
 export interface DashboardDeviceProps {
     showHeader?: boolean
@@ -84,7 +85,7 @@ export default function Dashboard(props: DashboardProps) {
         <>
             {!hideSimulators && (
                 <DashboardDeviceGroup
-                    title="Simulators"
+                    title={translateLang("simulators")}
                     action={
                         <>
                             {showStartRoleSimulators && (
@@ -92,13 +93,13 @@ export default function Dashboard(props: DashboardProps) {
                                     trackName="dashboard.simulators.missing"
                                     disabledChildren={null}
                                 >
-                                    Auto start
+                                    ${translateLang("autoStart")}
                                 </StartMissingSimulatorsButton>
                             )}
                             <StartSimulatorButton trackName="dashboard.simulators.start" />
                             <IconButtonWithTooltip
                                 trackName="dashboard.simulators.clear"
-                                title="clear simulators"
+                                title={translateLang("clearSimulators")}
                                 onClick={handleClearSimulators}
                             >
                                 <ClearIcon />
@@ -119,7 +120,7 @@ export default function Dashboard(props: DashboardProps) {
                 </DashboardDeviceGroup>
             )}
             <DashboardDeviceGroup
-                title="Devices"
+                title={translateLang("devices")}
                 action={
                     <>
                         {showConnect && (

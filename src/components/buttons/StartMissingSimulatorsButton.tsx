@@ -4,6 +4,7 @@ import useRoleManagerClient from "../services/useRoleManagerClient"
 import useChange from "../../jacdac/useChange"
 import CmdButton from "../CmdButton"
 import { delay } from "../../../jacdac-ts/src/jdom/utils"
+import { translateLang } from "../translations"
 
 export default function StartMissingSimulatorsButton(props: {
     variant?: "contained" | "outlined"
@@ -29,16 +30,10 @@ export default function StartMissingSimulatorsButton(props: {
 
     if (disabled && hideOnDisabled) return null
 
-    // TODO: i18n
-    const enabledTooltip =
-        "Create a simulator for each Role without an assigned device"
-    const disabledTooltip =
-        "This button becomes available if there are Roles without assignable devices"
-
     return (
         <CmdButton
             size="small"
-            title={disabled ? disabledTooltip : enabledTooltip}
+            title={translateLang(disabled ? "simDisabled" : "simEnabled")}
             variant={variant}
             trackName={trackName}
             onClick={handleStartSimulators}
