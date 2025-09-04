@@ -57,8 +57,8 @@ const translations = {
         patternVibrations: "Muster der Vibrationen",
         patternTooLong: "Muster zu lang",
         maximum: "Maximum",
-        pressVibrate: "Drücken Sie VIBRATE, um die Soundwiedergabe zu aktivieren.",
-        clickActivateSounds: "Klicken Sie, um Sounds zu aktivieren",
+        pressVibrate: "Drücke VIBRIEREN, um die Soundwiedergabe zu aktivieren.",
+        clickActivateSounds: "Klicke, um Sounds zu aktivieren",
         simulators: "Simulatoren",
         devices: "Geräte",
         autoStart: "Automatisch starten",
@@ -68,12 +68,12 @@ const translations = {
         filterSimulators: "Simulatoren filtern",
         blockAdd: "Blöcke hinzufügen",
         blockEnabled:
-            "Fügen Sie Blöcke für Ihre verbundenen und simulierten Geräte zur Modulauswahl hinzu",
+            "Füge Blöcke für die verbundenen und simulierten Geräte zur Modulauswahl hinzu",
         blockDisabled:
-            "Diese Schaltfläche wird verfügbar, wenn Sie Geräte verbunden haben, für die noch keine passenden Blöcke zur 'Module'-Leiste hinzugefügt wurden",
+            "Diese Schaltfläche wird verfügbar, wenn Geräte verbunden sind, für die noch keine passenden Blöcke in der 'Module'-Leiste hinzugefügt wurden",
         simAdd: "Simulatoren hinzufügen",
         simEnabled:
-            "Erstellen Sie einen Simulator für jede Rolle ohne zugewiesenes Gerät",
+            "Erstelle einen Simulator für jede Rolle ohne zugewiesenes Gerät",
         simDisabled:
             "Diese Schaltfläche wird verfügbar, wenn es Rollen ohne zuweisbare Geräte gibt",
     },
