@@ -1,4 +1,4 @@
-import queryString from 'query-string'
+import queryString from "query-string"
 
 const translations = {
     en: {
@@ -81,11 +81,10 @@ const translations = {
 
 function getLang() {
     const qs = queryString.parse(location.search)
-    if (qs.language && typeof qs.language === "string" )
-        return qs.language
+    if (qs.language && typeof qs.language === "string") return qs.language
     const lang =
         typeof navigator !== "undefined" ? navigator.language.slice(0, 2) : "en"
-    return lang    
+    return lang
 }
 
 export function tL(key: string) {
@@ -95,13 +94,13 @@ export function tL(key: string) {
 
 const translate_servers = {
     de: {
-        "accelerometer": "Beschleunigungssensor",
+        accelerometer: "Beschleunigungssensor",
         "humidity + temperature": "Feuchtigkeit + Temperatur",
         "vibration motor": "Vibrationsmotor",
-        "button": "Knopf",
+        button: "Knopf",
         "light level (solar)": "Lichtstärke (solar)",
         "magnetic field level": "Magnetfeldstärke",
-        "power": "Stromversorgung",
+        power: "Stromversorgung",
         "relay (EM/10A)": "Relais (EM/10A)",
         "water pump (relay)": "Wasserpumpe (Relais)",
         "LED ring 8 pixels": "LED-Ring 8 Pixel",
@@ -110,7 +109,7 @@ const translate_servers = {
         "LED pixel strip 150": "LED-Pixelstreifen 150",
         "LED pixel strip 300": "LED-Pixelstreifen 300",
         "rotary encoder + button": "Drehgeber + Knopf",
-        "servo": "Servo",
+        servo: "Servo",
         "servo (270°)": "Servo (270°)",
         "servo (360°)": "Servo (360°)",
         "servo (continuous)": "Servo (kontinuierlich)",
@@ -126,11 +125,11 @@ const translate_servers = {
         "thermometer (outdoor)": "Thermometer (außen)",
         "thermometer (soil)": "Thermometer (Boden)",
         "thermometer (medical)": "Thermometer (medizinisch)",
-        "buzzer": "Summer",
-        "motion": "Bewegung",
+        buzzer: "Summer",
+        motion: "Bewegung",
         "UV index": "UV-Index",
         "light bulb (dimmeable)": "Glühbirne (dimmbar)",
-    }
+    },
 }
 
 export function translateServer(name: string) {
@@ -138,6 +137,6 @@ export function translateServer(name: string) {
     if (lang === "en") return name
     if (translate_servers[lang]) {
         return translate_servers[lang][name] || name
-    } 
+    }
     return name
 }
