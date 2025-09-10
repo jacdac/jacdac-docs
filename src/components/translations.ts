@@ -1,7 +1,26 @@
-import queryString from 'query-string'
+import queryString from "query-string"
 
 const translations = {
     en: {
+        active: "active",
+        inactive: "inactive",
+        on: "on",
+        off: "off",
+        red: "red",
+        yellow: "yellow",
+        green: "green",
+        orange: "orange",
+        text: "text",
+        intensity: "intensity",
+        clearDisplay: "clear the entire display",
+        vibrate: "vibrate",
+        vibrationPattern: "vibration pattern",
+        sendVibPattern: "send vibration pattern",
+        patternVibrations: "Pattern of vibrations",
+        patternTooLong: "Pattern too long",
+        maximum: "maximum",
+        pressVibrate: "Press VIBRATE to enable sound playback.",
+        clickActivateSounds: "Click to activate sounds",
         simulators: "Simulators",
         devices: "Devices",
         autoStart: "Auto start",
@@ -21,6 +40,25 @@ const translations = {
             "This button becomes available if there are Roles without assignable devices",
     },
     de: {
+        active: "aktiv",
+        inactive: "inaktiv",
+        on: "an",
+        off: "aus",
+        red: "rot",
+        yellow: "gelb",
+        green: "grün",
+        orange: "orange",
+        text: "Text",
+        intensity: "Intensität",
+        clearDisplay: "Anzeige löschen",
+        vibrate: "vibrieren",
+        vibrationPattern: "Vibrationsmuster",
+        sendVibPattern: "Vibrationsmuster senden",
+        patternVibrations: "Muster der Vibrationen",
+        patternTooLong: "Muster zu lang",
+        maximum: "Maximum",
+        pressVibrate: "Drücke VIBRIEREN, um die Soundwiedergabe zu aktivieren.",
+        clickActivateSounds: "Klicke, um Sounds zu aktivieren",
         simulators: "Simulatoren",
         devices: "Geräte",
         autoStart: "Automatisch starten",
@@ -30,12 +68,12 @@ const translations = {
         filterSimulators: "Simulatoren filtern",
         blockAdd: "Blöcke hinzufügen",
         blockEnabled:
-            "Fügen Sie Blöcke für Ihre verbundenen und simulierten Geräte zur Modulauswahl hinzu",
+            "Füge Blöcke für die verbundenen und simulierten Geräte zur Modulauswahl hinzu",
         blockDisabled:
-            "Diese Schaltfläche wird verfügbar, wenn Sie Geräte verbunden haben, für die noch keine passenden Blöcke zur 'Module'-Leiste hinzugefügt wurden",
+            "Diese Schaltfläche wird verfügbar, wenn Geräte verbunden sind, für die noch keine passenden Blöcke in der 'Module'-Leiste hinzugefügt wurden",
         simAdd: "Simulatoren hinzufügen",
         simEnabled:
-            "Erstellen Sie einen Simulator für jede Rolle ohne zugewiesenes Gerät",
+            "Erstelle einen Simulator für jede Rolle ohne zugewiesenes Gerät",
         simDisabled:
             "Diese Schaltfläche wird verfügbar, wenn es Rollen ohne zuweisbare Geräte gibt",
     },
@@ -43,27 +81,31 @@ const translations = {
 
 function getLang() {
     const qs = queryString.parse(location.search)
-    if (qs.language && typeof qs.language === "string" )
-        return qs.language
+    if (qs.language && typeof qs.language === "string") return qs.language
     const lang =
         typeof navigator !== "undefined" ? navigator.language.slice(0, 2) : "en"
-    return lang    
+    return lang
 }
 
-export function translateLang(key: string) {
+export function tL(key: string) {
     const lang = getLang()
     return translations[lang]?.[key] || translations.en[key]
 }
 
 const translate_servers = {
     de: {
-        "accelerometer": "Beschleunigungssensor",
+        accelerometer: "Beschleunigungssensor",
         "humidity + temperature": "Feuchtigkeit + Temperatur",
         "vibration motor": "Vibrationsmotor",
-        "button": "Knopf",
+        button: "Knopf",
+        color: "Farbe",
+        "eCO₂": "eCO₂",
+        "electrical conductivity": "elektrische Leitfähigkeit",
+        "cursor character screen (LCD, 16x2)": "Cursor-Zeichenbildschirm (LCD, 16x2)",
+        "rotations per minute": "Umdrehungen pro Minute",
         "light level (solar)": "Lichtstärke (solar)",
         "magnetic field level": "Magnetfeldstärke",
-        "power": "Stromversorgung",
+        power: "Stromversorgung",
         "relay (EM/10A)": "Relais (EM/10A)",
         "water pump (relay)": "Wasserpumpe (Relais)",
         "LED ring 8 pixels": "LED-Ring 8 Pixel",
@@ -72,26 +114,27 @@ const translate_servers = {
         "LED pixel strip 150": "LED-Pixelstreifen 150",
         "LED pixel strip 300": "LED-Pixelstreifen 300",
         "rotary encoder + button": "Drehgeber + Knopf",
-        "servo": "Servo",
+        servo: "Servo",
         "servo (270°)": "Servo (270°)",
         "servo (360°)": "Servo (360°)",
         "servo (continuous)": "Servo (kontinuierlich)",
         "rotary potentiometer": "Drehpotentiometer",
         "slider (potentiometer)": "Schieberegler (Potentiometer)",
         "Hall sensor (potentiometer)": "Hallsensor (Potentiometer)",
-        "distance (sonar)": "Entfernung (Sonar)",
+        "distance (sonar)": "Entfernung (Ultraschall)",
         "DC current/voltage measurement": "Gleichstrom-/Spannungsmessung",
         "light bulb": "Glühbirne",
         "line sensor (3x digital)": "Liniensensor (3x digital)",
         "soil moisture": "Bodenfeuchtigkeit",
         "water acidity (pH)": "Wasser-Säuregehalt (pH)",
         "thermometer (outdoor)": "Thermometer (außen)",
-        "thermometer (indoor)": "Thermometer (innen)",
+        "thermometer (soil)": "Thermometer (Boden)",
         "thermometer (medical)": "Thermometer (medizinisch)",
-        "buzzer": "Summer",
-        "motion": "Bewegung",
+        buzzer: "Summer",
+        motion: "Bewegung",
         "UV index": "UV-Index",
-    }
+        "light bulb (dimmeable)": "Glühbirne (dimmbar)",
+    },
 }
 
 export function translateServer(name: string) {
@@ -99,6 +142,6 @@ export function translateServer(name: string) {
     if (lang === "en") return name
     if (translate_servers[lang]) {
         return translate_servers[lang][name] || name
-    } 
+    }
     return name
 }

@@ -13,6 +13,7 @@ import { Grid, Slider } from "@mui/material"
 import SvgWidget from "../widgets/SvgWidget"
 import PowerButton from "../widgets/PowerButton"
 import DashboardRegisterValueFallback from "./DashboardRegisterValueFallback"
+import { tL } from "../translations"
 
 export default function DashboardLightBulb(props: DashboardServiceProps) {
     const { service } = props
@@ -52,8 +53,8 @@ export default function DashboardLightBulb(props: DashboardServiceProps) {
     const tvalue = dimmeable
         ? `${Math.round(brightnessPercent)}%`
         : on
-        ? "on"
-        : "off"
+        ? tL("on")
+        : tL("off")
     const widgetSize = `clamp(4rem, 12vw, 12vh)`
 
     return (
@@ -99,7 +100,7 @@ export default function DashboardLightBulb(props: DashboardServiceProps) {
                         value={brightnessPercent}
                         min={0}
                         max={100}
-                        valueLabelDisplay="off"
+                        valueLabelDisplay={tL("off")}
                         onChange={handleChange}
                     />
                 </Grid>

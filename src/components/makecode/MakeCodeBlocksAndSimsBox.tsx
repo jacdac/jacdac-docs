@@ -2,7 +2,7 @@ import { Box } from "@mui/material"
 import React from "react"
 import StartMissingSimulatorsButton from "../buttons/StartMissingSimulatorsButton"
 import MakeCodeAddBlocksButton from "./MakeCodeAddBlocksButton"
-import { translateLang } from "../translations"
+import { tL } from "../translations"
 
 export default function MakeCodeBlocksAndSimsBox() {
 
@@ -12,7 +12,7 @@ export default function MakeCodeBlocksAndSimsBox() {
         <StartMissingSimulatorsButton
         variant="contained"
         >
-          {translateLang("simAdd")}
+          {tL("simAdd")}
         </StartMissingSimulatorsButton>
       </Box>
       )

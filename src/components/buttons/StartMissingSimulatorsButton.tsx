@@ -4,7 +4,7 @@ import useRoleManagerClient from "../services/useRoleManagerClient"
 import useChange from "../../jacdac/useChange"
 import CmdButton from "../CmdButton"
 import { delay } from "../../../jacdac-ts/src/jdom/utils"
-import { translateLang } from "../translations"
+import { tL } from "../translations"
 
 export default function StartMissingSimulatorsButton(props: {
     variant?: "contained" | "outlined"
@@ -33,7 +33,7 @@ export default function StartMissingSimulatorsButton(props: {
     return (
         <CmdButton
             size="small"
-            title={translateLang(disabled ? "simDisabled" : "simEnabled")}
+            title={tL(disabled ? "simDisabled" : "simEnabled")}
             variant={variant}
             trackName={trackName}
             onClick={handleStartSimulators}

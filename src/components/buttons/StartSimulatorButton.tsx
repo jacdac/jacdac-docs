@@ -4,7 +4,7 @@ import AddIcon from "@mui/icons-material/Add"
 import { useContext } from "react"
 import SimulatorDialogsContext from "../SimulatorsDialogContext"
 import { Chip } from "@mui/material"
-import { translateLang } from "../translations"
+import { tL } from "../translations"
 
 export default function StartSimulatorButton(props: {
     trackName?: string
@@ -19,7 +19,7 @@ export default function StartSimulatorButton(props: {
         return (
             <Chip
                 label="simulator"
-                title={translateLang("startSimulator")}
+                title={tL("startSimulator")}
                 variant="outlined"
                 icon={<AddIcon />}
                 onClick={handleShowStartSimulator}
@@ -28,7 +28,7 @@ export default function StartSimulatorButton(props: {
     else
         return (
             <IconButtonWithTooltip
-                title={translateLang("startSimulator")}
+                title={tL("startSimulator")}
                 trackName={trackName}
                 onClick={handleShowStartSimulator}
             >

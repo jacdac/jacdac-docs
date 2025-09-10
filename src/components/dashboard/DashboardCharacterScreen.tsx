@@ -12,6 +12,7 @@ import CmdButton from "../CmdButton"
 import ClearIcon from "@mui/icons-material/Clear"
 import CharacterScreenWidget from "../widgets/CharacterScreenWidget"
 import DashboardRegisterValueFallback from "./DashboardRegisterValueFallback"
+import { tL } from "../translations"
 
 // https://en.wikipedia.org/wiki/Braille_ASCII
 const BRAILE_CHARACTERS = {
@@ -158,7 +159,7 @@ export default function DashboardCharacterScreen(props: DashboardServiceProps) {
                     <Grid container spacing={1}>
                         <Grid item xs>
                             <TextField
-                                label="text"
+                                label={tL("text")}
                                 value={fieldMessage}
                                 onChange={handleFieldMessageChange}
                                 multiline={true}
@@ -168,7 +169,7 @@ export default function DashboardCharacterScreen(props: DashboardServiceProps) {
                         </Grid>
                         <Grid item>
                             <CmdButton
-                                title="clear the entire display"
+                                title={tL("clearDisplay")}
                                 onClick={handleClear}
                                 icon={<ClearIcon />}
                             />

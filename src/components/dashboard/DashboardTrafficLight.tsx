@@ -10,6 +10,7 @@ import useSvgButtonProps from "../hooks/useSvgButtonProps"
 import { TrafficLightServer } from "../../../jacdac-ts/src/servers/trafficlightserver"
 import useKeyboardNavigationProps from "../hooks/useKeyboardNavigationProps"
 import useRegister from "../hooks/useRegister"
+import { tL } from "../translations"
 
 const m = 2
 const r = 8
@@ -100,7 +101,7 @@ export default function DashboardTrafficLight(props: DashboardServiceProps) {
                             background={background}
                             fill={fill}
                             onDown={onDown}
-                            label={`${names[i]} ${v ? "on" : "off"}`}
+                            label={`${tL(names[i])} ${tL(v ? "on" : "off")}`}
                         />
                     )
                 })}

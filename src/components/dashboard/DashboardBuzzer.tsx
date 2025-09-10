@@ -12,6 +12,7 @@ import { IconButton } from "gatsby-theme-material-ui"
 import VolumeUpIcon from "@mui/icons-material/VolumeUp"
 import WebAudioContext from "../ui/WebAudioContext"
 import VolumeWidget from "../widgets/VolumeWidget"
+import { tL } from "../translations"
 const PianoWidget = lazy(() => import("../widgets/PianoWidget"))
 
 export default function DashboardBuzzer(props: DashboardServiceProps) {
@@ -54,7 +55,7 @@ export default function DashboardBuzzer(props: DashboardServiceProps) {
             {server && !activated && (
                 <Grid item xs>
                     <Alert severity="warning">
-                        Click to activate sounds. &nbsp;
+                        {tL("clickActivateSounds")}. &nbsp;
                         <IconButton
                             aria-label="unlock sounds"
                             onClick={handleUnlock}
