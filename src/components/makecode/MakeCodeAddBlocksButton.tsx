@@ -14,15 +14,7 @@ export default function MakeCodeAddBlocksButton() {
     ] as IFrameBridgeClient
     const extensions = useChange(iframeBridge, _ => _?.candidateExtensions())
     const handleAdd = () => iframeBridge?.postAddExtensions()
-    const isMakeCodeTool = useMemo(
-        () =>
-            typeof window !== "undefined" &&
-            /makecode/.test(window.location.href),
-        []
-    )
     const isButtonEnabled = !!extensions?.length
-
-    if (!isMakeCodeTool) return null
 
     return (
         <Tooltip
