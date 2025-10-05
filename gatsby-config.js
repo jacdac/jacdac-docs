@@ -27,6 +27,7 @@ module.exports = {
         FAST_DEV: true,
     },
     plugins: [
+        `@smithc/gatsby-plugin-static-site`,
         `gatsby-transformer-json`,
         `gatsby-transformer-csv`,
         `gatsby-transformer-plaintext`,
