@@ -2,8 +2,6 @@ import Layout from "./src/components/layout"
 import React from "react"
 import ReactDOM from "react-dom"
 
-window.page.path = window.location.pathname
-
 const UPDATE_DEBOUNCE = 5000
 let lastUpdate = Date.now()
 function tryUpdate(force) {
