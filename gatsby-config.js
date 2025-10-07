@@ -4,7 +4,7 @@ const maxImageWidth = 800
 const siteUrl = "https://jacdac.github.io"
 
 // const pathPrefix = "/pxt-jacdac-test"
-const pathPrefix = "/simx/jacdac/pxt-jacdac/-/"
+const pathPrefix = "/simx/jacdac/pxt-jacdac-test/-/"
 
 const wsl = !!process.env.WSL_DISTRO_NAME || !!process.env.CODESPACE_NAME
 const offline = !!process.env.JACDAC_OFFLINE
