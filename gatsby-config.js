@@ -3,8 +3,8 @@ const { identifierToUrlPath } = require(`./jacdac-ts/dist/jacdac.cjs`)
 const maxImageWidth = 800
 const siteUrl = "https://jacdac.github.io"
 
-// const pathPrefix = "/pxt-jacdac"
-const pathPrefix = "/simx/jacdac/pxt-jacdac/-/"
+// const pathPrefix = "/pxt-jacdac-test"
+const pathPrefix = "/simx/jacdac/pxt-jacdac-test/-/"
 
 const wsl = !!process.env.WSL_DISTRO_NAME || !!process.env.CODESPACE_NAME
 const offline = !!process.env.JACDAC_OFFLINE
@@ -27,6 +27,7 @@ module.exports = {
         FAST_DEV: true,
     },
     plugins: [
+        `@smithc/gatsby-plugin-static-site`,
         `gatsby-transformer-json`,
         `gatsby-transformer-csv`,
         `gatsby-transformer-plaintext`,
