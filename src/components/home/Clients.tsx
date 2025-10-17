@@ -65,22 +65,6 @@ export default function Clients() {
 
             <SplitGrid
                 right={true}
-                subtitle="DeviceScript"
-                imageColumns={8}
-                description="TypeScript for microcontrollers with Visual Studio Code integration."
-                buttonText="Get started with DeviceScript"
-                buttonVariant="link"
-                buttonUrl="/clients/devicescript"
-                image={
-                    <StaticImage
-                        src="./devicescript.png"
-                        alt="A DeviceScript program in Visual Studio Code."
-                    />
-                }
-            />
-
-            <SplitGrid
-                right={true}
                 subtitle="MicroCode"
                 imageColumns={8}
                 description="Physical computing for young learners on the micro:bit V2."

@@ -13,6 +13,7 @@ import CharacterScreenWidget from "../widgets/CharacterScreenWidget"
 import DashboardRegisterValueFallback from "./DashboardRegisterValueFallback"
 import { CursorCharacterScreenServer } from "../../../jacdac-ts/src/servers/cursorcharscreenserver"
 import useServiceServer from "../hooks/useServiceServer"
+import { tL } from "../translations"
 
 export default function DashboardCursorCharacterScreen(props: DashboardServiceProps) {
     const { service, expanded } = props
@@ -72,7 +73,7 @@ export default function DashboardCursorCharacterScreen(props: DashboardServicePr
                     <Grid container spacing={1}>
                         <Grid item xs>
                             <TextField
-                                label="text"
+                                label={tL("text")}
                                 value={fieldMessage}
                                 onChange={handleFieldMessageChange}
                                 multiline={true}
@@ -82,7 +83,7 @@ export default function DashboardCursorCharacterScreen(props: DashboardServicePr
                         </Grid>
                         <Grid item>
                             <CmdButton
-                                title="clear the entire display"
+                                title={tL("clear the entire display")}
                                 onClick={handleClear}
                                 icon={<ClearIcon />}
                             />

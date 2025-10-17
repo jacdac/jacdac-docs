@@ -3,6 +3,7 @@ import SvgWidget from "../widgets/SvgWidget"
 import useWidgetTheme from "../widgets/useWidgetTheme"
 import PowerButton from "./PowerButton"
 import useAnimationFrame from "../hooks/useAnimationFrame"
+import { tL } from "../translations"
 
 export default function ServoWidget(props: {
     angle: number
@@ -40,7 +41,7 @@ export default function ServoWidget(props: {
     const w = 158.50195
     const pr = 14
     const pri = 6
-    const text = enabled ? `${Math.round(a)}°` : "off"
+    const text = enabled ? `${Math.round(a)}°` : tL("off")
 
     useAnimationFrame(
         continuous && enabled && visible && rotationRate !== undefined

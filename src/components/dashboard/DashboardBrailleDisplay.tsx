@@ -13,6 +13,7 @@ import CharacterScreenWidget from "../widgets/CharacterScreenWidget"
 import { useId } from "react"
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew"
 import DashboardRegisterValueFallback from "./DashboardRegisterValueFallback"
+import { tL } from "../translations"
 
 // https://en.wikipedia.org/wiki/Braille_ASCII
 /** 
@@ -104,7 +105,7 @@ export default function DashboardBrailleDisplay(props: DashboardServiceProps) {
                         </Grid>
                         <Grid item>
                             <CmdButton
-                                title="clear the entire display"
+                                title={tL("clearDisplay")}
                                 onClick={handleClear}
                                 icon={<ClearIcon />}
                             />

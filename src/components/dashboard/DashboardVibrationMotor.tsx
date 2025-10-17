@@ -21,6 +21,7 @@ import SliderWithLabel from "../ui/SliderWithLabel"
 import { useRegisterUnpackedValue } from "../../jacdac/useRegisterValue"
 import useRegister from "../hooks/useRegister"
 import Alert from "../ui/Alert"
+import { tL as tL } from "../translations"
 
 const T_DIT = 50
 const T_REST = 120
@@ -81,11 +82,11 @@ function PatternInput(props: {
     const [text, setText] = useState(".-.")
     const errorText =
         text.length > maxLength
-            ? `Pattern too long (max ${maxLength})`
+            ? tL("patternTooLong") + `(` + tL(`maximum`) + ` ${maxLength})`
             : undefined
     const helperText = useMemo(
         () =>
-            `Pattern of vibrations: ${Object.entries(patterns)
+            tL(`patternVibrations`) + `: ${Object.entries(patterns)
                 .map(([key, value]) => `"${key}" ${value.name}`)
                 .join(", ")}`,
         []
@@ -119,7 +120,7 @@ function PatternInput(props: {
         <Grid container spacing={1} direction="row">
             <Grid item xs>
                 <TextField
-                    title="vibration pattern"
+                    title={tL("vibrationPattern")}
                     helperText={errorText || helperText}
                     value={text}
                     fullWidth={true}
@@ -131,11 +132,11 @@ function PatternInput(props: {
             <Grid item>
                 <CmdButton
                     variant="outlined"
-                    title="send vibration pattern"
+                    title={tL("sendVibPattern")}
                     disabled={disabled}
                     onClick={handleSend}
                 >
-                    vibrate
+                    {tL("vibrate")}
                 </CmdButton>
             </Grid>
         </Grid>
@@ -184,7 +185,7 @@ export default function DashboardVibrationMotor(props: DashboardServiceProps) {
             </Grid>
             <Grid item xs={12}>
                 <SliderWithLabel
-                    label="intensity"
+                    label={tL("intensity")}
                     min={0}
                     max={100}
                     value={intensity}
@@ -193,7 +194,7 @@ export default function DashboardVibrationMotor(props: DashboardServiceProps) {
                     valueLabelFormat={percentValueFormat}
                 />
             </Grid>
-            {!activated && <Alert severity="warning">Press VIBRATE to enable sound playback.</Alert>}
+            {!activated && <Alert severity="warning">{tL("pressVibrate")}</Alert>}
         </>
     )
 }
