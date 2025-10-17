@@ -60,6 +60,8 @@ enum ProductId {
     SonarSensor = 926591985,
     SolarSensor = 1005257879,
     TemperatureSensor = 827772841,
+    EcSensor = 884234713,
+    PirSensor = 884222425,
 }
 
 export function hasCustomFwdWidget(device: JDDevice): boolean {
@@ -229,6 +231,13 @@ export function FwdEduSubstituteWidget(dashboardProps: DashboardServiceProps) {
                 ...widgetProps,
                 size: "clamp(14rem, 12vw, 16vh)",
             })
+        case ProductId.EcSensor:
+            return lazifyWidget(FwdEcWidget, {
+                ...widgetProps,
+                size: "clamp(14rem, 12vw, 16vh)",
+            })
+        case ProductId.PirSensor:
+            return createPirWidget(dashboardProps)
     }
     return DashboardServiceDefaultWidget(dashboardProps)
 }
