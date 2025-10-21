@@ -24,6 +24,7 @@ import { CircularProgress } from "@mui/material"
 import {
     createLEDWidget,
     createLightsWidget,
+    createPirWidget,
     createPumpWidget,
     createServoWidget,
 } from "./DashboardFwdUniqueComponents"
@@ -41,6 +42,8 @@ import FwdDcVoltageWidget from "../widgets/FwdDcVoltageWidget"
 import FwdPhWidget from "../widgets/FwdPhWidget"
 import FwdTemperatureWidget from "../widgets/FwdTemperatureWidget"
 import FwdFloatWidget from "../widgets/FwdFloatWidget"
+import FwdEcWidget from "../widgets/FwdEcWidget"
+import FwdPirWidget from "../widgets/FwdPirWidget"
 
 enum ProductId {
     BreakoutBoard1 = 873600795,
@@ -57,6 +60,8 @@ enum ProductId {
     SonarSensor = 926591985,
     SolarSensor = 1005257879,
     TemperatureSensor = 827772841,
+    EcSensor = 884234713,
+    PirSensor = 884222425,
 }
 
 export function hasCustomFwdWidget(device: JDDevice): boolean {
@@ -226,6 +231,13 @@ export function FwdEduSubstituteWidget(dashboardProps: DashboardServiceProps) {
                 ...widgetProps,
                 size: "clamp(14rem, 12vw, 16vh)",
             })
+        case ProductId.EcSensor:
+            return lazifyWidget(FwdEcWidget, {
+                ...widgetProps,
+                size: "clamp(14rem, 12vw, 16vh)",
+            })
+        case ProductId.PirSensor:
+            return createPirWidget(dashboardProps)
     }
     return DashboardServiceDefaultWidget(dashboardProps)
 }
