@@ -12,6 +12,7 @@ import {
     bufferEq,
     JDEventSource,
     LightBulbReg,
+    MotionReg,
 } from "../../../jacdac-ts/src/jacdac"
 import { DashboardServiceProps } from "./DashboardServiceWidget"
 import useServiceServer from "../hooks/useServiceServer"
@@ -31,6 +32,7 @@ import SwitchWithLabel from "../ui/SwitchWithLabel"
 import useChange from "../../jacdac/useChange"
 import ColorButtons from "../widgets/ColorButtons"
 import FwdLightsWidget from "../widgets/FwdLightsWidget"
+import FwdPirWidget from "../widgets/FwdPirWidget"
 
 export function createLightsWidget(props: DashboardServiceProps) {
     const { service } = props
@@ -74,6 +76,14 @@ export function createLightsWidget(props: DashboardServiceProps) {
             </Box>
         </Box>
     )
+}
+
+export function createPirWidget(props: DashboardServiceProps) {
+    const { service } = props
+    const movingRegister = useRegister(service, MotionReg.Moving)
+    const moving = useRegisterBoolValue(movingRegister, props)
+
+    return <FwdPirWidget moving={moving}></FwdPirWidget>
 }
 
 export function createPumpWidget(props: DashboardServiceProps) {

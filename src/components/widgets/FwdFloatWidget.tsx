@@ -81,8 +81,8 @@ export default function FwdFloatWidget(props: {
                 <rect
                     className={"float-transition"}
                     x="39.38252"
-                    y={checked ? "297.9536" : "390.33026"}
-                    fill={checked ? active : "#fff"}
+                    y={!checked ? "297.9536" : "390.33026"}
+                    fill={!checked ? active : "#fff"}
                     width="241.75308"
                     height="221.71515"
                     rx="15.54198"
