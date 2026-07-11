@@ -239,7 +239,7 @@ Recommended owners (replace with real names):
 | Workstream | Stage | Owner | Status | Target Date | Dependencies | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | Route inventory and tiering | 0 | docs | not-started | TBD | none | Includes all docs, generated routes, tools routes |
-| Baseline capture (URL, SEO, perf, search) | 0 | platform | not-started | TBD | Route inventory | Capture before any content cutover |
+| Baseline capture (URL, SEO, perf, search) | 0 | platform | in-progress | TBD | Route inventory | Baseline scaffold and route snapshot created under `docs/migration/baseline/` |
 | Astro/Starlight scaffold | 1 | platform | not-started | TBD | none | In-repo bootstrap with preview deploy |
 | Base path + GH Pages deploy parity | 1 | platform | not-started | TBD | Astro scaffold | Must preserve `/jacdac-docs` behavior |
 | Content collections and shared layout | 1 | docs | not-started | TBD | Astro scaffold | Define frontmatter schema and nav model |
@@ -254,6 +254,198 @@ Recommended owners (replace with real names):
 | Tier B/C tools plan and execution | 5 | app | not-started | TBD | Tier A progress | Batch migration/defer/archive decisions |
 | Cutover rehearsal + rollback test | 6 | platform | not-started | TBD | Stages 2-5 | Dry run before production switch |
 | Production cutover and stabilization | 6 | platform | not-started | TBD | Rehearsal complete | Monitor 404s/errors/perf for one cycle |
+
+## Stage 0 Baseline Capture Runbook
+
+This section expands the workstream row:
+
+- Baseline capture (URL, SEO, perf, search)
+
+Use this runbook before any migration code lands on the main branch.
+
+### Baseline Deliverables
+
+| Deliverable | Owner | Status | Output Location | Notes |
+| --- | --- | --- | --- | --- |
+| Route snapshot (all pages + redirects) | platform | not-started | docs/migration/baseline/routes/ | Include static routes and generated route families |
+| Top routes traffic list (last 30-90 days) | platform | not-started | docs/migration/baseline/traffic/ | Use analytics export for prioritization |
+| SEO metadata snapshot | docs/platform | not-started | docs/migration/baseline/seo/ | Capture title, description, canonical, og tags |
+| Lighthouse sample report | platform | not-started | docs/migration/baseline/perf/ | Capture representative docs and app routes |
+| Search relevance checks | docs | not-started | docs/migration/baseline/search/ | Record query set and expected top results |
+| Error baseline (404 + JS errors) | platform | not-started | docs/migration/baseline/errors/ | 7-14 day pre-migration baseline |
+
+### Minimum Route Sample Set
+
+Sample at least one route from each class:
+
+1. Docs index: `/reference/`
+2. Docs leaf: `/reference/protocol/`
+3. Generated service: `/services/<shortId>/` (pick 3 representative values)
+4. Generated device: `/devices/<identifier>/` (pick 3 representative values)
+5. Tier A tool route: `/tools/console/`
+6. Route with redirect: `/services/0x<classId>` and `/devices/0x<productId>`
+7. Error page: `/404/`
+
+### Search Baseline Query Set (Starter)
+
+Track top 10 results for each query and flag whether expected docs appear in top 3:
+
+1. jacdac protocol
+2. service specification
+3. makecode extension
+4. packet inspector
+5. firmware update
+6. device tester
+7. edge connector
+8. electrical spec
+9. register fields
+10. cli
+
+### Baseline Exit Criteria
+
+Stage 0 baseline capture is complete only when:
+
+1. All baseline deliverables above are checked in or linked from this file.
+2. Tier A and Tier B routes each have at least one measured example in perf and SEO snapshots.
+3. Search relevance baseline exists for the full query set.
+4. A short baseline summary is added to the migration PR description.
+
+### Baseline Risks to Watch
+
+1. Missing generated routes in the baseline sample set.
+2. Measuring only docs pages and skipping interactive tool routes.
+3. No redirect validation before migration begins.
+4. Capturing one-off local results without reproducible scripts or notes.
+
+### Baseline PR Summary Template
+
+Copy this block into migration/baseline PR descriptions:
+
+```md
+## Baseline Summary
+
+### Scope
+- Date:
+- Commit/branch:
+- Environment:
+- Reviewer(s):
+
+### Route Coverage
+- Docs routes sampled:
+- Generated service routes sampled:
+- Generated device routes sampled:
+- Tools routes sampled:
+- Redirect routes validated:
+
+### SEO Snapshot
+- Pages checked:
+- Title/description parity issues:
+- Canonical issues:
+- OpenGraph/Twitter issues:
+
+### Performance Snapshot
+- Lighthouse pages:
+- Largest regressions found:
+- Notes on variance (local/network/cache):
+
+### Search Baseline
+- Queries tested:
+- Queries with expected result in top 3:
+- Queries with misses:
+
+### Error Baseline
+- 404 baseline window:
+- Top 404 routes:
+- Client JS error baseline:
+
+### Artifacts
+- Route snapshot:
+- SEO report:
+- Perf report:
+- Search report:
+- Error report:
+
+### Risk Notes
+1.
+2.
+3.
+
+### Decision
+- Baseline complete: yes/no
+- Follow-up actions:
+	1.
+	2.
+```
+
+### Optional Scorecard (Quick Compare)
+
+Use this small scorecard to compare legacy Gatsby baseline and migrated Astro output for sampled routes.
+
+| Metric | Gatsby Baseline | Astro Candidate | Status | Notes |
+| --- | --- | --- | --- | --- |
+| Route availability |  |  |  |  |
+| Redirect correctness |  |  |  |  |
+| SEO metadata parity |  |  |  |  |
+| Lighthouse performance |  |  |  |  |
+| Search relevance |  |  |  |  |
+| JS/client error rate |  |  |  |  |
+
+## Migration PR Reviewer Checklist
+
+Use this checklist during review for any migration PR (baseline, implementation, or cutover prep).
+
+### 1) Scope and Change Safety
+
+- [ ] PR scope is clearly limited (docs migration, generated routes, tool migration, or infra only).
+- [ ] Out-of-scope changes are explicitly called out and justified.
+- [ ] Rollback plan is included for risky changes.
+
+### 2) Route and Redirect Integrity
+
+- [ ] All touched routes are listed in PR description.
+- [ ] Redirect behavior is documented and validated for changed routes.
+- [ ] Base path behavior (`/jacdac-docs`) is verified for links and assets.
+- [ ] 404 behavior is unaffected or improved.
+
+### 3) Content and Rendering Parity
+
+- [ ] Page title, description, and canonical metadata are present.
+- [ ] Markdown/MDX rendering parity is verified for changed pages.
+- [ ] Images/media assets render correctly in desktop and mobile viewports.
+- [ ] Internal links are valid and no new broken links are introduced.
+
+### 4) Generated Data and Build Outputs (If Applicable)
+
+- [ ] Generated services/devices pages match expected shape and slugs.
+- [ ] JSON outputs (if touched) are schema-compatible with existing consumers.
+- [ ] Worker/version artifacts (if touched) are emitted and fetchable.
+- [ ] Build logs show no new warnings indicating route/data loss.
+
+### 5) Interactive Tool Behavior (If Applicable)
+
+- [ ] Critical user path smoke-tested for each touched tool route.
+- [ ] Browser API interactions (USB/BLE/serial/file) validated where relevant.
+- [ ] Navigation and deep links within tool routes function correctly.
+- [ ] Any known functional gaps are documented with follow-up ticket IDs.
+
+### 6) Search, SEO, and Performance
+
+- [ ] Search behavior for affected pages/routes is checked against baseline queries.
+- [ ] No obvious SEO regressions (missing meta, broken canonical, robots issues).
+- [ ] Lighthouse/performance check run for at least one representative touched route.
+- [ ] Significant regressions are documented with mitigation or explicit acceptance.
+
+### 7) Evidence and Traceability
+
+- [ ] PR includes artifact links (route list, SEO snapshot, perf/search reports as applicable).
+- [ ] Checklist and baseline template sections in this file are referenced.
+- [ ] Owner and status updates are reflected in execution tracker tables.
+
+### Review Outcome
+
+- [ ] Approve
+- [ ] Request changes
+- [ ] Approve with follow-ups (must include ticket references)
 
 ## Stage Gates Checklist
 
@@ -462,3 +654,11 @@ Start with a small but representative batch to validate architecture quickly:
 2. `/services/` + `/services/{shortId}/` + `services 0x redirects` (generated routes + redirects)
 3. `/tools/console/` (interactive split-app pilot)
 4. `/404/` and `/version.json` (utility parity)
+
+Issue templates for this slice are available in:
+
+- `docs/migration/sprint-1-issues.md`
+
+GitHub CLI automation (create all Sprint 1 issues + milestone):
+
+- `docs/migration/create-sprint-1-issues.sh`
