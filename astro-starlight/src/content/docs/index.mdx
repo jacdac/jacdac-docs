@@ -1,0 +1,39 @@
+---
+title: Jacdac Documentation
+description: Preview of the Jacdac documentation migration to Astro Starlight.
+template: splash # Remove or comment out this line to display the site sidebar on this page.
+hero:
+  tagline: Connect and code electronics. Instantly.
+  image:
+    file: ../../assets/houston.webp
+  actions:
+    - text: Open Example Guide
+      link: /guides/example/
+      icon: right-arrow
+    - text: View Current Gatsby Site
+      link: https://jacdac.github.io/jacdac-docs/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Next steps
+
+<CardGrid stagger>
+  <Card title="Migrate Docs Content" icon="pencil">
+    Move docs sections from the current Gatsby site into content collections.
+  </Card>
+  <Card title="Verify Route Parity" icon="document">
+    Confirm slugs, redirects, and metadata match baseline expectations.
+  </Card>
+  <Card title="Add Section Pilots" icon="add-document">
+    Start with /reference as the first migration slice.
+  </Card>
+  <Card title="Configure Deployment" icon="setting">
+    Validate base path and GitHub Pages deployment behavior.
+  </Card>
+  <Card title="Read Starlight Docs" icon="open-book">
+    Learn more at [Starlight Docs](https://starlight.astro.build/).
+  </Card>
+</CardGrid>
