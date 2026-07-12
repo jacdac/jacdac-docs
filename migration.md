@@ -239,8 +239,8 @@ Recommended owners (replace with real names):
 | Workstream | Stage | Owner | Status | Target Date | Dependencies | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | Route inventory and tiering | 0 | docs | not-started | TBD | none | Includes all docs, generated routes, tools routes |
-| Baseline capture (URL, SEO, perf, search) | 0 | platform | in-progress | TBD | Route inventory | Route snapshot + Lighthouse artifacts captured under `docs/migration/baseline/`; search and error baselines still pending |
-| Astro/Starlight scaffold | 1 | platform | not-started | TBD | none | In-repo bootstrap with preview deploy |
+| Baseline capture (URL, SEO, perf, search) | 0 | platform | done | TBD | Route inventory | Route, SEO, perf, search, and synthetic no-analytics error baseline captured under `docs/migration/baseline/` |
+| Astro/Starlight scaffold | 1 | platform | in-progress | TBD | none | Scaffold created in `astro-starlight/` and preview verified locally |
 | Base path + GH Pages deploy parity | 1 | platform | not-started | TBD | Astro scaffold | Must preserve `/jacdac-docs` behavior |
 | Content collections and shared layout | 1 | docs | not-started | TBD | Astro scaffold | Define frontmatter schema and nav model |
 | Static docs migration pilot (`reference`) | 2 | docs | not-started | TBD | Stage 1 complete | Use as format and navigation proof |
