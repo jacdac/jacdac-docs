@@ -243,7 +243,7 @@ Recommended owners (replace with real names):
 | Astro/Starlight scaffold | 1 | platform | done | TBD | none | Scaffold created in `astro-starlight/`, preview verified locally, and CI workflow added (`.github/workflows/astro-preview.yml`) |
 | Base path + GH Pages deploy parity | 1 | platform | not-started | TBD | Astro scaffold | Must preserve `/jacdac-docs` behavior |
 | Content collections and shared layout | 1 | docs | not-started | TBD | Astro scaffold | Define frontmatter schema and nav model |
-| Static docs migration pilot (`reference`) | 2 | docs | not-started | TBD | Stage 1 complete | Use as format and navigation proof |
+| Static docs migration pilot (`reference`) | 2 | docs | done | TBD | Stage 1 complete | `/reference/**` migrated into `astro-starlight/src/content/docs/reference/` with build/link/SEO checks captured |
 | Bulk docs migration | 2 | docs | not-started | TBD | Pilot complete | Migrate reference/faq/start/ddk/clients content |
 | Services generation pipeline port | 3 | spec | not-started | TBD | Stage 1 complete | Rebuild service pages + JSON artifacts |
 | Devices generation pipeline port | 3 | spec | not-started | TBD | Stage 1 complete | Rebuild device pages + image derivatives |
@@ -594,7 +594,7 @@ Status values:
 | /dashboard/ | src/pages/dashboard.tsx | astro-app | app | not-started | Device connection flow and key dashboard panels load |
 | /services/ | src/pages/services.tsx | astro-generated | spec | not-started | Services landing renders from generated service set |
 | /devices/ | src/pages/devices.tsx | astro-generated | spec | not-started | Devices landing renders with expected catalog entries |
-| /reference/ | src/pages/reference.mdx | astro-doc | docs | not-started | Sidebar entry, title/meta, and internal links verified |
+| /reference/ | src/pages/reference.mdx | astro-doc | docs | done | Sidebar entry, title/meta, and internal links verified |
 | /faq/ | src/pages/faq.mdx | astro-doc | docs | not-started | FAQ index + child links verified |
 | /start/ | src/pages/start.mdx | astro-doc | docs | not-started | Onboarding path integrity verified |
 | /ddk/ | src/pages/ddk.mdx | astro-doc | docs | not-started | DDK index + child nav verified |
@@ -620,7 +620,7 @@ Status values:
 | /blog/ | src/pages/blog.mdx | astro-doc | docs | not-started | Blog listing and child post links verified |
 | /privacy/ | src/pages/privacy.mdx | astro-doc | docs | not-started | Compliance page parity check complete |
 | /github/ | src/pages/github.tsx | astro-app | app | not-started | External integration/API behavior validated |
-| /reference/** docs family | src/pages/reference/**/*.mdx | astro-doc | docs | not-started | All reference docs slugs/anchors verified |
+| /reference/** docs family | src/pages/reference/**/*.mdx | astro-doc | docs | done | All reference docs slugs/anchors verified |
 | /faq/** docs family | src/pages/faq/**/*.mdx | astro-doc | docs | not-started | Nested error pages and breadcrumbs validated |
 | /start/** docs family | src/pages/start/**/*.mdx | astro-doc | docs | not-started | Child onboarding pages fully linked |
 | /ddk/** docs family | src/pages/ddk/**/*.mdx | astro-doc | docs | not-started | DDK hierarchy and media assets validated |
