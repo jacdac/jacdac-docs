@@ -240,7 +240,7 @@ Recommended owners (replace with real names):
 | --- | --- | --- | --- | --- | --- | --- |
 | Route inventory and tiering | 0 | docs | not-started | TBD | none | Includes all docs, generated routes, tools routes |
 | Baseline capture (URL, SEO, perf, search) | 0 | platform | done | TBD | Route inventory | Route, SEO, perf, search, and synthetic no-analytics error baseline captured under `docs/migration/baseline/` |
-| Astro/Starlight scaffold | 1 | platform | in-progress | TBD | none | Scaffold created in `astro-starlight/` and preview verified locally |
+| Astro/Starlight scaffold | 1 | platform | done | TBD | none | Scaffold created in `astro-starlight/`, preview verified locally, and CI workflow added (`.github/workflows/astro-preview.yml`) |
 | Base path + GH Pages deploy parity | 1 | platform | not-started | TBD | Astro scaffold | Must preserve `/jacdac-docs` behavior |
 | Content collections and shared layout | 1 | docs | not-started | TBD | Astro scaffold | Define frontmatter schema and nav model |
 | Static docs migration pilot (`reference`) | 2 | docs | not-started | TBD | Stage 1 complete | Use as format and navigation proof |
