@@ -1,0 +1,33 @@
+---
+title: Service Definition
+order: 5
+---
+
+# Service Definition
+
+Jacdac modules must run an instance of the [control service](/services/control) in order to
+advertise themselves, as well as the services they support, on the Jacdac bus. A platform-independent
+[control service implementation](https://github.com/jacdac/jacdac-c/blob/main/source/jd_control.c) 
+is part of the [jacdac-c firmware repo](https://github.com/jacdac/jacdac-c).
+
+# Finding a service specification
+
+When designing a new device, please first check the [service catalog](/services) to see if there is
+a service that already meets your needs.  If you find one, then check the
+[services folder](https://github.com/jacdac/jacdac-c/tree/main/services) of the [jacdac-c repo](https://github.com/jacdac/jacdac-c)
+(or in [jacdac-padauk](https://github.com/jacdac/jacdac-padauk/tree/main/services) when using that MCU)
+to see if there is already an implementation available for that service. 
+
+# Creating a service specification
+
+If you haven't found a service that exactly meets your needs, you 
+will need to [create a new service](/ddk/services/creating). 
+This requires designing a service specification and developing
+the following five assets in support of the service: 
+- a virtual server in TypeScript using the [JDOM](/clients/javascript)
+- a React component based on the virtual server, which will support both device twins and simulators
+- the firmware for a server in C using [jacdac-c](https://github.com/jacdac/jacdac-c)
+- tests for the service, written using the TypeScript test framework
+- a MakeCode client for the service
+
+There are code generators to help you get started.

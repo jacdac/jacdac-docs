@@ -12,11 +12,27 @@ export default defineConfig({
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/jacdac/jacdac-docs' }],
 			sidebar: [
 				{
-					label: 'Start',
+					label: 'Docs',
 					items: [
-						{ label: 'Overview', slug: 'index' },
+						{ label: 'Home', slug: 'index' },
 						{ label: 'Example Guide', slug: 'guides/example' },
 					],
+				},
+				{
+					label: 'Getting Started',
+					items: [{ autogenerate: { directory: 'start' } }],
+				},
+				{
+					label: 'FAQ',
+					items: [{ autogenerate: { directory: 'faq' } }],
+				},
+				{
+					label: 'Device Development',
+					items: [{ autogenerate: { directory: 'ddk' } }],
+				},
+				{
+					label: 'Clients',
+					items: [{ autogenerate: { directory: 'clients' } }],
 				},
 				{
 					label: 'Reference',

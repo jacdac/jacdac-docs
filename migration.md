@@ -244,7 +244,7 @@ Recommended owners (replace with real names):
 | Base path + GH Pages deploy parity | 1 | platform | not-started | TBD | Astro scaffold | Must preserve `/jacdac-docs` behavior |
 | Content collections and shared layout | 1 | docs | not-started | TBD | Astro scaffold | Define frontmatter schema and nav model |
 | Static docs migration pilot (`reference`) | 2 | docs | done | TBD | Stage 1 complete | `/reference/**` migrated into `astro-starlight/src/content/docs/reference/` with build/link/SEO checks captured |
-| Bulk docs migration | 2 | docs | not-started | TBD | Pilot complete | Migrate reference/faq/start/ddk/clients content |
+| Bulk docs migration | 2 | docs | done | TBD | Pilot complete | `reference`, `faq`, `start`, `ddk`, and `clients` docs families migrated with build/link/SEO artifacts |
 | Services generation pipeline port | 3 | spec | not-started | TBD | Stage 1 complete | Rebuild service pages + JSON artifacts |
 | Devices generation pipeline port | 3 | spec | not-started | TBD | Stage 1 complete | Rebuild device pages + image derivatives |
 | Redirect map migration + validation | 3 | platform | not-started | TBD | Services/devices port | Must include legacy and QR vanity redirects |
@@ -615,15 +615,15 @@ Status values:
 | Route | Current Source | Destination | Owner | Status | Acceptance Checks |
 | --- | --- | --- | --- | --- | --- |
 | /clients/ | src/pages/clients.tsx | astro-app | docs/app | not-started | Clients index and category navigation verified |
-| /clients/** docs family | src/pages/clients/**/*.mdx | astro-doc | docs | not-started | High-traffic client docs migrated first |
+| /clients/** docs family | src/pages/clients/**/*.mdx | astro-doc | docs | done | Migrated into `astro-starlight/src/content/docs/clients/`; build passes and link/SEO artifacts captured |
 | /clients/embed/commands/ | src/pages/clients/embed/commands.tsx | astro-app | app | not-started | Embed command examples and UI interactions work |
 | /blog/ | src/pages/blog.mdx | astro-doc | docs | not-started | Blog listing and child post links verified |
 | /privacy/ | src/pages/privacy.mdx | astro-doc | docs | not-started | Compliance page parity check complete |
 | /github/ | src/pages/github.tsx | astro-app | app | not-started | External integration/API behavior validated |
 | /reference/** docs family | src/pages/reference/**/*.mdx | astro-doc | docs | done | All reference docs slugs/anchors verified |
-| /faq/** docs family | src/pages/faq/**/*.mdx | astro-doc | docs | not-started | Nested error pages and breadcrumbs validated |
-| /start/** docs family | src/pages/start/**/*.mdx | astro-doc | docs | not-started | Child onboarding pages fully linked |
-| /ddk/** docs family | src/pages/ddk/**/*.mdx | astro-doc | docs | not-started | DDK hierarchy and media assets validated |
+| /faq/** docs family | src/pages/faq/**/*.mdx | astro-doc | docs | done | Migrated into `astro-starlight/src/content/docs/faq/`; nested error routes build and link-check clean |
+| /start/** docs family | src/pages/start/**/*.mdx | astro-doc | docs | done | Migrated into `astro-starlight/src/content/docs/start/`; child onboarding routes build and link-check clean |
+| /ddk/** docs family | src/pages/ddk/**/*.mdx | astro-doc | docs | done | Migrated into `astro-starlight/src/content/docs/ddk/`; build passes and link/SEO artifacts captured |
 | /services/{shortId}/playground/ | gatsby-node + src/templates/service-playground.tsx | astro-generated | spec | not-started | Playground route behavior validated for sample services |
 | /devices/{company}/ | gatsby-node + src/templates/device-company.tsx | astro-generated | spec | not-started | Company slug generation and listing parity checked |
 | /version.json | gatsby-node createVersions() | astro-generated | platform | not-started | Commit SHA output and consumer behavior validated |
