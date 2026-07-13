@@ -2,11 +2,19 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import react from '@astrojs/react';
+import { fileURLToPath } from 'node:url';
 
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://jacdac.github.io',
 	base: '/jacdac-docs',
+	vite: {
+		resolve: {
+			alias: {
+				gatsby: fileURLToPath(new URL('./src/shims/gatsby.tsx', import.meta.url)),
+			},
+		},
+	},
 	integrations: [
 		react(),
 		starlight({

@@ -1,5 +1,5 @@
 ---
-import DashboardMigrationPanel from '../../components/dashboard/DashboardMigrationPanel';
+import LegacyDashboardIsland from '../../components/dashboard/LegacyDashboardIsland';
 ---
 
 <html lang="en">
@@ -13,11 +13,13 @@ import DashboardMigrationPanel from '../../components/dashboard/DashboardMigrati
       <p style="margin: 0; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.75rem; color: #6b7280;">Device Dashboard</p>
       <h1 style="margin: 0; font-size: clamp(2.1rem, 4vw, 3.2rem); line-height: 1.05;">Device Dashboard</h1>
       <p style="margin: 0; color: #4b5563; max-width: 56rem;">
-        Dashboard migration is now anchored in Astro. While the full React dashboard is being integrated,
-        you can still use the existing dashboard implementation.
+        This page now mounts the legacy React dashboard component tree directly inside Astro.
+        The embedded view remains as a fallback while migration issues are resolved.
       </p>
 
-      <DashboardMigrationPanel client:load />
+      <section style="border: 1px solid #e5e7eb; border-radius: 16px; padding: 1rem; background: #fff;">
+        <LegacyDashboardIsland client:only="react" />
+      </section>
 
       <section style="border: 1px solid #e5e7eb; border-radius: 16px; overflow: hidden; background: #fff;">
         <iframe
