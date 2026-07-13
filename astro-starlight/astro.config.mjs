@@ -12,31 +12,44 @@ export default defineConfig({
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/jacdac/jacdac-docs' }],
 			sidebar: [
 				{
-					label: 'Docs',
-					items: [
-						{ label: 'Home', slug: 'index' },
-						{ label: 'Example Guide', slug: 'guides/example' },
-					],
-				},
-				{
 					label: 'Getting Started',
 					items: [{ autogenerate: { directory: 'start' } }],
 				},
 				{
-					label: 'FAQ',
-					items: [{ autogenerate: { directory: 'faq' } }],
+					label: 'Device Dashboard',
+					link: 'https://jacdac.github.io/jacdac-docs/dashboard/',
+				},
+				{
+					label: 'Device Catalog',
+					link: 'https://jacdac.github.io/jacdac-docs/devices/',
+				},
+				{
+					label: 'Client Programming',
+					items: [{ autogenerate: { directory: 'clients' } }],
+				},
+				{
+					label: 'Service Catalog',
+					link: 'https://jacdac.github.io/jacdac-docs/services/',
+				},
+				{
+					label: 'Web Tools',
+					link: 'https://jacdac.github.io/jacdac-docs/tools/',
 				},
 				{
 					label: 'Device Development',
 					items: [{ autogenerate: { directory: 'ddk' } }],
 				},
 				{
-					label: 'Clients',
-					items: [{ autogenerate: { directory: 'clients' } }],
+					label: 'Specifications',
+					items: [{ autogenerate: { directory: 'reference' } }],
 				},
 				{
-					label: 'Reference',
-					items: [{ autogenerate: { directory: 'reference' } }],
+					label: 'FAQ',
+					items: [{ autogenerate: { directory: 'faq' } }],
+				},
+				{
+					label: 'Blog',
+					link: 'https://jacdac.github.io/jacdac-docs/blog/',
 				},
 			],
 		}),
