@@ -3,16 +3,19 @@ import { devicePath, getDevices } from '../../lib/specData';
 const base = import.meta.env.BASE_URL;
 
 export function getStaticPaths() {
-  const paths: Array<{ params: { productId: string }; props: { toPath: string } }> = [];
+  const pathsByProductId = new Map<string, { params: { productId: string }; props: { toPath: string } }>();
   for (const device of getDevices()) {
     for (const productId of device.productIdentifiers || []) {
-      paths.push({
-        params: { productId: productId.toString(16) },
-        props: { toPath: devicePath(device) },
-      });
+      const key = productId.toString(16);
+      if (!pathsByProductId.has(key)) {
+        pathsByProductId.set(key, {
+          params: { productId: key },
+          props: { toPath: devicePath(device) },
+        });
+      }
     }
   }
-  return paths;
+  return [...pathsByProductId.values()];
 }
 
 const { toPath } = Astro.props as { toPath: string };

@@ -49,7 +49,7 @@ export default defineConfig({
 				},
 				{
 					label: 'Blog',
-					link: 'https://jacdac.github.io/jacdac-docs/blog/',
+					link: '/blog/',
 				},
 			],
 		}),
