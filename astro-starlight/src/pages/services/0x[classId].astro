@@ -1,5 +1,6 @@
 ---
 import { getServices } from '../../lib/specData';
+const base = import.meta.env.BASE_URL;
 
 export function getStaticPaths() {
   return getServices().map((service) => ({
@@ -9,5 +10,5 @@ export function getStaticPaths() {
 }
 
 const { shortId } = Astro.props;
-return Astro.redirect(`/jacdac-docs/services/${shortId}/`, 302);
+return Astro.redirect(`${base}services/${shortId}/`, 302);
 ---

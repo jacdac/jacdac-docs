@@ -1,0 +1,46 @@
+---
+import { companySlug, devicePath, getDevices, identifierToUrlPath } from '../../lib/specData';
+
+const devices = getDevices().slice().sort((a, b) => a.company.localeCompare(b.company) || a.name.localeCompare(b.name));
+const companies = Array.from(new Set(devices.map((device) => device.company))).sort();
+const base = import.meta.env.BASE_URL;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Device Catalog</title>
+  </head>
+  <body>
+    <main style="max-width: 980px; margin: 2rem auto; padding: 0 1rem; font-family: ui-sans-serif, system-ui, sans-serif;">
+      <h1>Device Catalog</h1>
+      <p>Generated from the Jacdac device spec data set.</p>
+      <h2>Companies</h2>
+      <ul>
+        {companies.map((company) => (
+          <li><a href={`${base}devices/${companySlug(company)}/`}>{company}</a></li>
+        ))}
+      </ul>
+      <h2>Devices</h2>
+      <ul>
+        {devices.map((device) => {
+          const path = devicePath(device);
+          return (
+            <li style="margin-bottom: 0.75rem; display: flex; gap: 0.75rem; align-items: center;">
+              <img
+                loading="lazy"
+                alt={device.name}
+                src={`${base}images/devices/${identifierToUrlPath(device.id)}.avatar.jpg`}
+                width="32"
+                height="32"
+                style="border-radius: 8px; flex: none;"
+              />
+              <a href={`${base}${path.replace(/^\//, '')}`}>{device.name}</a>
+            </li>
+          );
+        })}
+      </ul>
+    </main>
+  </body>
+</html>

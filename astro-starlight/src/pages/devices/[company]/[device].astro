@@ -1,0 +1,46 @@
+---
+import { companySlug, devicePath, deviceSlug, getDevices, identifierToUrlPath } from '../../../lib/specData';
+const base = import.meta.env.BASE_URL;
+
+export function getStaticPaths() {
+  return getDevices().map((device) => ({
+    params: {
+      company: companySlug(device.company),
+      device: deviceSlug(device.id, device.company),
+    },
+    props: { device },
+  }));
+}
+
+const { device } = Astro.props as { device: { id: string; name: string; company: string; description?: string; services?: number[]; productIdentifiers?: number[]; link?: string; storeLink?: string[] } };
+const slug = companySlug(device.company);
+const canonicalPath = devicePath(device);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{device.name}</title>
+  </head>
+  <body>
+    <main style="max-width: 920px; margin: 2rem auto; padding: 0 1rem; font-family: ui-sans-serif, system-ui, sans-serif;">
+      <p><a href={`${base}devices/`}>Device Catalog</a></p>
+      <p><a href={`${base}devices/${slug}/`}>{device.company} devices</a></p>
+      <h1>{device.name}</h1>
+      <img
+        loading="lazy"
+        alt={device.name}
+        src={`${base}images/devices/${identifierToUrlPath(device.id)}.full.jpg`}
+        style="width: 100%; max-width: 640px; border-radius: 16px; display: block; margin: 1rem 0;"
+      />
+      <p><strong>ID:</strong> {device.id}</p>
+      {device.description && <p>{device.description}</p>}
+      {device.productIdentifiers && <p><strong>Product IDs:</strong> {device.productIdentifiers.map((id) => `0x${id.toString(16)}`).join(', ')}</p>}
+      {device.services && <p><strong>Services:</strong> {device.services.map((id) => `0x${id.toString(16)}`).join(', ')}</p>}
+      {device.link && <p><a href={device.link}>Project link</a></p>}
+      {device.storeLink && device.storeLink.length > 0 && <p><a href={device.storeLink[0]}>Store link</a></p>}
+      <p><strong>Canonical route:</strong> {canonicalPath}</p>
+    </main>
+  </body>
+</html>

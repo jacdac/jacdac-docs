@@ -21,7 +21,7 @@ export default defineConfig({
 				},
 				{
 					label: 'Device Catalog',
-					link: 'https://jacdac.github.io/jacdac-docs/devices/',
+					link: '/devices/',
 				},
 				{
 					label: 'Client Programming',

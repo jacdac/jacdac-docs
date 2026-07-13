@@ -245,9 +245,9 @@ Recommended owners (replace with real names):
 | Content collections and shared layout | 1 | docs | not-started | TBD | Astro scaffold | Define frontmatter schema and nav model |
 | Static docs migration pilot (`reference`) | 2 | docs | done | TBD | Stage 1 complete | `/reference/**` migrated into `astro-starlight/src/content/docs/reference/` with build/link/SEO checks captured |
 | Bulk docs migration | 2 | docs | done | TBD | Pilot complete | `reference`, `faq`, `start`, `ddk`, and `clients` docs families migrated with build/link/SEO artifacts |
-| Services generation pipeline port | 3 | spec | in-progress | TBD | Stage 1 complete | JSON-driven Astro generation scaffolded for `/services/{shortId}/`, `/services/{shortId}/playground/`, `/services/0x{classId}` redirects, and `/services/x{classId}.json` + `/services/lite/x{classId}.json` |
-| Devices generation pipeline port | 3 | spec | not-started | TBD | Stage 1 complete | Rebuild device pages + image derivatives |
-| Redirect map migration + validation | 3 | platform | not-started | TBD | Services/devices port | Must include legacy and QR vanity redirects |
+| Services generation pipeline port | 3 | spec | done | TBD | Stage 1 complete | JSON-driven Astro generation is live for `/services/{shortId}/`, `/services/{shortId}/playground/`, `/services/0x{classId}` redirects, and `/services/x{classId}.json` + `/services/lite/x{classId}.json` |
+| Devices generation pipeline port | 3 | spec | in-progress | TBD | Stage 1 complete | JSON-driven Astro generation is live for `/devices/`, `/devices/{company}/`, `/devices/{company}/{identifier}/`, `/devices/0x{productId}` redirects, and `/devices/codes/{vanity}` redirects |
+| Redirect map migration + validation | 3 | platform | in-progress | TBD | Services/devices port | Must include legacy and QR vanity redirects; service and device redirect slices are now wired |
 | Search implementation selection | 4 | docs | not-started | TBD | Stage 2 baseline | Decide built-in vs custom index |
 | SEO/sitemap/robots parity | 4 | platform | not-started | TBD | Stage 2 complete | Validate canonical/meta behavior |
 | Tier A tools migration | 5 | app | not-started | TBD | Stages 1-4 | No regressions allowed for critical tools |

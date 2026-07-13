@@ -4,6 +4,7 @@ import { getServices } from '../../lib/specData';
 const services = getServices()
   .slice()
   .sort((a, b) => a.shortId.localeCompare(b.shortId));
+const base = import.meta.env.BASE_URL;
 ---
 
 <html lang="en">
@@ -15,11 +16,11 @@ const services = getServices()
   <body>
     <main style="max-width: 920px; margin: 2rem auto; padding: 0 1rem; font-family: ui-sans-serif, system-ui, sans-serif;">
       <h1>Service Catalog</h1>
-      <p>Generated from <code>jacdac-ts/jacdac-spec/dist/services.json</code>.</p>
+      <p>Generated from the Jacdac service spec data set.</p>
       <ul>
         {services.map((service) => (
           <li>
-            <a href={`/jacdac-docs/services/${service.shortId}/`}>{service.name} ({service.shortId})</a>
+            <a href={`${base}services/${service.shortId}/`}>{service.name} ({service.shortId})</a>
           </li>
         ))}
       </ul>
