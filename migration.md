@@ -245,7 +245,7 @@ Recommended owners (replace with real names):
 | Content collections and shared layout | 1 | docs | not-started | TBD | Astro scaffold | Define frontmatter schema and nav model |
 | Static docs migration pilot (`reference`) | 2 | docs | done | TBD | Stage 1 complete | `/reference/**` migrated into `astro-starlight/src/content/docs/reference/` with build/link/SEO checks captured |
 | Bulk docs migration | 2 | docs | done | TBD | Pilot complete | `reference`, `faq`, `start`, `ddk`, and `clients` docs families migrated with build/link/SEO artifacts |
-| Services generation pipeline port | 3 | spec | not-started | TBD | Stage 1 complete | Rebuild service pages + JSON artifacts |
+| Services generation pipeline port | 3 | spec | in-progress | TBD | Stage 1 complete | JSON-driven Astro generation scaffolded for `/services/{shortId}/`, `/services/{shortId}/playground/`, `/services/0x{classId}` redirects, and `/services/x{classId}.json` + `/services/lite/x{classId}.json` |
 | Devices generation pipeline port | 3 | spec | not-started | TBD | Stage 1 complete | Rebuild device pages + image derivatives |
 | Redirect map migration + validation | 3 | platform | not-started | TBD | Services/devices port | Must include legacy and QR vanity redirects |
 | Search implementation selection | 4 | docs | not-started | TBD | Stage 2 baseline | Decide built-in vs custom index |
@@ -598,8 +598,8 @@ Status values:
 | /faq/ | src/pages/faq.mdx | astro-doc | docs | not-started | FAQ index + child links verified |
 | /start/ | src/pages/start.mdx | astro-doc | docs | not-started | Onboarding path integrity verified |
 | /ddk/ | src/pages/ddk.mdx | astro-doc | docs | not-started | DDK index + child nav verified |
-| /services/{shortId}/ | gatsby-node + src/templates/service.tsx | astro-generated | spec | not-started | Sample matrix of service pages matches legacy output |
-| /services/0x{classId} -> /services/{shortId}/ | gatsby-node redirect | astro-generated | platform/spec | not-started | Redirect map validated against generated class IDs |
+| /services/{shortId}/ | gatsby-node + src/templates/service.tsx | astro-generated | spec | in-progress | JSON-driven route generation is active in `astro-starlight/src/pages/services/[shortId]/index.astro`; parity/UI validation still pending |
+| /services/0x{classId} -> /services/{shortId}/ | gatsby-node redirect | astro-generated | platform/spec | in-progress | JSON-driven redirects are generated in `astro-starlight/src/pages/services/0x[classId].astro`; redirect validation matrix pending |
 | /devices/{identifier}/ | gatsby-node + src/templates/device.tsx | astro-generated | spec | not-started | Sample matrix of device pages and metadata validated |
 | /devices/0x{productId} -> /devices/{identifier}/ | gatsby-node redirect | astro-generated | platform/spec | not-started | Product ID redirects verified for representative set |
 | /devices/codes/{vanity}/ -> device route | gatsby-node redirect | astro-generated | platform/spec | not-started | QR vanity redirects validated with CSV/design-ID fixtures |
@@ -628,7 +628,7 @@ Status values:
 | /devices/{company}/ | gatsby-node + src/templates/device-company.tsx | astro-generated | spec | not-started | Company slug generation and listing parity checked |
 | /version.json | gatsby-node createVersions() | astro-generated | platform | not-started | Commit SHA output and consumer behavior validated |
 | /jacdac-worker-{version}.js | gatsby-node createWorkers() | astro-generated | platform/app | not-started | Worker file emitted and fetched successfully |
-| /services/x{classId}.json and /services/lite/x{classId}.json | gatsby-node generateServicesJSON() | astro-generated | spec | not-started | JSON schema and content parity checks passing |
+| /services/x{classId}.json and /services/lite/x{classId}.json | gatsby-node generateServicesJSON() | astro-generated | spec | in-progress | JSON endpoints generated from `jacdac-ts/jacdac-spec/dist/services.json`; schema/content parity checks pending |
 | /tools/settings/ | src/pages/tools/settings.tsx | astro-island | app | not-started | Settings save/load and navigation behavior works |
 | /tools/player/ | src/pages/tools/player.tsx | astro-island | app | not-started | Playback controls and data flow validated |
 | /tools/service-editor/ | src/pages/tools/service-editor.tsx | split-react-app | app | not-started | Editor interactions and persistence validated |

@@ -1,0 +1,28 @@
+---
+import { getServices } from '../../../lib/specData';
+
+export function getStaticPaths() {
+  return getServices().map((service) => ({
+    params: { shortId: service.shortId },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{service.name} playground</title>
+  </head>
+  <body>
+    <main style="max-width: 920px; margin: 2rem auto; padding: 0 1rem; font-family: ui-sans-serif, system-ui, sans-serif;">
+      <p><a href={`/jacdac-docs/services/${service.shortId}/`}>Back to service page</a></p>
+      <h1>{service.name} playground</h1>
+      <p>This route is generated from service JSON and reserved for service-specific playground UI.</p>
+      <p><strong>Service:</strong> {service.shortId} (0x{service.classIdentifier.toString(16)})</p>
+    </main>
+  </body>
+</html>

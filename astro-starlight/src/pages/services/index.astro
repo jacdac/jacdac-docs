@@ -1,0 +1,28 @@
+---
+import { getServices } from '../../lib/specData';
+
+const services = getServices()
+  .slice()
+  .sort((a, b) => a.shortId.localeCompare(b.shortId));
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Service Catalog</title>
+  </head>
+  <body>
+    <main style="max-width: 920px; margin: 2rem auto; padding: 0 1rem; font-family: ui-sans-serif, system-ui, sans-serif;">
+      <h1>Service Catalog</h1>
+      <p>Generated from <code>jacdac-ts/jacdac-spec/dist/services.json</code>.</p>
+      <ul>
+        {services.map((service) => (
+          <li>
+            <a href={`/jacdac-docs/services/${service.shortId}/`}>{service.name} ({service.shortId})</a>
+          </li>
+        ))}
+      </ul>
+    </main>
+  </body>
+</html>

@@ -29,7 +29,7 @@ export default defineConfig({
 				},
 				{
 					label: 'Service Catalog',
-					link: 'https://jacdac.github.io/jacdac-docs/services/',
+					link: '/services/',
 				},
 				{
 					label: 'Web Tools',
