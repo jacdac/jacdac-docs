@@ -1,5 +1,5 @@
 ---
-import { companySlug, devicePath, deviceSlug, getDevices, identifierToUrlPath } from '../../../lib/specData';
+import { companySlug, deviceImagePath, devicePath, deviceSlug, getDevices, identifierToUrlPath } from '../../../lib/specData';
 const base = import.meta.env.BASE_URL;
 
 export function getStaticPaths() {
@@ -12,9 +12,10 @@ export function getStaticPaths() {
   }));
 }
 
-const { device } = Astro.props as { device: { id: string; name: string; company: string; description?: string; services?: number[]; productIdentifiers?: number[]; link?: string; storeLink?: string[] } };
+const { device } = Astro.props as { device: { id: string; name: string; company: string; description?: string; services?: number[]; productIdentifiers?: number[]; link?: string; storeLink?: string[]; tags?: string[]; version?: string; connector?: string; designIdentifier?: string } };
 const slug = companySlug(device.company);
 const canonicalPath = devicePath(device);
+const tags = (device.tags || []).slice(0, 6);
 ---
 
 <html lang="en">
@@ -24,23 +25,69 @@ const canonicalPath = devicePath(device);
     <title>{device.name}</title>
   </head>
   <body>
-    <main style="max-width: 920px; margin: 2rem auto; padding: 0 1rem; font-family: ui-sans-serif, system-ui, sans-serif;">
-      <p><a href={`${base}devices/`}>Device Catalog</a></p>
-      <p><a href={`${base}devices/${slug}/`}>{device.company} devices</a></p>
-      <h1>{device.name}</h1>
-      <img
-        loading="lazy"
-        alt={device.name}
-        src={`${base}images/devices/${identifierToUrlPath(device.id)}.full.jpg`}
-        style="width: 100%; max-width: 640px; border-radius: 16px; display: block; margin: 1rem 0;"
-      />
-      <p><strong>ID:</strong> {device.id}</p>
-      {device.description && <p>{device.description}</p>}
-      {device.productIdentifiers && <p><strong>Product IDs:</strong> {device.productIdentifiers.map((id) => `0x${id.toString(16)}`).join(', ')}</p>}
-      {device.services && <p><strong>Services:</strong> {device.services.map((id) => `0x${id.toString(16)}`).join(', ')}</p>}
-      {device.link && <p><a href={device.link}>Project link</a></p>}
-      {device.storeLink && device.storeLink.length > 0 && <p><a href={device.storeLink[0]}>Store link</a></p>}
-      <p><strong>Canonical route:</strong> {canonicalPath}</p>
+    <main style="max-width: 1120px; margin: 2rem auto 4rem; padding: 0 1rem; font-family: ui-sans-serif, system-ui, sans-serif;">
+      <p style="margin: 0 0 1rem; display: flex; gap: 0.75rem; flex-wrap: wrap;"><a href={`${base}devices/`}>Device Catalog</a><a href={`${base}devices/${slug}/`}>{device.company} devices</a></p>
+      <div style="display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr); gap: 1.5rem; align-items: start;">
+        <div style="display: grid; gap: 1rem;">
+          <div style="display: grid; gap: 0.5rem;">
+            <p style="margin: 0; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.75rem; color: #6b7280;">Device Detail</p>
+            <h1 style="margin: 0; font-size: clamp(2.2rem, 4vw, 3.6rem); line-height: 1.05;">{device.name}</h1>
+            {device.description && <p style="margin: 0; font-size: 1.05rem; color: #4b5563; line-height: 1.55; max-width: 56rem;">{device.description}</p>}
+          </div>
+
+          <img
+            loading="lazy"
+            alt={device.name}
+            src={deviceImagePath(device, 'full')}
+            style="width: 100%; max-width: 760px; border-radius: 20px; display: block; background: #f3f4f6; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);"
+          />
+
+          {tags.length > 0 && (
+            <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+              {tags.map((tag) => (
+                <span style="display: inline-flex; align-items: center; padding: 0.25rem 0.65rem; border-radius: 999px; background: #f3f4f6; color: #374151; font-size: 0.8rem;">{tag}</span>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <aside style="display: grid; gap: 1rem; position: sticky; top: 1rem;">
+          <section style="padding: 1rem; border: 1px solid #e5e7eb; border-radius: 18px; background: #fff; display: grid; gap: 0.75rem;">
+            <h2 style="margin: 0; font-size: 1rem;">Identity</h2>
+            <dl style="margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 0.35rem 0.75rem; align-items: baseline;">
+              <dt style="color: #6b7280;">ID</dt><dd style="margin: 0;">{device.id}</dd>
+              <dt style="color: #6b7280;">Canonical</dt><dd style="margin: 0;"><a href={`${base}${canonicalPath.replace(/^\//, '')}`}>{canonicalPath}</a></dd>
+              {device.version && <><dt style="color: #6b7280;">Version</dt><dd style="margin: 0;">{device.version}</dd></>}
+              {device.connector && <><dt style="color: #6b7280;">Connector</dt><dd style="margin: 0;">{device.connector}</dd></>}
+              {device.designIdentifier && <><dt style="color: #6b7280;">Design</dt><dd style="margin: 0;">{device.designIdentifier}</dd></>}
+            </dl>
+          </section>
+
+          {device.productIdentifiers && device.productIdentifiers.length > 0 && (
+            <section style="padding: 1rem; border: 1px solid #e5e7eb; border-radius: 18px; background: #fff; display: grid; gap: 0.75rem;">
+              <h2 style="margin: 0; font-size: 1rem;">Product IDs</h2>
+              <p style="margin: 0; color: #374151;">{device.productIdentifiers.map((id) => `0x${id.toString(16)}`).join(', ')}</p>
+            </section>
+          )}
+
+          {device.services && device.services.length > 0 && (
+            <section style="padding: 1rem; border: 1px solid #e5e7eb; border-radius: 18px; background: #fff; display: grid; gap: 0.75rem;">
+              <h2 style="margin: 0; font-size: 1rem;">Services</h2>
+              <p style="margin: 0; color: #374151;">{device.services.map((id) => `0x${id.toString(16)}`).join(', ')}</p>
+            </section>
+          )}
+
+          {(device.link || (device.storeLink && device.storeLink.length > 0)) && (
+            <section style="padding: 1rem; border: 1px solid #e5e7eb; border-radius: 18px; background: #fff; display: grid; gap: 0.65rem;">
+              <h2 style="margin: 0; font-size: 1rem;">Links</h2>
+              {device.link && <a href={device.link}>Project link</a>}
+              {device.storeLink && device.storeLink.length > 0 && <a href={device.storeLink[0]}>Store link</a>}
+              <a href={deviceImagePath(device, 'preview')}>Preview image</a>
+              <a href={deviceImagePath(device, 'list')}>List image</a>
+            </section>
+          )}
+        </aside>
+      </div>
     </main>
   </body>
 </html>

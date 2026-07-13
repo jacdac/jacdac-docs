@@ -50,7 +50,7 @@ export default function DeviceSpecificationCard(props: {
     ]
         .filter(s => !!s)
         .join(", ")
-    const to = onClick ? undefined : `/devices/${identifierToUrlPath(id)}`
+    const to = onClick ? undefined : `/devices/${identifierToUrlPath(id)}/`
 
     return (
         <Card raised>

@@ -93,6 +93,11 @@ export function identifierToUrlPath(id: string): string {
   return `${parts.slice(0, -1).map(escape).join('-')}/${escape(parts[parts.length - 1])}`;
 }
 
+export function basePathPrefix(): string {
+  const base = import.meta.env.BASE_URL;
+  return base.endsWith('/') ? base : `${base}/`;
+}
+
 export function deviceSlug(deviceId: string, company: string): string {
   const slug = companySlug(company);
   return deviceId.startsWith(`${slug}-`) ? deviceId.slice(slug.length + 1) : deviceId;
@@ -100,6 +105,12 @@ export function deviceSlug(deviceId: string, company: string): string {
 
 export function devicePath(device: DeviceSpec): string {
   return `/devices/${companySlug(device.company)}/${deviceSlug(device.id, device.company)}/`;
+}
+
+export type DeviceImageVariant = 'catalog' | 'preview' | 'full' | 'lazy' | 'list' | 'avatar';
+
+export function deviceImagePath(device: DeviceSpec, variant: DeviceImageVariant = 'avatar'): string {
+  return `${basePathPrefix()}images/devices/${identifierToUrlPath(device.id)}.${variant}.jpg`;
 }
 
 export function getDeviceRedirectRows(): DeviceRedirectRow[] {

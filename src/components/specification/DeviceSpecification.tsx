@@ -258,7 +258,7 @@ export default function DeviceSpecification(props: {
                                 ? "kit"
                                 : "device"}{" "}
                             requires a{" "}
-                            <Link to={`/devices/${identifierToUrlPath(id)}`}>
+                            <Link to={`/devices/${identifierToUrlPath(id)}/`}>
                                 {name}
                             </Link>{" "}
                             (sold separately).
