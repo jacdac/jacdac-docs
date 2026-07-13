@@ -1,12 +1,14 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://jacdac.github.io',
 	base: '/jacdac-docs',
 	integrations: [
+		react(),
 		starlight({
 			title: 'Jacdac Docs',
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/jacdac/jacdac-docs' }],
@@ -17,7 +19,7 @@ export default defineConfig({
 				},
 				{
 					label: 'Device Dashboard',
-					link: 'https://jacdac.github.io/jacdac-docs/dashboard/',
+					link: '/dashboard/',
 				},
 				{
 					label: 'Device Catalog',
