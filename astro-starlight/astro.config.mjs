@@ -16,6 +16,7 @@ export default defineConfig({
 		resolve: {
 			alias: {
 				gatsby: fileURLToPath(new URL('./src/shims/gatsby.tsx', import.meta.url)),
+				'gatsby-link': fileURLToPath(new URL('./src/shims/gatsby-link.ts', import.meta.url)),
 			},
 		},
 	},
