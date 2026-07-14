@@ -6,6 +6,7 @@ on:
       - "astro-starlight/**"
       - "docs/migration/astro-island-provider-checklist.md"
       - "scripts/check-astro-island-checklist.mjs"
+      - "scripts/check-astro-migrated-routes.mjs"
       - ".github/workflows/astro-preview.yml"
   workflow_dispatch:
 
@@ -36,6 +37,9 @@ jobs:
       - name: Build
         working-directory: astro-starlight
         run: npm run build
+
+      - name: Verify migrated route output
+        run: node scripts/check-astro-migrated-routes.mjs
 
       - name: Verify base path output
         run: |
