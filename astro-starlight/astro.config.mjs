@@ -9,6 +9,10 @@ export default defineConfig({
 	site: 'https://jacdac.github.io',
 	base: '/jacdac-docs',
 	vite: {
+		define: {
+			'process.env': {},
+			'process.env.GATSBY_GITHUB_SHA': JSON.stringify(''),
+		},
 		resolve: {
 			alias: {
 				gatsby: fileURLToPath(new URL('./src/shims/gatsby.tsx', import.meta.url)),
