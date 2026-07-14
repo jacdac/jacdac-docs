@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "../../compat/gatsbyData"
 import { parseTrace } from "../../../jacdac-ts/src/jdom/logparser"
 import { Trace } from "../../../jacdac-ts/src/jdom/trace/trace"
 import { Grid } from "@mui/material"
@@ -23,7 +23,7 @@ export default function TraceList() {
             }
         }
     `)
-    const traces: { trace: Trace; name: string }[] = data.allPlainText.nodes
+    const traces: { trace: Trace; name: string }[] = (data?.allPlainText?.nodes || [])
         .filter(node => node.parent?.ext === ".txt")
         .map(node => {
             return {

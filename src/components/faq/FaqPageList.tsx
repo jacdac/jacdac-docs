@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "../../compat/gatsbyData"
 import PageLinkList, { PageQuery, pageQueryToNodes } from "../ui/PageLinkList"
 
 export default function FaqPageList() {

@@ -1,4 +1,4 @@
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "../compat/gatsbyData"
 import { Index } from "elasticlunr"
 import { useRef } from "react"
 
@@ -10,6 +10,10 @@ export default function useSearchIndex() {
             }
         }
     `)
-    const index = useRef(Index.load(siteSearchIndex.index))
+    const index = useRef(
+        siteSearchIndex?.index
+            ? Index.load(siteSearchIndex.index)
+            : (({ search: () => [] } as unknown) as Index)
+    )
     return index.current
 }

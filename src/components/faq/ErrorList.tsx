@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "../../compat/gatsbyData"
 import { groupBy } from "../../../jacdac-ts/src/jdom/utils"
 import PageLinkList from "../ui/PageLinkList"
 
@@ -48,7 +48,7 @@ export default function ErrorList() {
             order: node.frontmatter.order,
         }))
 
-    const groups = groupBy(nodes, node => node.slug.split("/", 3)[2] || "")
+    const groups = groupBy(nodes || [], node => node.slug.split("/", 3)[2] || "")
     const groupNames = Object.keys(groups).filter(g => !!g)
     console.debug(groupNames)
 

@@ -13,10 +13,13 @@ export default defineConfig({
 			'process.env': {},
 			'process.env.GATSBY_GITHUB_SHA': JSON.stringify(''),
 		},
+		optimizeDeps: {
+			exclude: ['gatsby', 'gatsby-link', 'gatsby-theme-material-ui', 'gatsby-material-ui-components'],
+		},
 		resolve: {
 			alias: {
-				gatsby: fileURLToPath(new URL('./src/shims/gatsby.tsx', import.meta.url)),
-				'gatsby-link': fileURLToPath(new URL('./src/shims/gatsby-link.ts', import.meta.url)),
+				'gatsby-theme-material-ui': fileURLToPath(new URL('./src/shims/gatsby-theme-material-ui.tsx', import.meta.url)),
+				'gatsby-material-ui-components': fileURLToPath(new URL('./src/shims/gatsby-material-ui-components.tsx', import.meta.url)),
 			},
 		},
 	},

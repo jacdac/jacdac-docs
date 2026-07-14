@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useMemo, useState } from "react"
 import { styled } from "@mui/material/styles"
-import { List, Collapse } from "@mui/material"
-import { ListItemButton } from "gatsby-theme-material-ui"
+import { List, Collapse, ListItemButton } from "@mui/material"
 // tslint:disable-next-line: no-submodule-imports
 import ListItemText from "@mui/material/ListItemText"
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "../../compat/gatsbyData"
 import ExpandMore from "@mui/icons-material/ExpandMore"
 import ChevronRightIcon from "@mui/icons-material/ChevronRight"
 import AppContext, { DrawerType } from "../AppContext"
@@ -96,7 +95,8 @@ function TocListItem(props: {
     return (
         <>
             <ListItemButton
-                to={path}
+                component="a"
+                href={path}
                 onClick={handleClick}
                 selected={selected}
                 sx={{ width: "100%", pl: Math.max(1, level) }}
@@ -206,7 +206,7 @@ export default function Toc(props: { pagePath: string }) {
             },
         ]
 
-        data.allMdx.edges
+        ;(data?.allMdx?.edges || [])
             .map(node => node.node)
             .filter(
                 node => !!node.frontmatter?.title && node.fields.slug !== "/"

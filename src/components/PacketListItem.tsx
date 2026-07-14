@@ -12,7 +12,7 @@ import {
 import { prettyDuration } from "../../jacdac-ts/src/jdom/pretty"
 import { ellipseJoin, toHex } from "../../jacdac-ts/src/jdom/utils"
 import { jdunpack } from "../../jacdac-ts/src/jdom/pack"
-import { navigate } from "gatsby"
+import { navigate } from "../compat/navigate"
 import useMediaQueries from "./hooks/useMediaQueries"
 
 const PREFIX = "PacketListItem"

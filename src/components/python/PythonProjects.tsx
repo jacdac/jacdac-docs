@@ -1,4 +1,4 @@
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "../../compat/gatsbyData"
 import React, { useMemo } from "react"
 import { ReactNode } from "react"
 import { serviceSpecificationFromClassIdentifier } from "../../../jacdac-ts/src/jdom/spec"
@@ -61,7 +61,7 @@ export default function PythonProjects(props: {
 
     const nodes = useMemo(() => {
         // grab the nodes
-        let nodes = query.allMdx.edges.map(edge => edge.node)
+        let nodes = (query?.allMdx?.edges || []).map(edge => edge.node)
         // filter out
         if (serviceNames?.length)
             nodes = nodes.filter(node =>
