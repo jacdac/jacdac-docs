@@ -13,29 +13,13 @@ import LegacyDashboardIsland from '../../components/dashboard/LegacyDashboardIsl
       <p style="margin: 0; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.75rem; color: #6b7280;">Device Dashboard</p>
       <h1 style="margin: 0; font-size: clamp(2.1rem, 4vw, 3.2rem); line-height: 1.05;">Device Dashboard</h1>
       <p style="margin: 0; color: #4b5563; max-width: 56rem;">
-        This page now mounts the legacy React dashboard component tree directly inside Astro.
-        The embedded view remains as a fallback while migration issues are resolved.
+        This page mounts the legacy React dashboard component tree directly inside Astro.
       </p>
 
       <section style="border: 1px solid #e5e7eb; border-radius: 16px; padding: 1rem; background: #fff;">
         <LegacyDashboardIsland client:only="react" />
       </section>
 
-      <details style="border: 1px solid #e5e7eb; border-radius: 16px; background: #fff; overflow: hidden;">
-        <summary style="cursor: pointer; padding: 0.75rem 1rem; color: #374151; font-weight: 600;">
-          Open hosted dashboard fallback
-        </summary>
-        <iframe
-          title="Jacdac Device Dashboard"
-          src="https://jacdac.github.io/jacdac-docs/dashboard/?embed=1"
-          style="width: 100%; min-height: 72vh; border: 0; display: block;"
-        ></iframe>
-      </details>
-
-      <p style="margin: 0; color: #6b7280;">
-        If the embedded dashboard does not load, open it directly:
-        <a href="https://jacdac.github.io/jacdac-docs/dashboard/" style="margin-left: 0.35rem;">jacdac.github.io/jacdac-docs/dashboard/</a>
-      </p>
     </main>
   </body>
 </html>
