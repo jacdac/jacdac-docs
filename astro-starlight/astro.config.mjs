@@ -8,6 +8,11 @@ export default defineConfig({
 	site: 'https://jacdac.github.io',
 	base: '/jacdac-docs',
 	vite: {
+		resolve: {
+			alias: {
+				'@mui/material/styles/adaptV4Theme': '@mui/material/styles/adaptV4Theme.js',
+			},
+		},
 		define: {
 			'process.env': {},
 			'process.env.GATSBY_GITHUB_SHA': JSON.stringify(''),
@@ -44,7 +49,7 @@ export default defineConfig({
 				},
 				{
 					label: 'Web Tools',
-					link: 'https://jacdac.github.io/jacdac-docs/tools/',
+					items: [{ autogenerate: { directory: 'tools' } }],
 				},
 				{
 					label: 'Device Development',
