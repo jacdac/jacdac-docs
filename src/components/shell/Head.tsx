@@ -5,11 +5,15 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import type { HeadProps } from "gatsby"
+import { useStaticQuery, graphql } from "../../compat/gatsbyData"
+
+type CoreHeadProps = {
+    pageContext?: { title?: string }
+    data?: { page?: { description?: string } }
+}
 
 export default function Head(
-    props: HeadProps & {
+    props: CoreHeadProps & {
         description?: string
         image?: string
         title?: string

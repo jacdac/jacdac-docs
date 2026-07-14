@@ -1,4 +1,4 @@
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "../../compat/gatsbyData"
 import React from "react"
 import { ReactNode } from "react"
 import PageLinkList, { PageQuery, pageQueryToNodes } from "../ui/PageLinkList"

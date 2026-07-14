@@ -11,7 +11,7 @@ import { serviceProviderDefinitionFromServiceClass } from "../../../jacdac-ts/sr
 import useDeviceCatalog from "../../components/devices/useDeviceCatalog"
 import useChange from "../../jacdac/useChange"
 import { resolveMakecodeServiceFromClassIdentifier } from "../../components/makecode/services"
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "../../compat/gatsbyData"
 import CheckIcon from "@mui/icons-material/Check"
 import ClearIcon from "@mui/icons-material/Clear"
 import { Chip } from "@mui/material"
