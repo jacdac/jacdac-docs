@@ -1,28 +1,16 @@
-import { graphql, useStaticQuery } from "../../compat/gatsbyData"
+import { listLegacyPagesByPrefix } from "../../compat/pageData"
 import React from "react"
 import { ReactNode } from "react"
-import PageLinkList, { PageQuery, pageQueryToNodes } from "../ui/PageLinkList"
+import PageLinkList from "../ui/PageLinkList"
 
 export default function BlogEntries(props: { header?: ReactNode }) {
     const { header } = props
-    const query = useStaticQuery<PageQuery>(graphql`
-        {
-            allMdx(filter: { fields: { slug: { glob: "/blog/*" } } }) {
-                nodes {
-                    excerpt
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        title
-                        order
-                        description
-                        date
-                    }
-                }
-            }
-        }
-    `)
-
-    return <PageLinkList header={header} nodes={pageQueryToNodes(query)} />
+    const nodes = listLegacyPagesByPrefix("/blog/").map(page => ({
+        slug: page.slug,
+        title: page.title || page.slug,
+        description: page.description || page.excerpt,
+        order: page.order,
+        date: page.date,
+    }))
+    return React.createElement(PageLinkList, { header, nodes })
 }

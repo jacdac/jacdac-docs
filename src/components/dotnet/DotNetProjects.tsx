@@ -1,27 +1,13 @@
-import { graphql, useStaticQuery } from "../../compat/gatsbyData"
+import { listLegacyPagesByPrefix } from "../../compat/pageData"
 import React from "react"
-import PageLinkList, { PageQuery, pageQueryToNodes } from "../ui/PageLinkList"
+import PageLinkList from "../ui/PageLinkList"
 
 export default function DotNetProjects() {
-    const query = useStaticQuery<PageQuery>(graphql`
-        {
-            allMdx(
-                filter: {
-                    fields: { slug: { glob: "/clients/dotnet/projects/*" } }
-                }
-            ) {
-                nodes {
-                    excerpt
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        title
-                        order
-                    }
-                }
-            }
-        }
-    `)
-    return <PageLinkList nodes={pageQueryToNodes(query)} />
+    const nodes = listLegacyPagesByPrefix("/clients/dotnet/projects/").map(page => ({
+        slug: page.slug,
+        title: page.title,
+        description: page.description || page.excerpt,
+        order: page.order,
+    }))
+    return <PageLinkList nodes={nodes} />
 }

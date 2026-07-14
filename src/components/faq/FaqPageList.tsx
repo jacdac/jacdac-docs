@@ -1,25 +1,13 @@
 import React from "react"
-import { graphql, useStaticQuery } from "../../compat/gatsbyData"
-import PageLinkList, { PageQuery, pageQueryToNodes } from "../ui/PageLinkList"
+import { listLegacyPagesByPrefix } from "../../compat/pageData"
+import PageLinkList from "../ui/PageLinkList"
 
 export default function FaqPageList() {
-    const query = useStaticQuery<PageQuery>(graphql`
-        {
-            allMdx(filter: { fields: { slug: { glob: "/faq/*" } } }) {
-                nodes {
-                    excerpt
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        title
-                        description
-                        order
-                    }
-                }
-            }
-        }
-    `)
-
-    return <PageLinkList nodes={pageQueryToNodes(query)} />
+    const nodes = listLegacyPagesByPrefix("/faq/").map(page => ({
+        slug: page.slug,
+        title: page.title,
+        description: page.description || page.excerpt,
+        order: page.order,
+    }))
+    return <PageLinkList nodes={nodes} />
 }

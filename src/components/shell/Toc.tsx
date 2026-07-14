@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles"
 import { List, Collapse, ListItemButton } from "@mui/material"
 // tslint:disable-next-line: no-submodule-imports
 import ListItemText from "@mui/material/ListItemText"
-import { graphql, useStaticQuery } from "../../compat/gatsbyData"
+import { listLegacyPages } from "../../compat/pageData"
 import ExpandMore from "@mui/icons-material/ExpandMore"
 import ChevronRightIcon from "@mui/icons-material/ChevronRight"
 import AppContext, { DrawerType } from "../AppContext"
@@ -126,30 +126,7 @@ function TocListItem(props: {
 
 export default function Toc(props: { pagePath: string }) {
     const { pagePath } = props
-
-    const data = useStaticQuery(graphql`
-        query {
-            allMdx {
-                edges {
-                    node {
-                        frontmatter {
-                            title
-                            order
-                            hideToc
-                        }
-                        fields {
-                            slug
-                        }
-                        parent {
-                            ... on File {
-                                sourceInstanceName
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
+    const pages = listLegacyPages()
 
     const tree = useMemo(() => {
         // convert pages into tree
@@ -206,27 +183,21 @@ export default function Toc(props: { pagePath: string }) {
             },
         ]
 
-        ;(data?.allMdx?.edges || [])
-            .map(node => node.node)
-            .filter(
-                node => !!node.frontmatter?.title && node.fields.slug !== "/"
-            )
-            .filter(node => !node.frontmatter || !node.frontmatter?.hideToc)
-            .map(node => {
+        pages
+            .filter(page => !!page.title && page.slug !== "/")
+            .filter(page => !page.hideToc)
+            .map(page => {
                 const r = {
-                    name: node.frontmatter?.title,
-                    path: node.fields.slug,
-                    order:
-                        node.frontmatter?.order !== undefined
-                            ? node.frontmatter?.order
-                            : 50,
+                    name: page.title,
+                    path: page.slug,
+                    order: page.order !== undefined ? page.order : 50,
                 }
                 return r
             })
             .forEach(node => toc.push(node))
         const { tree } = treeifyToc(toc)
         return tree
-    }, [])
+    }, [pages.length])
 
     return (
         <StyledList dense className={classes.root}>

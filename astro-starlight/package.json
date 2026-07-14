@@ -3,9 +3,9 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "node ./scripts/generate-device-assets.mjs && astro dev",
-    "start": "node ./scripts/generate-device-assets.mjs && astro dev",
-    "build": "node ./scripts/generate-device-assets.mjs && astro build",
+    "dev": "node ./scripts/generate-legacy-page-index.mjs && node ./scripts/generate-device-assets.mjs && astro dev",
+    "start": "node ./scripts/generate-legacy-page-index.mjs && node ./scripts/generate-device-assets.mjs && astro dev",
+    "build": "node ./scripts/generate-legacy-page-index.mjs && node ./scripts/generate-device-assets.mjs && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },

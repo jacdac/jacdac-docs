@@ -1,51 +1,18 @@
 import React from "react"
-import { graphql, useStaticQuery } from "../../compat/gatsbyData"
+import { listLegacyPagesByPrefix } from "../../compat/pageData"
 import { groupBy } from "../../../jacdac-ts/src/jdom/utils"
 import PageLinkList from "../ui/PageLinkList"
 
 export default function ErrorList() {
-    const data = useStaticQuery<{
-        allMdx: {
-            nodes: {
-                fields: {
-                    slug: string
-                }
-                frontmatter: {
-                    title?: string
-                    order?: number
-                }
-            }[]
-        }
-    }>(graphql`
-        {
-            allMdx(
-                filter: { fields: { slug: { glob: "faq/errors/**" } } }
-            ) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        title
-                        order
-                    }
-                }
-            }
-        }
-    `)
-
     const nodes: {
         slug: string
         title: string
-    }[] = data?.allMdx?.nodes
-        ?.filter(
-            node =>
-                node.fields?.slug.indexOf("/") > -1 && node.frontmatter?.title
-        )
+    }[] = listLegacyPagesByPrefix("/faq/errors/")
+        ?.filter(node => node.slug?.indexOf("/") > -1 && node.title)
         .map(node => ({
-            slug: node.fields?.slug,
-            title: node.frontmatter.title,
-            order: node.frontmatter.order,
+            slug: node.slug,
+            title: node.title,
+            order: node.order,
         }))
 
     const groups = groupBy(nodes || [], node => node.slug.split("/", 3)[2] || "")
