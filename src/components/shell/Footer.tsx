@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material"
 import { styled } from "@mui/material/styles"
-import { Link } from "gatsby-theme-material-ui"
+import { Link } from "../ui/GatsbyMuiCompat"
 import React from "react"
 import TraceSaveButton from "../trace/TraceSaveButton"
 

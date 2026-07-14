@@ -5,7 +5,7 @@ import {
     DialogContentText,
     DialogTitle,
 } from "@mui/material"
-import { Button } from "gatsby-theme-material-ui"
+import { Button } from "../ui/GatsbyMuiCompat"
 import React, { ReactNode } from "react"
 import CmdButton from "../CmdButton"
 

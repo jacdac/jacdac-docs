@@ -1,5 +1,5 @@
 import { Card, CardActions, CardContent, CardHeader, Grid } from "@mui/material"
-import { Button } from "gatsby-theme-material-ui"
+import { Button } from "./ui/GatsbyMuiCompat"
 import React, { useContext } from "react"
 import { prettyDuration } from "../../jacdac-ts/src/jdom/pretty"
 import ServiceManagerContext from "./ServiceManagerContext"

@@ -1,7 +1,7 @@
 import React from "react"
 
 import { Card, CardContent, CardHeader, Grid } from "@mui/material"
-import { IconButton } from "gatsby-theme-material-ui"
+import { IconButton } from "./ui/GatsbyMuiCompat"
 import DeleteIcon from "@mui/icons-material/Delete"
 // tslint:disable-next-line: no-submodule-imports match-default-export-name
 

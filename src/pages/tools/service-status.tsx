@@ -15,7 +15,7 @@ import { graphql, useStaticQuery } from "gatsby"
 import CheckIcon from "@mui/icons-material/Check"
 import ClearIcon from "@mui/icons-material/Clear"
 import { Chip } from "@mui/material"
-import { Link } from "gatsby-theme-material-ui"
+import { Link } from "../../components/ui/GatsbyMuiCompat"
 
 const statuses: Record<jdspec.StabilityStatus, string> = {
     stable: "Stable",

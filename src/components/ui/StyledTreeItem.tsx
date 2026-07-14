@@ -6,7 +6,7 @@ import KindIcon from "../KindIcon"
 import WarningIcon from "@mui/icons-material/Warning"
 
 import { useId } from "react"
-import { Link } from "gatsby-material-ui-components"
+import { Link } from "./GatsbyMuiCompat"
 import { Tooltip } from "@mui/material"
 import { ellipse } from "../../../jacdac-ts/src/jdom/utils"
 

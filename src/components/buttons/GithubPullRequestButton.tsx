@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react"
 import { Octokit } from "@octokit/core"
 import { createPullRequest } from "octokit-plugin-create-pull-request/pkg"
-import { Button, Link } from "gatsby-theme-material-ui"
+import { Button, Link } from "../ui/GatsbyMuiCompat"
 import {
     AlertTitle,
     Dialog,

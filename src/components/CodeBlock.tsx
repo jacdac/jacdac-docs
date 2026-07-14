@@ -9,7 +9,7 @@ import LIGHT_THEME from "prism-react-renderer/themes/vsLight"
 // tslint:disable-next-line: no-submodule-imports match-default-export-name
 import DARK_THEME from "prism-react-renderer/themes/vsDark"
 import DarkModeContext from "./ui/DarkModeContext"
-import { IconButton, Link } from "gatsby-theme-material-ui"
+import { IconButton, Link } from "./ui/GatsbyMuiCompat"
 // tslint:disable-next-line: no-submodule-imports match-default-export-name
 import GetAppIcon from "@mui/icons-material/GetApp"
 // tslint:disable-next-line: no-submodule-imports match-default-export-name

@@ -10,7 +10,7 @@ import {
     TextField,
     Box,
 } from "@mui/material"
-import { Button } from "gatsby-theme-material-ui"
+import { Button } from "./ui/GatsbyMuiCompat"
 // tslint:disable-next-line: match-default-export-name no-submodule-imports
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 // tslint:disable-next-line: match-default-export-name no-submodule-imports

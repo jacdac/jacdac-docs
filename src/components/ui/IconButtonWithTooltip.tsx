@@ -1,5 +1,5 @@
 import { IconButtonProps, useTheme } from "@mui/material"
-import { IconButton } from "gatsby-theme-material-ui"
+import { IconButton } from "./GatsbyMuiCompat"
 import React from "react"
 import Zoom from "@mui/material/Zoom"
 import Tooltip from "./Tooltip"

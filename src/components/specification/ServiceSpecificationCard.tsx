@@ -9,7 +9,7 @@ import {
 } from "@mui/material"
 import { serviceSpecificationFromClassIdentifier } from "../../../jacdac-ts/src/jdom/spec"
 import IDChip from "../IDChip"
-import { Button } from "gatsby-theme-material-ui"
+import { Button } from "../ui/GatsbyMuiCompat"
 import Markdown from "../ui/Markdown"
 import ServiceSpecificationStatusAlert from "./ServiceSpecificationStatusAlert"
 import {

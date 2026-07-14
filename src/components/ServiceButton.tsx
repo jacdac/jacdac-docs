@@ -1,5 +1,5 @@
 import { ButtonProps } from "@mui/material"
-import { Button } from "gatsby-theme-material-ui"
+import { Button } from "./ui/GatsbyMuiCompat"
 import React from "react"
 import { JDService } from "../../jacdac-ts/src/jdom/service"
 

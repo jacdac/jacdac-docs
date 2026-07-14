@@ -3,7 +3,7 @@ import React from "react"
 import { CardHeader } from "@mui/material"
 import { normalizeSlug, useLatestFirmwareRelease } from "../github"
 import GitHubIcon from "@mui/icons-material/GitHub"
-import { Link } from "gatsby-theme-material-ui"
+import { Link } from "../ui/GatsbyMuiCompat"
 import MakeCodeOpenSnippetButton from "../makecode/MakeCodeOpenSnippetButton"
 import MakeCodeGithubImportLink from "../makecode/MakeCodeGithubImportLink"
 

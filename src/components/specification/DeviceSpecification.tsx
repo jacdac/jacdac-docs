@@ -10,7 +10,7 @@ import DownloadFirmwareButton from "../ui/DownloadFirmwareButton"
 import MemoryIcon from "@mui/icons-material/Memory"
 import ChipList from "../ui/ChipList"
 import useDeviceSpecifications from "../devices/useDeviceSpecifications"
-import { Link } from "gatsby-theme-material-ui"
+import { Link } from "../ui/GatsbyMuiCompat"
 import {
     arrayify,
     ellipseFirstSentence,

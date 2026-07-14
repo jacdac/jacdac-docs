@@ -1,5 +1,5 @@
 import React, { Fragment } from "react"
-import { Link } from "gatsby-theme-material-ui"
+import { Link } from "../ui/GatsbyMuiCompat"
 import {
     serviceSpecificationFromName,
     isRegister,

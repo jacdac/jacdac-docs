@@ -1,7 +1,7 @@
 import React from "react"
 // tslint:disable-next-line: no-submodule-imports
 import { Typography } from "@mui/material"
-import { Link } from "gatsby-theme-material-ui"
+import { Link } from "../ui/GatsbyMuiCompat"
 
 export default function MakeCodeGithubImportLink(props: { slug: string }) {
     const { slug } = props

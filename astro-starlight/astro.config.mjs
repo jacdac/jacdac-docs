@@ -2,7 +2,6 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import react from '@astrojs/react';
-import { fileURLToPath } from 'node:url';
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,13 +13,7 @@ export default defineConfig({
 			'process.env.GATSBY_GITHUB_SHA': JSON.stringify(''),
 		},
 		optimizeDeps: {
-			exclude: ['gatsby', 'gatsby-link', 'gatsby-theme-material-ui', 'gatsby-material-ui-components'],
-		},
-		resolve: {
-			alias: {
-				'gatsby-theme-material-ui': fileURLToPath(new URL('./src/shims/gatsby-theme-material-ui.tsx', import.meta.url)),
-				'gatsby-material-ui-components': fileURLToPath(new URL('./src/shims/gatsby-material-ui-components.tsx', import.meta.url)),
-			},
+			exclude: ['gatsby', 'gatsby-link'],
 		},
 	},
 	integrations: [

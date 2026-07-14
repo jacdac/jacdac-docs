@@ -1,7 +1,7 @@
 import React from "react"
 import Alert from "../ui/Alert"
 import { AlertTitle } from "@mui/material"
-import { Button } from "gatsby-theme-material-ui"
+import { Button } from "../ui/GatsbyMuiCompat"
 import useBus from "../../jacdac/useBus"
 import { BusInteractionMode } from "../../../jacdac-ts/src/jacdac"
 import useInteractionMode from "./useInteractionMode"

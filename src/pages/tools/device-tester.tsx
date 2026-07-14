@@ -30,7 +30,7 @@ import SwitchWithLabel from "../../components/ui/SwitchWithLabel"
 import { arrayConcatMany, splitFilter } from "../../../jacdac-ts/src/jdom/utils"
 import { resolveReadingTolerage } from "../../../jacdac-ts/src/testdom/testrules"
 import GridHeader from "../../components/ui/GridHeader"
-import { Link } from "gatsby-theme-material-ui"
+import { Link } from "../../components/ui/GatsbyMuiCompat"
 
 const FACTORY_MODE_STORAGE_KEY = "device_tester_factory"
 const EXPORT_MODE_STORAGE_KEY = "device_tester_export"

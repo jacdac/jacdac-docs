@@ -4,7 +4,7 @@ import {
     serviceSpecificationFromClassIdentifier,
 } from "../../../jacdac-ts/src/jdom/spec"
 // tslint:disable-next-line: match-default-export-name no-submodule-imports
-import { CardActionArea } from "gatsby-theme-material-ui"
+import { CardActionArea } from "../ui/GatsbyMuiCompat"
 import { uniqueMap } from "../../../jacdac-ts/src/jdom/utils"
 import useDeviceImage from "../devices/useDeviceImage"
 import { humanify } from "../../../jacdac-ts/jacdac-spec/spectool/jdspec"
