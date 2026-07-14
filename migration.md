@@ -250,7 +250,7 @@ Recommended owners (replace with real names):
 | Redirect map migration + validation | 3 | platform | in-progress | TBD | Services/devices port | Must include legacy and QR vanity redirects; service and device redirect slices are now wired |
 | Search implementation selection | 4 | docs | not-started | TBD | Stage 2 baseline | Decide built-in vs custom index |
 | SEO/sitemap/robots parity | 4 | platform | not-started | TBD | Stage 2 complete | Validate canonical/meta behavior |
-| Tier A tools migration | 5 | app | in-progress | TBD | Stages 1-4 | Device Dashboard is now mounted locally at `/dashboard/` in Astro via a React island, with external iframe fallback retained during parity hardening |
+| Tier A tools migration | 5 | app | in-progress | TBD | Stages 1-4 | Device Dashboard is mounted locally at `/dashboard/` in Astro via a React island (fallback removed); parity pass verified simulator start/identify/stop and connect-alert flows, and fixed a buzzer runtime crash by replacing lazy service-icon imports with static imports |
 | Tier B/C tools plan and execution | 5 | app | not-started | TBD | Tier A progress | Batch migration/defer/archive decisions |
 | Cutover rehearsal + rollback test | 6 | platform | not-started | TBD | Stages 2-5 | Dry run before production switch |
 | Production cutover and stabilization | 6 | platform | not-started | TBD | Rehearsal complete | Monitor 404s/errors/perf for one cycle |
