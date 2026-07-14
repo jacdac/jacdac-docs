@@ -4,7 +4,7 @@ import { Button } from "../ui/GatsbyMuiCompat"
 import SendIcon from "@mui/icons-material/Send"
 import useBus from "../../jacdac/useBus"
 import { injectDevTools } from "../../../jacdac-ts/src/jdom/devtools"
-import { withPrefix } from "gatsby"
+import { withPrefix } from "../../compat/withPrefix"
 
 export default function DevToolsLauncher() {
     const [text, setText] = useState("")

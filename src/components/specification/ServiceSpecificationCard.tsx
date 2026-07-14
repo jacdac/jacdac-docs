@@ -19,7 +19,7 @@ import {
 import JacdacContext, { JacdacContextProps } from "../../jacdac/Context"
 import KindIcon from "../KindIcon"
 import { VIRTUAL_DEVICE_NODE_NAME } from "../../../jacdac-ts/src/jdom/constants"
-import { navigate } from "gatsby"
+import { navigate } from "../../compat/navigate"
 import Alert from "../ui/Alert"
 
 export default function ServiceSpecificationCard(props: {

@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material"
-import { withPrefix } from "gatsby-link"
 import { StaticImage } from "gatsby-plugin-image"
 import React, { lazy, useContext } from "react"
+import { withPrefix } from "../../compat/withPrefix"
 import CarouselGrid from "./CarouselGrid"
 import CenterGrid from "./CenterGrid"
 import FeatureItem from "./FeatureItem"

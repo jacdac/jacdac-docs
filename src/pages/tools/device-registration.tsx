@@ -111,7 +111,7 @@ export const frontmatter = {
     description: "Form to submit a new device for the catalog.",
 }
 import CoreHead from "../../components/shell/Head"
-import { withPrefix } from "gatsby"
+import { withPrefix } from "../../compat/withPrefix"
 import { identifierToUrlPath } from "../../../jacdac-ts/src/jdom/catalog"
 export const Head = props => <CoreHead {...props} {...frontmatter} />
 
