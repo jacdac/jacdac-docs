@@ -34,6 +34,7 @@ export interface DashboardDeviceProps {
 }
 export interface DashboardProps extends DashboardDeviceProps {
     hideSimulators?: boolean
+    hideDevices?: boolean
     showSimulatorHeader?: boolean
     showSimulatorAvatar?: boolean
     showDeviceHeader?: boolean
@@ -48,6 +49,7 @@ export interface DashboardProps extends DashboardDeviceProps {
 export default function Dashboard(props: DashboardProps) {
     const {
         hideSimulators,
+        hideDevices,
         showConnect,
         showStartSimulators,
         showStartRoleSimulators,
@@ -119,7 +121,8 @@ export default function Dashboard(props: DashboardProps) {
                     )}
                 </DashboardDeviceGroup>
             )}
-            <DashboardDeviceGroup
+            {(!hideDevices && (
+              <DashboardDeviceGroup
                 title={tL("devices")}
                 action={
                     <>
@@ -143,6 +146,7 @@ export default function Dashboard(props: DashboardProps) {
                     </Grid>
                 )}
             </DashboardDeviceGroup>
+            )) || <></>}
         </>
     )
 }

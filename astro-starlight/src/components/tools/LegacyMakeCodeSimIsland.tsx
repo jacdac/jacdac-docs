@@ -58,9 +58,10 @@ function MakeCodeSimBody(props: { bus: JDBus }) {
   const deviceFilter = iframeBridge?.deviceFilter.bind(iframeBridge);
   const serviceFilter = iframeBridge?.serviceFilter.bind(iframeBridge);
 
+  // TODO
+  // 1. need separate modes: just for simulators (hideDevices), just for devices (hideSimulators)
   return (
     <>
-      <MakeCodeBlocksAndSimsBox />
       <Dashboard
         showHeader={false}
         showDeviceHeader={true}
