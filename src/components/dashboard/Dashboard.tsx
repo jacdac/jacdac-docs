@@ -34,6 +34,7 @@ export interface DashboardDeviceProps {
 }
 export interface DashboardProps extends DashboardDeviceProps {
     hideSimulators?: boolean
+    hideSimulatorButtons?: boolean
     hideDevices?: boolean
     showSimulatorHeader?: boolean
     showSimulatorAvatar?: boolean
@@ -49,6 +50,7 @@ export interface DashboardProps extends DashboardDeviceProps {
 export default function Dashboard(props: DashboardProps) {
     const {
         hideSimulators,
+        hideSimulatorButtons,
         hideDevices,
         showConnect,
         showStartSimulators,
@@ -98,8 +100,10 @@ export default function Dashboard(props: DashboardProps) {
                                     ${tL("autoStart")}
                                 </StartMissingSimulatorsButton>
                             )}
-                            <StartSimulatorButton trackName="dashboard.simulators.start" />
-                            <IconButtonWithTooltip
+                            {!hideSimulatorButtons && (
+                                <>
+                                <StartSimulatorButton trackName="dashboard.simulators.start" />
+                                                            <IconButtonWithTooltip
                                 trackName="dashboard.simulators.clear"
                                 title={tL("clearSimulators")}
                                 onClick={handleClearSimulators}
@@ -107,6 +111,8 @@ export default function Dashboard(props: DashboardProps) {
                                 <ClearIcon />
                             </IconButtonWithTooltip>{" "}
                             <DevicePowerChips devices={simulators} />
+                            </>
+                            )}
                         </>
                     }
                     devices={simulators}

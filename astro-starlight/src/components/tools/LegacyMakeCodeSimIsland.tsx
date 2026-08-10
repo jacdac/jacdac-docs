@@ -3,7 +3,7 @@ import React, { useEffect, useMemo } from 'react';
 import { JDBus } from '../../../../jacdac-ts/src/jdom/bus';
 import { JDDevice } from '../../../../jacdac-ts/src/jdom/device';
 import { isReading, isValueOrIntensity } from '../../../../jacdac-ts/src/jdom/spec';
-import { strcmp } from '../../../../jacdac-ts/src/jdom/utils';
+import { delay, strcmp } from '../../../../jacdac-ts/src/jdom/utils';
 import Dashboard from '../../../../src/components/dashboard/Dashboard';
 import { HostedSimulatorsProvider } from '../../../../src/components/HostedSimulatorsContext';
 import { PacketsProvider } from '../../../../src/components/PacketsContext';
@@ -14,6 +14,9 @@ import MakeCodeBlocksAndSimsBox from '../../../../src/components/makecode/MakeCo
 import IFrameBridgeClient from '../../../../src/components/makecode/iframebridgeclient';
 import JacdacContext from '../../../../src/jacdac/Context';
 import { usePersistentSimulators } from '../../../../src/jacdac/usePersistentSimulators';
+import useChange from '../../../../src/jacdac/useChange';
+import useRoleManagerClient from '../../../../src/components/services/useRoleManagerClient';
+
 
 function deviceSort(l: JDDevice, r: JDDevice): number {
   const srvScore = (srv: jdspec.ServiceSpec) =>
@@ -57,12 +60,22 @@ function MakeCodeSimBody(props: { bus: JDBus }) {
   const iframeBridge = bus.nodeData[IFrameBridgeClient.DATA_ID] as IFrameBridgeClient;
   const deviceFilter = iframeBridge?.deviceFilter.bind(iframeBridge);
   const serviceFilter = iframeBridge?.serviceFilter.bind(iframeBridge);
+  // need to deal with simulators automatically, otherwise MakeCode will not see them
+  const roleManagerClient = useRoleManagerClient()
+  const allRolesBound = useChange(roleManagerClient, _ => _?.allRolesBound())
+  const handleStartSimulators = async () => {
+        roleManagerClient?.startSimulators()
+        await delay(1000)
+    }
 
   // TODO
   // 1. need separate modes: just for simulators (hideDevices), just for devices (hideSimulators)
+  // 2. need to expose modes via URL params so that we can link to them from MakeCode
+  // 3. add simulators automatically, no manual start of simulators
   return (
     <>
       <Dashboard
+        hideSimulatorButtons={true}
         showHeader={false}
         showDeviceHeader={true}
         showDeviceAvatar={true}
