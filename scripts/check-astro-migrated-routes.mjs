@@ -11,6 +11,7 @@ const migratedRoutes = [
     { route: "/tools/firmware/", marker: "Firmware Updater" },
     { route: "/tools/more/", marker: "Testing and compliance" },
     { route: "/tools/packet-console/", marker: "Pause and inspect" },
+    { route: "/tools/makecode-sim/", marker: "Add blocks" },
 ]
 
 function routeToFile(route) {
