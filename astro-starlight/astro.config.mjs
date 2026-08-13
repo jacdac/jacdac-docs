@@ -7,6 +7,9 @@ import react from '@astrojs/react';
 export default defineConfig({
 	site: 'https://jacdac.github.io',
 	base: '/jacdac-docs',
+	devToolbar: {
+		enabled: false,
+	},
 	vite: {
 		resolve: {
 			alias: {

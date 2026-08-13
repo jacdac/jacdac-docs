@@ -1,16 +1,15 @@
 import { SnackbarProvider } from 'notistack';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { JDBus } from '../../../../jacdac-ts/src/jdom/bus';
 import { JDDevice } from '../../../../jacdac-ts/src/jdom/device';
 import { isReading, isValueOrIntensity } from '../../../../jacdac-ts/src/jdom/spec';
-import { delay, strcmp } from '../../../../jacdac-ts/src/jdom/utils';
+import { strcmp } from '../../../../jacdac-ts/src/jdom/utils';
 import Dashboard from '../../../../src/components/dashboard/Dashboard';
 import { HostedSimulatorsProvider } from '../../../../src/components/HostedSimulatorsContext';
 import { PacketsProvider } from '../../../../src/components/PacketsContext';
 import { AppProvider } from '../../../../src/components/AppContext';
 import { SimulatorDialogsProvider } from '../../../../src/components/SimulatorsDialogContext';
 import { WebAudioProvider } from '../../../../src/components/ui/WebAudioContext';
-import MakeCodeBlocksAndSimsBox from '../../../../src/components/makecode/MakeCodeBlocksAndSimsBox';
 import IFrameBridgeClient from '../../../../src/components/makecode/iframebridgeclient';
 import JacdacContext from '../../../../src/jacdac/Context';
 import { usePersistentSimulators } from '../../../../src/jacdac/usePersistentSimulators';
@@ -46,6 +45,8 @@ function deviceSort(l: JDDevice, r: JDDevice): number {
 
 function MakeCodeSimBody(props: { bus: JDBus }) {
   const { bus } = props;
+  const autoStartInFlightRef = useRef(false);
+
   useEffect(() => {
     void bus.start();
     bus.streaming = true;
@@ -55,27 +56,34 @@ function MakeCodeSimBody(props: { bus: JDBus }) {
     };
   }, [bus]);
 
+  // BUG: need to look into why extra sims are created... see RoleManagerClient.startSimulators() and usePersistentSimulators()
   usePersistentSimulators();
 
   const iframeBridge = bus.nodeData[IFrameBridgeClient.DATA_ID] as IFrameBridgeClient;
   const deviceFilter = iframeBridge?.deviceFilter.bind(iframeBridge);
   const serviceFilter = iframeBridge?.serviceFilter.bind(iframeBridge);
-  // need to deal with simulators automatically, otherwise MakeCode will not see them
-  const roleManagerClient = useRoleManagerClient()
-  const allRolesBound = useChange(roleManagerClient, _ => _?.allRolesBound())
-  const handleStartSimulators = async () => {
-        roleManagerClient?.startSimulators()
-        await delay(1000)
-    }
+  // new roles are available if role manager is present and not all roles are bound
+  const roleManagerClient = useRoleManagerClient();
+  const allRolesBound = useChange(roleManagerClient, _ => _?.allRolesBound());
 
-  // TODO
-  // 1. need separate modes: just for simulators (hideDevices), just for devices (hideSimulators)
-  // 2. need to expose modes via URL params so that we can link to them from MakeCode
-  // 3. add simulators automatically, no manual start of simulators
+  // TODO: when we are showing only devices, we don't want to spin up simulators, but have
+  // a "skeleton" device twin
+  useEffect(() => {
+    if (!roleManagerClient || allRolesBound || autoStartInFlightRef.current) return;
+
+    autoStartInFlightRef.current = true;
+    try {
+      roleManagerClient.startSimulators();
+    } finally {
+      autoStartInFlightRef.current = false;
+    }
+  }, [allRolesBound, roleManagerClient]);
+
   return (
     <>
       <Dashboard
         hideSimulatorButtons={true}
+        hideDevices={true}
         showHeader={false}
         showDeviceHeader={true}
         showDeviceAvatar={true}
@@ -94,7 +102,7 @@ function MakeCodeSimBody(props: { bus: JDBus }) {
 export default function LegacyMakeCodeSimIsland() {
   const bus = useMemo(() => {
     const params = new URLSearchParams(window.location.search);
-    const frameId = window.location.hash?.slice(1) || undefined;
+    const frameId = window.location.hash?.slice(1) || '';
     const parentOrigin = params.get('parentOrigin') || undefined;
     const nextBus = new JDBus([], {
       dashboard: true,
