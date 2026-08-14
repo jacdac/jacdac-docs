@@ -65,6 +65,7 @@ function MakeCodeSimBody(props: { bus: JDBus }) {
   // new roles are available if role manager is present and not all roles are bound
   const roleManagerClient = useRoleManagerClient();
   const allRolesBound = useChange(roleManagerClient, _ => _?.allRolesBound());
+  const roleManagerChangeId = useChange(roleManagerClient, _ => _?.changeId);
 
   // TODO: when we are showing only devices, we don't want to spin up simulators, but have
   // a "skeleton" device twin
@@ -77,7 +78,7 @@ function MakeCodeSimBody(props: { bus: JDBus }) {
     } finally {
       autoStartInFlightRef.current = false;
     }
-  }, [allRolesBound, roleManagerClient]);
+  }, [allRolesBound, roleManagerChangeId, roleManagerClient]);
 
   return (
     <>
