@@ -56,16 +56,18 @@ function MakeCodeSimBody(props: { bus: JDBus }) {
     };
   }, [bus]);
 
-  // BUG: need to look into why extra sims are created... see RoleManagerClient.startSimulators() and usePersistentSimulators()
   usePersistentSimulators();
 
   const iframeBridge = bus.nodeData[IFrameBridgeClient.DATA_ID] as IFrameBridgeClient;
   const deviceFilter = iframeBridge?.deviceFilter.bind(iframeBridge);
   const serviceFilter = iframeBridge?.serviceFilter.bind(iframeBridge);
+  const mode = useChange(iframeBridge, _ => _?.mode);
+  
   // new roles are available if role manager is present and not all roles are bound
   const roleManagerClient = useRoleManagerClient();
   const allRolesBound = useChange(roleManagerClient, _ => _?.allRolesBound());
   const roleManagerChangeId = useChange(roleManagerClient, _ => _?.changeId);
+
 
   // TODO: when we are showing only devices, we don't want to spin up simulators, but have
   // a "skeleton" device twin
@@ -84,7 +86,8 @@ function MakeCodeSimBody(props: { bus: JDBus }) {
     <>
       <Dashboard
         hideSimulatorButtons={true}
-        hideDevices={true}
+        hideDevices={mode === "simulator"}
+        hideSimulators={mode === "device"}
         showHeader={false}
         showDeviceHeader={true}
         showDeviceAvatar={true}

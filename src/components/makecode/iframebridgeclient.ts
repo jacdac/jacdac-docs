@@ -113,6 +113,7 @@ export class IFrameBridgeClient extends JDClient {
     private _serialMessages: { data: string; time: number; sim: boolean }[] = []
 
     private _runOptions: SimulatorRunOptions
+    private _mode: "simulator" | "device" = "simulator"
 
     constructor(readonly bus: JDBus, readonly frameId: string) {
         super()
@@ -137,6 +138,10 @@ export class IFrameBridgeClient extends JDClient {
 
     get dependencies() {
         return this._runOptions?.dependencies
+    }
+
+    get mode() {
+        return this._mode
     }
 
     private registerEvents() {
@@ -263,6 +268,16 @@ export class IFrameBridgeClient extends JDClient {
                 // remember options
                 // this._runOptions = undefined
                 break
+            case "simulator":
+                this._mode = "simulator"
+                this.emit(CHANGE)
+                break
+            case "device":
+                this._mode = "device"
+                this.emit(CHANGE)
+                break
+            default:
+                console.debug("unknown pxt message", msg)
         }
     }
 
