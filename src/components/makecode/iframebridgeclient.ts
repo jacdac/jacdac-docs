@@ -255,7 +255,7 @@ export class IFrameBridgeClient extends JDClient {
     }
 
     private handleDriverMessage(msg: { type: string }) {
-        //console.log("pxt message", msg)
+        console.log("pxt message", msg)
         switch (msg.type) {
             case "run": {
                 // simulation is starting
@@ -268,16 +268,14 @@ export class IFrameBridgeClient extends JDClient {
                 // remember options
                 // this._runOptions = undefined
                 break
-            case "simulator":
+            case "simulatorMode":
                 this._mode = "simulator"
                 this.emit(CHANGE)
                 break
-            case "device":
+            case "devicesMode":
                 this._mode = "device"
                 this.emit(CHANGE)
                 break
-            default:
-                console.debug("unknown pxt message", msg)
         }
     }
 
