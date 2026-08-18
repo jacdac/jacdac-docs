@@ -1,3 +1,4 @@
+import { Card, List, Typography } from '@mui/material';
 import { SnackbarProvider } from 'notistack';
 import React, { useEffect, useMemo, useRef } from 'react';
 import { JDBus } from '../../../../jacdac-ts/src/jdom/bus';
@@ -5,9 +6,11 @@ import { JDDevice } from '../../../../jacdac-ts/src/jdom/device';
 import { isReading, isValueOrIntensity } from '../../../../jacdac-ts/src/jdom/spec';
 import { strcmp } from '../../../../jacdac-ts/src/jdom/utils';
 import Dashboard from '../../../../src/components/dashboard/Dashboard';
+import DeviceCardHeader from '../../../../src/components/devices/DeviceCardHeader';
 import { HostedSimulatorsProvider } from '../../../../src/components/HostedSimulatorsContext';
 import { PacketsProvider } from '../../../../src/components/PacketsContext';
 import { AppProvider } from '../../../../src/components/AppContext';
+import RoleListItem from '../../../../src/components/services/RoleListItem';
 import { SimulatorDialogsProvider } from '../../../../src/components/SimulatorsDialogContext';
 import { WebAudioProvider } from '../../../../src/components/ui/WebAudioContext';
 import IFrameBridgeClient from '../../../../src/components/makecode/iframebridgeclient';
@@ -68,6 +71,14 @@ function MakeCodeSimBody(props: { bus: JDBus }) {
   const allRolesBound = useChange(roleManagerClient, _ => _?.allRolesBound());
   const roleManagerChangeId = useChange(roleManagerClient, _ => _?.changeId);
 
+  // the physical device (e.g. micro:bit) hosting the role manager service
+  const connectedDevice = useChange(roleManagerClient, _ => _?.service?.device);
+  // roles declared by the program that have not been bound to a device yet
+  const unboundRoles = useChange(
+    roleManagerClient,
+    _ => _?.roles.filter(role => !bus.device(role.deviceId, true)),
+    [roleManagerChangeId]
+  );
 
   // TODO: when we are showing only devices, we don't want to spin up simulators, but have
   // a "skeleton" device twin
@@ -84,6 +95,23 @@ function MakeCodeSimBody(props: { bus: JDBus }) {
 
   return (
     <>
+      {mode === 'device' && connectedDevice && (
+        <Card sx={{ mb: 1 }}>
+          <DeviceCardHeader device={connectedDevice} showAvatar={true} />
+        </Card>
+      )}
+      {mode === 'device' && !!unboundRoles?.length && (
+        <Card sx={{ mb: 1 }}>
+          <Typography variant="subtitle2" sx={{ px: 2, pt: 1 }}>
+            Waiting for roles
+          </Typography>
+          <List dense={true}>
+            {unboundRoles.map(role => (
+              <RoleListItem key={role.name} role={role} />
+            ))}
+          </List>
+        </Card>
+      )}
       <Dashboard
         hideSimulatorButtons={true}
         hideDevices={mode === "simulator"}

@@ -13,9 +13,19 @@ import useBus from "./useBus"
 const STORAGE_KEY = "active_simulators"
 const STORAGE_EXPIRATION = 3600_000
 
+// TODO: keep track of role mapping for simulators and another for device twin.
+interface RoleBinding {
+    role: string
+    deviceId: string
+    serviceClass: number
+    serviceIndex: number
+}
+
 interface Simulators {
     update?: number
     templates: string[]
+    simulatorRoles: RoleBinding[]
+    deviceRoles: RoleBinding[]
 }
 
 export function usePersistentSimulators() {
@@ -35,6 +45,8 @@ export function usePersistentSimulators() {
         setSimulators({
             update: Date.now(),
             templates,
+            simulatorRoles: [], // TODO
+            deviceRoles: [], // TODO
         })
     }
 
