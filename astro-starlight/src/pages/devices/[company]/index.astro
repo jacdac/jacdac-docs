@@ -1,0 +1,66 @@
+---
+import { basePathPrefix, companySlug, deviceImagePath, devicePath, getDevices } from '../../../lib/specData';
+const base = basePathPrefix();
+
+export function getStaticPaths() {
+  const companies = Array.from(new Set(getDevices().map((device) => device.company)));
+  return companies.map((company) => ({
+    params: { company: companySlug(company) },
+    props: {
+      company,
+      devices: getDevices().filter((device) => companySlug(device.company) === companySlug(company)),
+    },
+  }));
+}
+
+const { company, devices } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{company} devices</title>
+  </head>
+  <body>
+    <main style="max-width: 1120px; margin: 2rem auto 4rem; padding: 0 1rem; font-family: ui-sans-serif, system-ui, sans-serif;">
+      <p style="margin: 0 0 1rem;"><a href={`${base}devices/`}>Device Catalog</a></p>
+      <div style="display: grid; gap: 0.5rem; margin-bottom: 1.75rem;">
+        <h1 style="margin: 0; font-size: clamp(2rem, 4vw, 3rem);">{company} devices</h1>
+        <p style="margin: 0; color: #4b5563;">{devices.length} devices in this company collection.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
+        {devices.map((device: { id: string; name: string; company: string; description?: string; tags?: string[] }) => {
+          const path = devicePath(device);
+          const tags = (device.tags || []).slice(0, 2);
+          return (
+            <a
+              href={`${base}${path.replace(/^\//, '')}`}
+              style="display: grid; border: 1px solid #e5e7eb; border-radius: 20px; text-decoration: none; color: inherit; background: #fff; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04); overflow: hidden;"
+            >
+              <img
+                loading="lazy"
+                alt={device.name}
+                src={deviceImagePath(device, 'list')}
+                width="240"
+                height="180"
+                style="width: 100%; height: auto; display: block; background: #f3f4f6;"
+              />
+              <div style="display: grid; gap: 0.4rem; padding: 1rem;">
+                <h2 style="margin: 0; font-size: 1.05rem; line-height: 1.25;">{device.name}</h2>
+                {device.description && <p style="margin: 0; color: #4b5563; font-size: 0.92rem; line-height: 1.45;">{device.description}</p>}
+                {tags.length > 0 && (
+                  <div style="display: flex; flex-wrap: wrap; gap: 0.35rem;">
+                    {tags.map((tag) => (
+                      <span style="display: inline-flex; align-items: center; padding: 0.2rem 0.55rem; border-radius: 999px; background: #eef2ff; color: #3730a3; font-size: 0.76rem;">{tag}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </main>
+  </body>
+</html>

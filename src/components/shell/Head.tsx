@@ -1,56 +1,31 @@
 /**
- * SEO component that queries for data with
- *  Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
+ * SEO metadata helper used by legacy React pages.
+ * Uses static site metadata so it works in both Gatsby and Astro migration flows.
  */
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import type { HeadProps } from "gatsby"
+import { SITE_METADATA } from "../../compat/siteMetadata"
+
+type CoreHeadProps = {
+    pageContext?: { title?: string }
+    data?: { page?: { description?: string } }
+}
 
 export default function Head(
-    props: HeadProps & {
+    props: CoreHeadProps & {
         description?: string
         image?: string
         title?: string
         meta?: { name: string; content: string }[]
     }
 ) {
-    const {
-        pageContext,
-        data,
-        description,
-        image,
-        title,
-        meta = [],
-    }: {
-        pageContext: { title?: string }
-        data?: { page?: { description?: string } }
-        description?: string
-        image?: string
-        title?: string
-        meta?: { name: string; content: string }[]
-    } = props
-    const { site } = useStaticQuery(
-        graphql`
-            query {
-                site {
-                    siteMetadata {
-                        title
-                        description
-                        author
-                    }
-                }
-            }
-        `
-    )
-    let metaTitle = title || pageContext?.title || site?.siteMetadata?.title
+    const { pageContext, data, description, image, title, meta = [] } = props
+    let metaTitle = title || pageContext?.title || SITE_METADATA.title
     if (!/^(Jacdac|DeviceScript)/i.test(metaTitle))
         metaTitle = `Jacdac - ${metaTitle}`
     const metaDescription =
         description ||
         data?.page?.description ||
-        site?.siteMetadata?.description
+        SITE_METADATA.description
     return (
         <>
             <title key="title">{metaTitle}</title>
@@ -81,7 +56,7 @@ export default function Head(
                 },
                 {
                     name: `twitter:creator`,
-                    content: site.siteMetadata.author,
+                    content: SITE_METADATA.author,
                 },
                 {
                     name: `twitter:title`,

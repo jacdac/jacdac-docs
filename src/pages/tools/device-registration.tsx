@@ -49,7 +49,7 @@ import useDeviceCatalog from "../../components/devices/useDeviceCatalog"
 import GridHeader from "../../components/ui/GridHeader"
 import { JD_SERVICE_INDEX_CTRL } from "../../../jacdac-ts/src/jdom/constants"
 import ClearIcon from "@mui/icons-material/Clear"
-import { Link } from "gatsby-theme-material-ui"
+import { Link } from "../../components/ui/GatsbyMuiCompat"
 import { shapeToEC30 } from "../../components/enclosure/ec30"
 import CopyButton from "../../components/ui/CopyButton"
 
@@ -111,7 +111,7 @@ export const frontmatter = {
     description: "Form to submit a new device for the catalog.",
 }
 import CoreHead from "../../components/shell/Head"
-import { withPrefix } from "gatsby"
+import { withPrefix } from "../../compat/withPrefix"
 import { identifierToUrlPath } from "../../../jacdac-ts/src/jdom/catalog"
 export const Head = props => <CoreHead {...props} {...frontmatter} />
 

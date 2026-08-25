@@ -1,4 +1,4 @@
-import { graphql, useStaticQuery } from "gatsby"
+import { listLegacyPagesByPrefix } from "../../compat/pageData"
 import React, { useMemo } from "react"
 import { ReactNode } from "react"
 import { serviceSpecificationFromClassIdentifier } from "../../../jacdac-ts/src/jdom/spec"
@@ -18,65 +18,24 @@ export default function MakeCodeProjects(props: {
             .filter(s => !!s) || []),
     ])
 
-    const query = useStaticQuery<{
-        allMdx: {
-            edges: {
-                node: {
-                    fields: {
-                        slug: string
-                    }
-                    frontmatter: {
-                        title?: string
-                        order?: number
-                        services?: string
-                        description?: string
-                    }
-                }
-            }[]
-        }
-    }>(graphql`
-        {
-            allMdx(
-                filter: {
-                    fields: { slug: { glob: "/clients/makecode/projects/*" } }
-                }
-            ) {
-                edges {
-                    node {
-                        id
-                        fields {
-                            slug
-                        }
-                        frontmatter {
-                            title
-                            order
-                            services
-                            description
-                        }
-                    }
-                }
-            }
-        }
-    `)
+    const projectPages = listLegacyPagesByPrefix("/clients/makecode/projects/")
 
     const nodes = useMemo(() => {
         // grab the nodes
-        let nodes = query.allMdx.edges.map(edge => edge.node)
+        let nodes = projectPages
         // filter out
         if (serviceNames?.length)
             nodes = nodes.filter(node =>
-                serviceNames.some(
-                    n => node.frontmatter.services?.indexOf(n) > -1
-                )
+                serviceNames.some(n => node.services?.indexOf(n) > -1)
             )
-        return nodes.map(({ fields, frontmatter }) => ({
-            slug: fields.slug,
-            title: frontmatter.title,
-            description: frontmatter.description,
-            services: frontmatter.services,
-            order: frontmatter.order,
+        return nodes.map(page => ({
+            slug: page.slug,
+            title: page.title,
+            description: page.description,
+            services: page.services,
+            order: page.order,
         }))
-    }, [serviceNames.join(",")])
+    }, [serviceNames.join(","), projectPages.length])
 
     return <PageLinkList header={header} nodes={nodes} />
 }

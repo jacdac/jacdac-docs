@@ -1,0 +1,38 @@
+---
+import { getServices, getServiceSourceByClassIdentifier } from '../../../lib/specData';
+
+export function getStaticPaths() {
+  return getServices().map((service) => ({
+    params: { shortId: service.shortId },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+const source = getServiceSourceByClassIdentifier(service.classIdentifier);
+const base = import.meta.env.BASE_URL;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{service.name}</title>
+  </head>
+  <body>
+    <main style="max-width: 920px; margin: 2rem auto; padding: 0 1rem; font-family: ui-sans-serif, system-ui, sans-serif;">
+      <p><a href={`${base}services/`}>Service Catalog</a></p>
+      <h1>{service.name}</h1>
+      <p><strong>Short ID:</strong> {service.shortId}</p>
+      <p><strong>Class Identifier:</strong> 0x{service.classIdentifier.toString(16)}</p>
+      <p><strong>Status:</strong> {service.status || 'stable'}</p>
+      <p><a href={`${base}services/${service.shortId}/playground/`}>Open playground route</a></p>
+      {source && (
+        <>
+          <h2>Spec Source</h2>
+          <pre style="white-space: pre-wrap; border: 1px solid #ccc; padding: 1rem; border-radius: 8px;">{source}</pre>
+        </>
+      )}
+    </main>
+  </body>
+</html>

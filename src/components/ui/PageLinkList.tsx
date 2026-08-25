@@ -6,7 +6,7 @@ import {
     ListProps,
     Typography,
 } from "@mui/material"
-import { Link } from "gatsby-theme-material-ui"
+import { Link } from "./GatsbyMuiCompat"
 import React, { ReactNode, useMemo } from "react"
 import { serviceSpecificationFromName } from "../../../jacdac-ts/src/jdom/spec"
 import ChipList from "./ChipList"

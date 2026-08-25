@@ -1,6 +1,6 @@
 import { Box, Grid } from "@mui/material"
 import { AlertTitle } from "@mui/material"
-import { Button } from "gatsby-material-ui-components"
+import { Button } from "../ui/GatsbyMuiCompat"
 import React, { useContext } from "react"
 import { updateApplicable } from "../../../jacdac-ts/src/jdom/flashing"
 import { inIFrame } from "../../../jacdac-ts/src/jdom/iframeclient"

@@ -20,7 +20,7 @@ import { RegisterTreeItem } from "../tools/JDomTreeViewItems"
 import DashboardServiceWidget from "../dashboard/DashboardServiceWidget"
 import TestStateIcon from "./TestStateIcon"
 import PanToolIcon from "@mui/icons-material/PanTool"
-import { Button } from "gatsby-theme-material-ui"
+import { Button } from "../ui/GatsbyMuiCompat"
 import { TestState } from "../../../jacdac-ts/src/testdom/spec"
 const PREFIX = "TestTreeView"
 const classes = {

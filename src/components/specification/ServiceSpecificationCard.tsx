@@ -9,7 +9,7 @@ import {
 } from "@mui/material"
 import { serviceSpecificationFromClassIdentifier } from "../../../jacdac-ts/src/jdom/spec"
 import IDChip from "../IDChip"
-import { Button } from "gatsby-theme-material-ui"
+import { Button } from "../ui/GatsbyMuiCompat"
 import Markdown from "../ui/Markdown"
 import ServiceSpecificationStatusAlert from "./ServiceSpecificationStatusAlert"
 import {
@@ -19,7 +19,7 @@ import {
 import JacdacContext, { JacdacContextProps } from "../../jacdac/Context"
 import KindIcon from "../KindIcon"
 import { VIRTUAL_DEVICE_NODE_NAME } from "../../../jacdac-ts/src/jdom/constants"
-import { navigate } from "gatsby"
+import { navigate } from "../../compat/navigate"
 import Alert from "../ui/Alert"
 
 export default function ServiceSpecificationCard(props: {

@@ -2,7 +2,7 @@ import React, { lazy, useContext, useState } from "react"
 import { styled } from "@mui/material/styles"
 import { Drawer, Divider } from "@mui/material"
 import Suspense from "../ui/Suspense"
-import { IconButton } from "gatsby-theme-material-ui"
+import { IconButton } from "../ui/GatsbyMuiCompat"
 // tslint:disable-next-line: no-submodule-imports
 import { DRAWER_WIDTH, MOBILE_BREAKPOINT, TOC_DRAWER_WIDTH } from "../layout"
 // tslint:disable-next-line: no-submodule-imports match-default-export-name

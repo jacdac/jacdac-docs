@@ -1,4 +1,4 @@
-import { graphql, useStaticQuery } from "gatsby"
+import { listLegacyPagesByPrefix } from "../../compat/pageData"
 import React, { ReactNode, useMemo } from "react"
 import { serviceSpecificationFromClassIdentifier } from "../../../jacdac-ts/src/jdom/spec"
 import { arrayify, unique } from "../../../jacdac-ts/src/jdom/utils"
@@ -16,62 +16,25 @@ export default function MakeCodeExtensions(props: {
             ?.map(sc => serviceSpecificationFromClassIdentifier(sc)?.shortId)
             .filter(s => !!s) || []),
     ])
-    const query = useStaticQuery<{
-        allMdx: {
-            edges: {
-                node: {
-                    fields: {
-                        slug: string
-                    }
-                    frontmatter: {
-                        title?: string
-                        description?: string
-                        order?: number
-                    }
-                }
-            }[]
-        }
-    }>(graphql`
-        {
-            allMdx(
-                filter: {
-                    fields: { slug: { glob: "/clients/makecode/extensions/*" } }
-                }
-            ) {
-                edges {
-                    node {
-                        id
-                        fields {
-                            slug
-                        }
-                        frontmatter {
-                            title
-                            description
-                            order
-                        }
-                    }
-                }
-            }
-        }
-    `)
+    const extensionPages = listLegacyPagesByPrefix(
+        "/clients/makecode/extensions/"
+    )
     const nodes = useMemo(() => {
-        let nodes = query.allMdx.edges.map(edge => edge.node)
+        let nodes = extensionPages
 
         // filter out
         if (serviceNames?.length)
-            nodes = nodes.filter(node =>
-                serviceNames.some(n => node.fields.slug.indexOf(n) > -1)
-            )
+            nodes = nodes.filter(node => serviceNames.some(n => node.slug.indexOf(n) > -1))
         return nodes
-    }, [serviceNames.join(",")])
+    }, [serviceNames.join(","), extensionPages.length])
 
     return (
         <PageLinkList
             header={header}
-            nodes={nodes.map(({ fields, frontmatter }) => ({
-                slug: fields.slug,
-                title: frontmatter.title,
-                order: frontmatter.order,
+            nodes={nodes.map(page => ({
+                slug: page.slug,
+                title: page.title,
+                order: page.order,
             }))}
         />
     )

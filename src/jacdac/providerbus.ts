@@ -1,5 +1,5 @@
 import { JDBus } from "../../jacdac-ts/src/jdom/bus"
-import { withPrefix } from "gatsby"
+import { withPrefix } from "../compat/withPrefix"
 import { isWebUSBSupported } from "../../jacdac-ts/src/jdom/transport/usb"
 import { createUSBWorkerTransport } from "../../jacdac-ts/src/jdom/transport/workertransport"
 import { createWebSocketTransport } from "../../jacdac-ts/src/jdom/transport/websockettransport"

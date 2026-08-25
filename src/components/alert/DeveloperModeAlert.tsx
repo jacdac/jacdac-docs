@@ -2,7 +2,7 @@ import React from "react"
 import { AlertTitle } from "@mui/material"
 import useDeveloperMode from "../hooks/useDeveloperMode"
 import Alert from "../ui/Alert"
-import { Button } from "gatsby-theme-material-ui"
+import { Button } from "../ui/GatsbyMuiCompat"
 
 export default function DeveloperModeAlert() {
     const { developerMode, setDeveloperMode } = useDeveloperMode()

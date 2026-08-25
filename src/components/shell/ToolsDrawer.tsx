@@ -8,7 +8,7 @@ import {
     ListItem,
     Divider,
 } from "@mui/material"
-import { IconButton, Link, ListItemButton } from "gatsby-theme-material-ui"
+import { IconButton, Link, ListItemButton } from "../ui/GatsbyMuiCompat"
 import {
     MOBILE_BREAKPOINT,
     MOBILE_TOOLS_DRAWER_WIDTH,

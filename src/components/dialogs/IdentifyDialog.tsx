@@ -1,5 +1,5 @@
 import { Dialog, DialogContent, Grid, Typography } from "@mui/material"
-import { Link } from "gatsby-theme-material-ui"
+import { Link } from "../ui/GatsbyMuiCompat"
 import React, { lazy, useCallback } from "react"
 import { identifierToUrlPath } from "../../../jacdac-ts/src/jdom/catalog"
 import { ControlAnnounceFlags } from "../../../jacdac-ts/src/jdom/constants"

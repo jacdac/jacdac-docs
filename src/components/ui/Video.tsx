@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import { withPrefix } from "gatsby"
+import { withPrefix } from "../../compat/withPrefix"
 import React, { CSSProperties, useRef } from "react"
 import { useInView } from "react-intersection-observer"
 import useEffectAsync from "../useEffectAsync"

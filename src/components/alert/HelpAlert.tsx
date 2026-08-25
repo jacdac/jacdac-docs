@@ -1,7 +1,7 @@
 import React from "react"
 import { AlertTitle } from "@mui/material"
 import Alert from "../ui/Alert"
-import { Link } from "gatsby-theme-material-ui"
+import { Link } from "../ui/GatsbyMuiCompat"
 
 export default function HelpAlert() {
     return (

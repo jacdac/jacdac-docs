@@ -1,0 +1,182 @@
+---
+title: Creating a Service
+---
+
+
+## Creating a Service
+
+To create a service, please start as follows: 
+- copy and edit an [existing](https://github.com/jacdac/jacdac/tree/main/services)
+  service specification in the [service editor](/tools/service-editor/)
+- submit a pull request (PR), using the service editor
+See the [service language specification](/reference/service-specification/) 
+for more details about the syntax and semantics of services. 
+
+We will use the [button service](https://github.com/jacdac/jacdac/tree/main/services/button.md)
+as a running example.
+
+Once your PR has been merged, the following set of assets will be automatically created
+for your service:
+- a set of TypeScript definitions for your service in the file [jacdac/dist/specconstants.ts](https://github.com/jacdac/jacdac/blob/main/dist/specconstants.ts), including the following
+  - a definition of the service class number: `export const SRV_BUTTON = 0x1473a263`
+  - enums/namespaces for all the service members, including registers, commands and events  
+- a C include file ([button.h](https://github.com/jacdac/jacdac/blob/main/dist/c/button.h))
+- a MakeCode extension providing a service client ([pxt-jacdac/button](https://github.com/jacdac/pxt-jacdac/tree/master/button))
+
+The other required assets that need to be created for the service include:
+- a TypeScript server ([jacdac-ts/src/servers/buttonserver.ts](https://github.com/jacdac/jacdac-ts/blob/main/src/servers/buttonserver.ts))
+- a React component based on the TypeScript server, which will support both device twins and simulators
+- firmware for a server in C using [jacdac-c](https://github.com/jacdac/jacdac-c)
+- tests for the service, written using the TypeScript test framework
+
+We will add code generation for more assets soon.
+
+## A TypeScript virtual server
+
+A [server](/reference/clientserver/)
+makes one or more sensors and/or actuators available to other devices on the Jacdac bus. 
+
+To support simulation of a service, you must develop a **virtual server** residing in 
+[jacdac-ts/src/servers](https://github.com/jacdac/jacdac-ts/blob/main/src/servers). 
+The new service and its binding to the server must be added to the factory in 
+[jacdac-ts/src/servers/servers.ts](https://github.com/jacdac/jacdac-ts/blob/main/src/servers/servers.ts).
+
+**TODO**: simple sensors can just be defined using data (no new file/class needed)
+
+The button service's virtual server is at [jacdac-ts/src/servers/buttonserver.ts](https://github.com/jacdac/jacdac-ts/blob/main/src/servers/buttonserver.ts).
+It inherits from the base class `SensorServer` in
+[jacdac-ts/src/servers/sensorserver.ts](https://github.com/jacdac/jacdac-ts/blob/main/src/servers/sensorserver.ts),
+which makes use of various classes in the Jacdac object model (e.g. `JDServiceServer`, `JDRegisterServer`):
+
+```ts
+export class SensorServer<TReading extends PackedValues,> extends JDServiceServer {
+    readonly reading: JDRegisterServer<TReading>
+    readonly readingError: JDRegisterServer<TReading>
+    readonly streamingSamples: JDRegisterServer<[number]>
+    readonly streamingInterval: JDRegisterServer<[number]>
+    readonly preferredStreamingInterval: JDRegisterServer<[number]>
+
+```
+
+The server uses the Jacdac object model to handle requests
+for getting and setting register's values. It models hardware
+using methods that can be invoked from outside, as with the button being held down or let up:
+
+```ts
+    async down() {
+        this.reading.setValues([ButtonServer.ACTIVE_VALUE])
+    }
+
+    async up() {
+        this.reading.setValues([ButtonServer.INACTIVE_VALUE])
+    }
+```
+
+Such methods will be called from the React component. There are many other virtual servers
+available in [jacdac-ts/src/servers](https://github.com/jacdac/jacdac-ts/blob/main/src/servers). 
+Feel free to copy one that will help you get started.
+
+## React-based component (device twin and simulator)
+
+Each service is represented by a React component that can be incorporated into the Jacdac
+dashboard, which can be embedded in a web page. [jacdac-docs/src/components/dashboard/DashboardButton.tsx](https://github.com/jacdac/jacdac-docs/blob/main/src/components/dashboard/DashboardButton.tsx) is the React component
+corresponding to the button service.
+
+The React component should be designed to act as both
+- a device twin of a real Jacdac device's service on the Jacdac bus; in the case of a button, this means that the twin shows the state of the button (down or up) but does not let the user interact with the twinru
+- a simulator (service widget) of a virtual server of a service; in the case case of a button, this means that the simulator shows the state of the button and let's the user press it (which calls the `down()` method) and release it (which calls the `up()` method)
+
+If you inspect the code for `DashboardButton.tsx` you will see its logic
+depends on whether or not a server is available.
+
+The service widget factory for creating simulators/twins is at [jacdac-docs/src/components/dashboard/DashboardServiceWidget.tsx](https://github.com/jacdac/jacdac-docs/blob/main/src/components/dashboard/DashboardServiceWidget.tsx). You must add an entry there as well.
+
+## Support for sensors
+
+### Virtual servers
+
+Note that many services are simple sensors, for which it is much easier to define a virtual server
+and accompanying React component. Let's consider the [temperature service](https://github.com/jacdac/jacdac/blob/main/services/temperature.md),
+which supports both indoor and outdoor variants, as specified in [jacdac-ts/src/servers/sensorserver.ts](https://github.com/jacdac/jacdac-ts/blob/main/src/servers/sensorserver.ts). We show the code that supports the outdoor variant:
+
+
+```ts
+function initProviders() {
+    return (_providerDefinitions =
+        _providerDefinitions ||
+    [
+      ...
+    {
+        name: "thermometer (outdoor)",
+        serviceClasses: [SRV_TEMPERATURE],
+        services: () => [
+            new AnalogSensorServer(
+                SRV_TEMPERATURE,
+                outdoorThermometerOptions,
+            ),
+        ],
+    },
+    ...])
+}
+...
+const outdoorThermometerOptions: AnalogSensorServerOptions = {
+    readingValues: [21.5],
+    streamingInterval: 1000,
+    minReading: -40,
+    maxReading: 120,
+    readingError: [0.25],
+    variant: TemperatureVariant.Outdoor,
+}
+```
+
+The function `initProviders` maps a device name and its supporting service class ids (such as `SRV_TEMPERATURE`) to
+the virtual servers that support those services. In this simple case, we make use of the `AnalogSensorServer`, 
+which is parameterized by the associated `AnalogSensorServerOptions`. No other code is needed.
+
+### React components
+
+Nothing more is needed to create an UI for an analog sensor virtual server, unless you want to associate a specified
+icon with it. 
+
+## Tests
+
+It's important to develop automated/manual tests for your service, which
+are then made available via the [Jacdac device tester](https://jacdac.github.io/jacdac-docs/tools/device-tester/). You can find examples at [testdom/testrules](https://github.com/jacdac/jacdac-ts/blob/main/src/testdom/testrules.ts).
+
+## MakeCode Client
+
+From the `jacdac-docs` directory, running the following command
+
+```
+yarn buildspecs
+```
+
+will generated new MakeCode extensions into `jacdac/pxt-jacdac` for a new service, in a new subdirectory. They have the following structure
+- pxt.g.json
+- client.g.ts
+- constants.ts
+
+The `.g` denotes generated files that you will need to make a copy of (and potentially modifying themselves). In particular,
+to finish the creation of an extension, you will need to create
+- pxt.json
+
+to specify which files to include in the extension. The [button extension](https://github.com/jacdac/pxt-jacdac/tree/master/button)
+gives an example.
+
+
+# Firmware for server
+
+Find existing firmware for services 
+in the [services directory](https://github.com/jacdac/jacdac-c/tree/main/services)
+of the jacdac-c repo:
+* [services/button.c](https://github.com/jacdac/jacdac-c/tree/main/services/button.c) is the C code for the button service
+* [services/servo.c](https://github.com/jacdac/jacdac-c/tree/main/services/servo.c) has a simple example of registers
+* [services/buzzer.c](https://github.com/jacdac/jacdac-c/tree/main/services/buzzer.c) has a simple example of how a command is handled (in `buzzer_handle_packet()`)
+* [services/thermometer.c](https://github.com/jacdac/jacdac-c/tree/main/services/thermometer.c) is a very simple sensor
+* [services/power.c](https://github.com/jacdac/jacdac-c/tree/main/services/power.c) is a more involved sensor (with custom registers)
+
+Once you add a service, make sure to add its `*_init()` function to 
+[services/jd_services.h](https://github.com/jacdac/jacdac-c/tree/main/services/jd_services.h).
+
+The Jacdac runtime contains a set of helper functions for working with the
+components of a Jacdac service: registers, commands, and events.

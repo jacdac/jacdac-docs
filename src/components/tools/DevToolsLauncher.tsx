@@ -1,10 +1,10 @@
 import React, { ChangeEvent, useState } from "react"
 import { Grid, TextField } from "@mui/material"
-import { Button } from "gatsby-theme-material-ui"
+import { Button } from "../ui/GatsbyMuiCompat"
 import SendIcon from "@mui/icons-material/Send"
 import useBus from "../../jacdac/useBus"
 import { injectDevTools } from "../../../jacdac-ts/src/jdom/devtools"
-import { withPrefix } from "gatsby"
+import { withPrefix } from "../../compat/withPrefix"
 
 export default function DevToolsLauncher() {
     const [text, setText] = useState("")

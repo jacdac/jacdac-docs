@@ -8,9 +8,12 @@ import useBus from "../../jacdac/useBus"
 export default function useRoleManagerClient(): RoleManagerClient {
     const bus = useBus()
     const [mgr, setMgr] = useState<RoleManagerClient>(bus.roleManager)
-    useEffect(
-        () => bus.subscribe(ROLE_MANAGER_CHANGE, () => setMgr(bus.roleManager)),
-        [bus]
-    )
+    useEffect(() => {
+        // bus.roleManager may have changed between the initial render and this
+        // effect running (e.g. the role manager service just got discovered);
+        // re-sync immediately instead of only reacting to future events
+        setMgr(bus.roleManager)
+        return bus.subscribe(ROLE_MANAGER_CHANGE, () => setMgr(bus.roleManager))
+    }, [bus])
     return mgr
 }

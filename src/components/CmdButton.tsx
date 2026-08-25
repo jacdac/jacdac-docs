@@ -1,6 +1,6 @@
 import { darken, lighten } from "@mui/material"
 import { styled } from "@mui/material/styles"
-import { Button } from "gatsby-theme-material-ui"
+import { Button } from "./ui/GatsbyMuiCompat"
 import React, { CSSProperties, ReactNode, useEffect, useState } from "react"
 // tslint:disable-next-line: match-default-export-name no-submodule-imports
 import ErrorIcon from "@mui/icons-material/Error"

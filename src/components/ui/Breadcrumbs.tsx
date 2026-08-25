@@ -1,7 +1,7 @@
 import React, { useMemo } from "react"
 import { WindowLocation } from "@reach/router"
 import { Breadcrumbs as MaterialBreadcrumbs } from "@mui/material"
-import { Link } from "gatsby-theme-material-ui"
+import { Link } from "./GatsbyMuiCompat"
 
 export default function Breadcrumbs(props: { location: WindowLocation }) {
     const { location } = props

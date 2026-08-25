@@ -34,7 +34,7 @@ export function usePersistentSimulators() {
         const templates = resolveTemplates()
         setSimulators({
             update: Date.now(),
-            templates,
+            templates
         })
     }
 

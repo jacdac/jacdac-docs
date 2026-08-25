@@ -1,0 +1,25 @@
+{
+  "generatedAt": "2026-07-13T19:46:53.639Z",
+  "samples": [
+    [
+      "/devices/",
+      true
+    ],
+    [
+      "/devices/microbit-educational-foundation/",
+      true
+    ],
+    [
+      "/devices/microbit-educational-foundation/microbitv2/",
+      true
+    ],
+    [
+      "/devices/0x32f6253d/",
+      true
+    ],
+    [
+      "/devices/codes/aaaaaa/",
+      true
+    ]
+  ]
+}

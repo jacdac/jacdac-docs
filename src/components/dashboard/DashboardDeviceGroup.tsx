@@ -8,7 +8,7 @@ import DashboardDeviceItem from "./DashboardDeviceItem"
 
 export default function DeviceGroup(
     props: {
-        title: string
+        title: string | undefined
         action?: JSX.Element
         devices: JDDevice[]
         children?: JSX.Element | JSX.Element[]
@@ -22,7 +22,7 @@ export default function DeviceGroup(
     return (
         <section id={sectionId}>
             <Grid sx={{ mb: 1 }} container spacing={1}>
-                <GridHeader title={title} action={action} />
+                {title && <GridHeader title={title} action={action} />}
                 {children}
                 {devices?.map(device => (
                     <DashboardDeviceItem

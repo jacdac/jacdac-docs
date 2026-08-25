@@ -1,6 +1,6 @@
 import { Grid, Typography, Box } from "@mui/material"
 import { styled } from "@mui/material/styles"
-import { Button, Link } from "gatsby-theme-material-ui"
+import { Button, Link } from "../ui/GatsbyMuiCompat"
 import React, { ReactNode } from "react"
 import clsx from "clsx"
 

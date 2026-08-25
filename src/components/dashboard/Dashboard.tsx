@@ -34,6 +34,9 @@ export interface DashboardDeviceProps {
 }
 export interface DashboardProps extends DashboardDeviceProps {
     hideSimulators?: boolean
+    hideSimulatorButtons?: boolean
+    hideDevices?: boolean
+    noTitle?: boolean
     showSimulatorHeader?: boolean
     showSimulatorAvatar?: boolean
     showDeviceHeader?: boolean
@@ -48,6 +51,9 @@ export interface DashboardProps extends DashboardDeviceProps {
 export default function Dashboard(props: DashboardProps) {
     const {
         hideSimulators,
+        hideSimulatorButtons,
+        hideDevices,
+        noTitle,
         showConnect,
         showStartSimulators,
         showStartRoleSimulators,
@@ -85,7 +91,7 @@ export default function Dashboard(props: DashboardProps) {
         <>
             {!hideSimulators && (
                 <DashboardDeviceGroup
-                    title={tL("simulators")}
+                    title={noTitle ? undefined : tL("simulators")}
                     action={
                         <>
                             {showStartRoleSimulators && (
@@ -96,8 +102,10 @@ export default function Dashboard(props: DashboardProps) {
                                     ${tL("autoStart")}
                                 </StartMissingSimulatorsButton>
                             )}
-                            <StartSimulatorButton trackName="dashboard.simulators.start" />
-                            <IconButtonWithTooltip
+                            {!hideSimulatorButtons && (
+                                <>
+                                <StartSimulatorButton trackName="dashboard.simulators.start" />
+                                                            <IconButtonWithTooltip
                                 trackName="dashboard.simulators.clear"
                                 title={tL("clearSimulators")}
                                 onClick={handleClearSimulators}
@@ -105,6 +113,8 @@ export default function Dashboard(props: DashboardProps) {
                                 <ClearIcon />
                             </IconButtonWithTooltip>{" "}
                             <DevicePowerChips devices={simulators} />
+                            </>
+                            )}
                         </>
                     }
                     devices={simulators}
@@ -119,8 +129,9 @@ export default function Dashboard(props: DashboardProps) {
                     )}
                 </DashboardDeviceGroup>
             )}
-            <DashboardDeviceGroup
-                title={tL("devices")}
+            {(!hideDevices && (
+              <DashboardDeviceGroup
+                title={noTitle ? undefined : tL("devices")}
                 action={
                     <>
                         {showConnect && (
@@ -143,6 +154,7 @@ export default function Dashboard(props: DashboardProps) {
                     </Grid>
                 )}
             </DashboardDeviceGroup>
+            )) || <></>}
         </>
     )
 }

@@ -1,0 +1,21 @@
+---
+import { devicePath, getDeviceByProductId, getDeviceRedirectRows } from '../../../lib/specData';
+const base = import.meta.env.BASE_URL;
+
+export function getStaticPaths() {
+  const qrRows = getDeviceRedirectRows();
+  const paths = [] as Array<{ params: { vanity: string }; props: { toPath: string } }>;
+
+  for (const row of qrRows) {
+    const productId = Number.parseInt(row.productId, 16);
+    const device = getDeviceByProductId(productId);
+    const toPath = device ? devicePath(device) : '/devices/microsoft-research/';
+    paths.push({ params: { vanity: row.vanity }, props: { toPath } });
+  }
+
+  return paths;
+}
+
+const { toPath } = Astro.props as { toPath: string };
+return Astro.redirect(`${base}${toPath.replace(/^\//, '')}`, 302);
+---
