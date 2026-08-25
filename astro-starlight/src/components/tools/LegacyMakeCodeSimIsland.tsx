@@ -9,10 +9,10 @@ import {
   responsiveFontSizes,
 } from '@mui/material';
 import { SnackbarProvider } from 'notistack';
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { JDBus } from '../../../../jacdac-ts/src/jdom/bus';
 import { JDDevice } from '../../../../jacdac-ts/src/jdom/device';
-import { isReading, isValueOrIntensity } from '../../../../jacdac-ts/src/jdom/spec';
+import { isInfrastructure, isReading, isValueOrIntensity } from '../../../../jacdac-ts/src/jdom/spec';
 import { strcmp } from '../../../../jacdac-ts/src/jdom/utils';
 import Dashboard from '../../../../src/components/dashboard/Dashboard';
 import DeviceCardHeader from '../../../../src/components/devices/DeviceCardHeader';
@@ -88,6 +88,7 @@ function MakeCodeSimBody(props: { bus: JDBus }) {
   const deviceFilter = iframeBridge?.deviceFilter.bind(iframeBridge);
   const serviceFilter = iframeBridge?.serviceFilter.bind(iframeBridge);
   const mode = useChange(iframeBridge, _ => _?.mode);
+  const [roleResetPending, setRoleResetPending] = useState(false);
   
   // new roles are available if role manager is present and not all roles are bound
   const roleManagerClient = useRoleManagerClient();
@@ -118,20 +119,28 @@ function MakeCodeSimBody(props: { bus: JDBus }) {
     prevModeRef.current = mode;
     if (!enteringDeviceMode || !roleManagerClient) return;
 
+    const resetRequests: Promise<void>[] = [];
+    let resetQueue = Promise.resolve();
     bus.serviceProviders().forEach(provider => {
       const device = bus.device(provider.deviceId, true);
       device?.services().forEach(service => {
-        if (service.role) roleManagerClient.setRole(service, '');
+        if (!isInfrastructure(service.specification)) {
+          resetQueue = resetQueue.then(() => roleManagerClient.setRole(service, ''));
+          resetRequests.push(resetQueue);
+        }
       });
       bus.removeServiceProvider(provider);
     });
+    if (!resetRequests.length) return;
+    setRoleResetPending(true);
+    void Promise.allSettled(resetRequests).finally(() => setRoleResetPending(false));
   }, [mode, roleManagerClient, bus]);
 
   // TODO: when we are showing only devices, we don't want to spin up simulators, but have
   // a "skeleton" device twin
   useEffect(() => {
     // in device mode, unbound roles should wait for a physical device, not a new simulator
-    if (!roleManagerClient || allRolesBound || mode === 'device' || autoStartInFlightRef.current) return;
+    if (!roleManagerClient || allRolesBound || mode === 'device' || roleResetPending || autoStartInFlightRef.current) return;
 
     autoStartInFlightRef.current = true;
     try {
@@ -139,7 +148,7 @@ function MakeCodeSimBody(props: { bus: JDBus }) {
     } finally {
       autoStartInFlightRef.current = false;
     }
-  }, [allRolesBound, roleManagerChangeId, roleManagerClient, mode]);
+  }, [allRolesBound, roleManagerChangeId, roleManagerClient, mode, roleResetPending]);
 
   return (
     <>
