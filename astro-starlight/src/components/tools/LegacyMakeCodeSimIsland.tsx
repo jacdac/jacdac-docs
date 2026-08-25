@@ -18,6 +18,7 @@ import JacdacContext from '../../../../src/jacdac/Context';
 import { usePersistentSimulators } from '../../../../src/jacdac/usePersistentSimulators';
 import useChange from '../../../../src/jacdac/useChange';
 import useRoleManagerClient from '../../../../src/components/services/useRoleManagerClient';
+import type { Role } from '../../../../jacdac-ts/src/jdom/clients/rolemanagerclient';
 
 
 function deviceSort(l: JDDevice, r: JDDevice): number {
@@ -73,17 +74,42 @@ function MakeCodeSimBody(props: { bus: JDBus }) {
 
   // the physical device (e.g. micro:bit) hosting the role manager service
   const connectedDevice = useChange(roleManagerClient, _ => _?.service?.device);
+
+  // last-known-good role bindings, kept even if the role manager client is torn
+  // down/recreated (e.g. its hosting device disconnects) or a ListRoles poll fails;
+  // only overwritten once a poll actually succeeds with a (possibly identical) role list
+  const knownRolesRef = useRef<Role[]>([]);
+  if (roleManagerClient?.roles?.length) knownRolesRef.current = roleManagerClient.roles;
   // roles declared by the program that have not been bound to a device yet
   const unboundRoles = useChange(
-    roleManagerClient,
-    _ => _?.roles.filter(role => !bus.device(role.deviceId, true)),
-    [roleManagerChangeId]
+    bus,
+    () => knownRolesRef.current.filter(role => !bus.device(role.deviceId, true)),
+    [roleManagerChangeId, knownRolesRef.current]
   );
+
+  // when entering device mode, simulator devices are no longer relevant: clear
+  // their role bindings and drop them from the bus so those roles show up as
+  // unbound again, waiting for a physical device to take over
+  const prevModeRef = useRef(mode);
+  useEffect(() => {
+    const enteringDeviceMode = mode === 'device' && prevModeRef.current !== 'device';
+    prevModeRef.current = mode;
+    if (!enteringDeviceMode || !roleManagerClient) return;
+
+    bus.serviceProviders().forEach(provider => {
+      const device = bus.device(provider.deviceId, true);
+      device?.services().forEach(service => {
+        if (service.role) roleManagerClient.setRole(service, '');
+      });
+      bus.removeServiceProvider(provider);
+    });
+  }, [mode, roleManagerClient, bus]);
 
   // TODO: when we are showing only devices, we don't want to spin up simulators, but have
   // a "skeleton" device twin
   useEffect(() => {
-    if (!roleManagerClient || allRolesBound || autoStartInFlightRef.current) return;
+    // in device mode, unbound roles should wait for a physical device, not a new simulator
+    if (!roleManagerClient || allRolesBound || mode === 'device' || autoStartInFlightRef.current) return;
 
     autoStartInFlightRef.current = true;
     try {
@@ -91,7 +117,7 @@ function MakeCodeSimBody(props: { bus: JDBus }) {
     } finally {
       autoStartInFlightRef.current = false;
     }
-  }, [allRolesBound, roleManagerChangeId, roleManagerClient]);
+  }, [allRolesBound, roleManagerChangeId, roleManagerClient, mode]);
 
   return (
     <>
@@ -113,6 +139,7 @@ function MakeCodeSimBody(props: { bus: JDBus }) {
         </Card>
       )}
       <Dashboard
+        noTitle={true}
         hideSimulatorButtons={true}
         hideDevices={mode === "simulator"}
         hideSimulators={mode === "device"}
