@@ -1,4 +1,13 @@
-import { Card, List, Typography } from '@mui/material';
+import {
+  Card,
+  CssBaseline,
+  List,
+  StyledEngineProvider,
+  ThemeProvider,
+  Typography,
+  createTheme,
+  responsiveFontSizes,
+} from '@mui/material';
 import { SnackbarProvider } from 'notistack';
 import React, { useEffect, useMemo, useRef } from 'react';
 import { JDBus } from '../../../../jacdac-ts/src/jdom/bus';
@@ -13,12 +22,25 @@ import { AppProvider } from '../../../../src/components/AppContext';
 import RoleListItem from '../../../../src/components/services/RoleListItem';
 import { SimulatorDialogsProvider } from '../../../../src/components/SimulatorsDialogContext';
 import { WebAudioProvider } from '../../../../src/components/ui/WebAudioContext';
+import DarkModeContext from '../../../../src/components/ui/DarkModeContext';
 import IFrameBridgeClient from '../../../../src/components/makecode/iframebridgeclient';
 import JacdacContext from '../../../../src/jacdac/Context';
 import { usePersistentSimulators } from '../../../../src/jacdac/usePersistentSimulators';
 import useChange from '../../../../src/jacdac/useChange';
 import useRoleManagerClient from '../../../../src/components/services/useRoleManagerClient';
 import type { Role } from '../../../../jacdac-ts/src/jdom/clients/rolemanagerclient';
+
+const theme = responsiveFontSizes(
+  createTheme({
+    palette: {
+      primary: { main: '#85e' },
+      secondary: { main: '#ffc400' },
+      background: { default: '#fff' },
+      mode: 'light',
+      contrastThreshold: 3.1,
+    },
+  })
+);
 
 
 function deviceSort(l: JDDevice, r: JDDevice): number {
@@ -174,20 +196,34 @@ export default function LegacyMakeCodeSimIsland() {
   }, []);
 
   return (
-    <JacdacContext.Provider value={{ bus }}>
-      <SnackbarProvider maxSnack={1} dense={true}>
-        <WebAudioProvider>
-          <HostedSimulatorsProvider>
-            <PacketsProvider>
-              <AppProvider>
-                <SimulatorDialogsProvider>
-                  <MakeCodeSimBody bus={bus} />
-                </SimulatorDialogsProvider>
-              </AppProvider>
-            </PacketsProvider>
-          </HostedSimulatorsProvider>
-        </WebAudioProvider>
-      </SnackbarProvider>
-    </JacdacContext.Provider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <DarkModeContext.Provider
+          value={{
+            darkMode: 'light',
+            darkModeMounted: true,
+            toggleDarkMode: () => {},
+            setSystemMode: () => {},
+          }}
+        >
+          <JacdacContext.Provider value={{ bus }}>
+            <SnackbarProvider maxSnack={1} dense={true}>
+              <WebAudioProvider>
+                <HostedSimulatorsProvider>
+                  <PacketsProvider>
+                    <AppProvider>
+                      <SimulatorDialogsProvider>
+                        <MakeCodeSimBody bus={bus} />
+                      </SimulatorDialogsProvider>
+                    </AppProvider>
+                  </PacketsProvider>
+                </HostedSimulatorsProvider>
+              </WebAudioProvider>
+            </SnackbarProvider>
+          </JacdacContext.Provider>
+        </DarkModeContext.Provider>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 }
