@@ -88,6 +88,7 @@ function MakeCodeSimBody(props: { bus: JDBus }) {
   const deviceFilter = iframeBridge?.deviceFilter.bind(iframeBridge);
   const serviceFilter = iframeBridge?.serviceFilter.bind(iframeBridge);
   const mode = useChange(iframeBridge, _ => _?.mode);
+  const runId = useChange(iframeBridge, _ => _?.runId);
   const [roleResetPending, setRoleResetPending] = useState(false);
   
   // new roles are available if role manager is present and not all roles are bound
@@ -102,12 +103,28 @@ function MakeCodeSimBody(props: { bus: JDBus }) {
   // down/recreated (e.g. its hosting device disconnects) or a ListRoles poll fails;
   // only overwritten once a poll actually succeeds with a (possibly identical) role list
   const knownRolesRef = useRef<Role[]>([]);
-  if (roleManagerClient?.roles?.length) knownRolesRef.current = roleManagerClient.roles;
+  const previousRunIdRef = useRef(runId);
+  const ignoredRoleChangeIdRef = useRef<number | undefined>(undefined);
+  useEffect(() => {
+    if (previousRunIdRef.current !== runId) {
+      knownRolesRef.current = [];
+      previousRunIdRef.current = runId;
+      ignoredRoleChangeIdRef.current = roleManagerChangeId;
+    }
+  }, [runId, roleManagerChangeId]);
+  if (
+    previousRunIdRef.current === runId &&
+    roleManagerClient?.roles?.length &&
+    ignoredRoleChangeIdRef.current !== roleManagerChangeId
+  ) {
+    knownRolesRef.current = roleManagerClient.roles;
+    ignoredRoleChangeIdRef.current = undefined;
+  }
   // roles declared by the program that have not been bound to a device yet
   const unboundRoles = useChange(
     bus,
     () => knownRolesRef.current.filter(role => !bus.device(role.deviceId, true)),
-    [roleManagerChangeId, knownRolesRef.current]
+    [roleManagerChangeId, runId, knownRolesRef.current]
   );
 
   // when entering device mode, simulator devices are no longer relevant: clear

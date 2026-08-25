@@ -113,6 +113,7 @@ export class IFrameBridgeClient extends JDClient {
     private _serialMessages: { data: string; time: number; sim: boolean }[] = []
 
     private _runOptions: SimulatorRunOptions
+    private _runId = 0
     private _mode: "simulator" | "device" = "simulator"
 
     constructor(readonly bus: JDBus, readonly frameId: string) {
@@ -142,6 +143,10 @@ export class IFrameBridgeClient extends JDClient {
 
     get mode() {
         return this._mode
+    }
+
+    get runId() {
+        return this._runId
     }
 
     private registerEvents() {
@@ -260,6 +265,7 @@ export class IFrameBridgeClient extends JDClient {
             case "run": {
                 // simulation is starting
                 this._runOptions = msg as SimulatorRunOptions
+                this._runId++
                 this.bus.broadcastDisconnectRequest()
                 this.emit(CHANGE)
                 break
