@@ -9,6 +9,7 @@ import {
     ButtonEvent,
     ButtonServer,
     ReflectedLightServer,
+    SensorServer,
     JDRegister,
     RotaryEncoderReg,
     SRV_DC_CURRENT_MEASUREMENT,
@@ -44,6 +45,8 @@ import FwdTemperatureWidget from "../widgets/FwdTemperatureWidget"
 import FwdFloatWidget from "../widgets/FwdFloatWidget"
 import FwdEcWidget from "../widgets/FwdEcWidget"
 import FwdPirWidget from "../widgets/FwdPirWidget"
+import FwdFlexWidget from "../widgets/FwdFlexWidget"
+import FwdSliderWidget from "../widgets/FwdSliderWidget"
 
 enum ProductId {
     BreakoutBoard1 = 873600795,
@@ -62,6 +65,8 @@ enum ProductId {
     TemperatureSensor = 827772841,
     EcSensor = 884234713,
     PirSensor = 884222425,
+    Flex = 990704158,
+    Slider = 885275322,
 }
 
 export function hasCustomFwdWidget(device: JDDevice): boolean {
@@ -102,6 +107,21 @@ function lineWidgetProps(
     }
     return {
         buttonProps: useSvgButtonProps("line detector", server && handleDown),
+    }
+}
+
+// lets a simulated sensor's reading be dragged from the widget
+function readingDragProps(
+    register: JDRegister,
+    server?: SensorServer<[number]>
+) {
+    return {
+        onChange: server
+            ? (value: number) => {
+                  server.reading.setValues([value])
+                  register.refresh()
+              }
+            : undefined,
     }
 }
 
@@ -238,6 +258,18 @@ export function FwdEduSubstituteWidget(dashboardProps: DashboardServiceProps) {
             })
         case ProductId.PirSensor:
             return createPirWidget(dashboardProps)
+        case ProductId.Flex:
+            return lazifyWidget(FwdFlexWidget, {
+                ...widgetProps,
+                size: undefined,
+                ...readingDragProps(valueReg, server as SensorServer<[number]>),
+            })
+        case ProductId.Slider:
+            return lazifyWidget(FwdSliderWidget, {
+                ...widgetProps,
+                size: undefined,
+                ...readingDragProps(valueReg, server as SensorServer<[number]>),
+            })
     }
     return DashboardServiceDefaultWidget(dashboardProps)
 }
