@@ -9,9 +9,12 @@ import {
     ButtonEvent,
     ButtonServer,
     ReflectedLightServer,
+    SensorServer,
     JDRegister,
     RotaryEncoderReg,
     SRV_DC_CURRENT_MEASUREMENT,
+    SRV_HUMIDITY,
+    SRV_AIR_PRESSURE,
 } from "../../../jacdac-ts/src/jacdac"
 import { DashboardServiceProps } from "./DashboardServiceWidget"
 import useServiceServer from "../hooks/useServiceServer"
@@ -22,6 +25,11 @@ import Suspense from "../ui/Suspense"
 import { CircularProgress } from "@mui/material"
 
 import {
+    createI2cWidget,
+    createNeopixelWidget,
+    createTimeRtcWidget,
+    createBme280Widget,
+    createDpadWidget,
     createLEDWidget,
     createLightsWidget,
     createPirWidget,
@@ -44,6 +52,10 @@ import FwdTemperatureWidget from "../widgets/FwdTemperatureWidget"
 import FwdFloatWidget from "../widgets/FwdFloatWidget"
 import FwdEcWidget from "../widgets/FwdEcWidget"
 import FwdPirWidget from "../widgets/FwdPirWidget"
+import FwdFlexWidget from "../widgets/FwdFlexWidget"
+import FwdSliderWidget from "../widgets/FwdSliderWidget"
+import FwdLightLuxWidget from "../widgets/FwdLightLuxWidget"
+import FwdLoadCellWidget from "../widgets/FwdLoadCellWidget"
 
 enum ProductId {
     BreakoutBoard1 = 873600795,
@@ -62,12 +74,32 @@ enum ProductId {
     TemperatureSensor = 827772841,
     EcSensor = 884234713,
     PirSensor = 884222425,
+    Flex = 990704158,
+    Slider = 885275322,
+    LightLux = 972250329,
+    LoadCell = 885296573,
+    Neopixel = 862371172,
+    TimeRtc = 976194561,
+    I2c = 884222634,
+    Bme280 = 921984170,
+    Dpad = 818512728,
 }
 
 export function hasCustomFwdWidget(device: JDDevice): boolean {
     const productId = useDeviceProductIdentifier(device)
     const productIds = Object.values(ProductId) as number[]
     return productIds.includes(productId)
+}
+
+// services drawn as part of another service's widget, so they get no card of their own
+export function useHiddenFwdService(service: JDService): boolean {
+    const productId = useDeviceProductIdentifier(service.device)
+    if (productId === ProductId.Bme280)
+        return (
+            service.serviceClass === SRV_HUMIDITY ||
+            service.serviceClass === SRV_AIR_PRESSURE
+        )
+    return false
 }
 
 function buttonWidgetProps(service: JDService, server?: ButtonServer) {
@@ -102,6 +134,21 @@ function lineWidgetProps(
     }
     return {
         buttonProps: useSvgButtonProps("line detector", server && handleDown),
+    }
+}
+
+// lets a simulated sensor's reading be dragged from the widget
+function readingDragProps(
+    register: JDRegister,
+    server?: SensorServer<[number]>
+) {
+    return {
+        onChange: server
+            ? (value: number) => {
+                  server.reading.setValues([value])
+                  register.refresh()
+              }
+            : undefined,
     }
 }
 
@@ -238,6 +285,38 @@ export function FwdEduSubstituteWidget(dashboardProps: DashboardServiceProps) {
             })
         case ProductId.PirSensor:
             return createPirWidget(dashboardProps)
+        case ProductId.Flex:
+            return lazifyWidget(FwdFlexWidget, {
+                ...widgetProps,
+                size: undefined,
+                ...readingDragProps(valueReg, server as SensorServer<[number]>),
+            })
+        case ProductId.Slider:
+            return lazifyWidget(FwdSliderWidget, {
+                ...widgetProps,
+                size: undefined,
+                ...readingDragProps(valueReg, server as SensorServer<[number]>),
+            })
+        case ProductId.LightLux:
+            return lazifyWidget(FwdLightLuxWidget, {
+                ...widgetProps,
+                size: undefined,
+            })
+        case ProductId.LoadCell:
+            return lazifyWidget(FwdLoadCellWidget, {
+                ...widgetProps,
+                size: undefined,
+            })
+        case ProductId.Neopixel:
+            return createNeopixelWidget(dashboardProps)
+        case ProductId.TimeRtc:
+            return createTimeRtcWidget(dashboardProps)
+        case ProductId.I2c:
+            return createI2cWidget(dashboardProps)
+        case ProductId.Bme280:
+            return createBme280Widget(dashboardProps)
+        case ProductId.Dpad:
+            return createDpadWidget(dashboardProps)
     }
     return DashboardServiceDefaultWidget(dashboardProps)
 }
