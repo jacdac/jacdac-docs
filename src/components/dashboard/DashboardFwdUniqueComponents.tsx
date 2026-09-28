@@ -13,6 +13,12 @@ import {
     JDEventSource,
     LightBulbReg,
     MotionReg,
+    I2CReg,
+    I2CCmd,
+    RealTimeClockReg,
+    RealTimeClockCmd,
+    COMMAND_RECEIVE,
+    Packet,
     TemperatureReg,
     HumidityReg,
     AirPressureReg,
@@ -21,6 +27,7 @@ import {
     SRV_HUMIDITY,
     SRV_AIR_PRESSURE,
 } from "../../../jacdac-ts/src/jacdac"
+import { RealTimeClockReadingType } from "../../../jacdac-ts/src/servers/realtimeclockserver"
 import { GamepadServer } from "../../../jacdac-ts/src/servers/gamepadserver"
 import { DashboardServiceProps } from "./DashboardServiceWidget"
 import useServiceServer from "../hooks/useServiceServer"
@@ -43,6 +50,11 @@ import useChange from "../../jacdac/useChange"
 import ColorButtons from "../widgets/ColorButtons"
 import FwdLightsWidget from "../widgets/FwdLightsWidget"
 import FwdPirWidget from "../widgets/FwdPirWidget"
+import FwdNeopixelWidget from "../widgets/FwdNeopixelWidget"
+import FwdI2cWidget from "../widgets/FwdI2cWidget"
+import FwdTimeRtcWidget from "../widgets/FwdTimeRtcWidget"
+import CmdButton from "../CmdButton"
+import SyncIcon from "@mui/icons-material/Sync"
 
 export function createLightsWidget(props: DashboardServiceProps) {
     const { service } = props
@@ -458,6 +470,91 @@ export function createLEDWidget(props: DashboardServiceProps) {
                     />
                 )}
             </Grid>
+        </Grid>
+    )
+}
+
+export function createNeopixelWidget(props: DashboardServiceProps) {
+    const { service } = props
+    const pixelsRegister = useRegister(service, LedReg.Pixels)
+    const [pixels] = useRegisterUnpackedValue<[Uint8Array]>(
+        pixelsRegister,
+        props
+    )
+    const numPixelsRegister = useRegister(service, LedReg.NumPixels)
+    const [numPixels] = useRegisterUnpackedValue<[number]>(
+        numPixelsRegister,
+        props
+    )
+
+    return <FwdNeopixelWidget pixels={pixels} numPixels={numPixels} />
+}
+
+export function createI2cWidget(props: DashboardServiceProps) {
+    const { service } = props
+    const okRegister = useRegister(service, I2CReg.Ok)
+    const ok = useRegisterBoolValue(okRegister, props)
+    const [transactions, setTransactions] = useState(0)
+    const [address, setAddress] = useState<number>(undefined)
+
+    // transaction commands from other clients carry the target device address
+    useEffect(
+        () =>
+            service?.subscribe(COMMAND_RECEIVE, (pkt: Packet) => {
+                if (pkt.serviceCommand !== I2CCmd.Transaction) return
+                setAddress(pkt.data[0])
+                setTransactions(n => n + 1)
+            }),
+        [service]
+    )
+
+    return (
+        <FwdI2cWidget address={address} transactions={transactions} ok={ok} />
+    )
+}
+
+export function createTimeRtcWidget(props: DashboardServiceProps) {
+    const { service, expanded } = props
+    const localTimeRegister = useRegister(service, RealTimeClockReg.LocalTime)
+    const [year, month, dayOfMonth, , hour, min, seconds] =
+        useRegisterUnpackedValue<RealTimeClockReadingType>(
+            localTimeRegister,
+            props
+        )
+    const time =
+        year === undefined
+            ? undefined
+            : new Date(year, month - 1, dayOfMonth, hour, min, seconds)
+
+    const handleSync = async () => {
+        const now = new Date()
+        await service.sendCmdPackedAsync(RealTimeClockCmd.SetTime, [
+            now.getFullYear(),
+            now.getMonth() + 1,
+            now.getDate(),
+            now.getDay(),
+            now.getHours(),
+            now.getMinutes(),
+            now.getSeconds(),
+        ])
+    }
+
+    return (
+        <Grid container direction="column" alignItems="center">
+            <Grid item>
+                <FwdTimeRtcWidget time={time} />
+            </Grid>
+            {expanded && (
+                <Grid item>
+                    <CmdButton
+                        trackName="realtimeclock.sync"
+                        onClick={handleSync}
+                        icon={<SyncIcon />}
+                    >
+                        sync time
+                    </CmdButton>
+                </Grid>
+            )}
         </Grid>
     )
 }
