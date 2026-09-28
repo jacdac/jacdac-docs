@@ -2,7 +2,7 @@ import React from "react"
 // tslint:disable-next-line: no-submodule-imports
 import { Typography } from "@mui/material"
 import { GithubRepository } from "../github"
-import { Link } from "gatsby-theme-material-ui"
+import { Link } from "../ui/GatsbyMuiCompat"
 
 export default function MakeCodeGithubFolderLink(props: {
     folder: string

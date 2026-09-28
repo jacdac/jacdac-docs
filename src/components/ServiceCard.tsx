@@ -7,7 +7,7 @@ import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
 // tslint:disable-next-line: no-submodule-imports
 import Typography from "@mui/material/Typography"
-import { Link } from "gatsby-theme-material-ui"
+import { Link } from "./ui/GatsbyMuiCompat"
 import ServiceRegisters from "./ServiceRegisters"
 import ServiceEvents from "./ServiceEvents"
 import { isCommand } from "../../jacdac-ts/src/jdom/spec"

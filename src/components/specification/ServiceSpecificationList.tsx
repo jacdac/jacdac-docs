@@ -10,7 +10,7 @@ import React, { useMemo } from "react"
 import { isInfrastructure } from "../../../jacdac-ts/src/jdom/spec"
 import { ellipseFirstSentence } from "../../../jacdac-ts/src/jdom/utils"
 import GridHeader from "../ui/GridHeader"
-import { Link, ListItemButton } from "gatsby-theme-material-ui"
+import { Link, ListItemButton } from "../ui/GatsbyMuiCompat"
 import MakeCodeIcon from "../icons/MakeCodeIcon"
 import {
     SERVICE_MIXIN_NODE_NAME,

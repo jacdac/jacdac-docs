@@ -11,7 +11,7 @@ import {
 import CheckIcon from "@mui/icons-material/Check"
 // tslint:disable-next-line: no-submodule-imports
 import Alert from "./ui/Alert"
-import { Button } from "gatsby-theme-material-ui"
+import { Button } from "./ui/GatsbyMuiCompat"
 import { NoSsr } from "@mui/material"
 import { useId } from "react"
 import useDeviceCatalog from "./devices/useDeviceCatalog"

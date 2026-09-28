@@ -10,7 +10,7 @@ export default function DeviceProductInformationTreeItem(props: { device: JDDevi
     const specification = useDeviceSpecification(device)
     if (!specification) return null
 
-    const to = `/devices/${identifierToUrlPath(specification.id)}`
+    const to = `/devices/${identifierToUrlPath(specification.id)}/`
     return (
         <StyledTreeItem
             nodeId={`${id}:catalog`}

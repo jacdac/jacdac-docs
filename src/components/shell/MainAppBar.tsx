@@ -12,7 +12,7 @@ import DarkModeContext from "../ui/DarkModeContext"
 import IconButtonWithTooltip from "../ui/IconButtonWithTooltip"
 import OpenDashboardButton from "../buttons/OpenDashboardButton"
 import PacketStats from "./PacketStats"
-import { Link } from "gatsby-theme-material-ui"
+import { Link } from "../ui/GatsbyMuiCompat"
 import { UIFlags } from "../../jacdac/providerbus"
 import { HideOnScroll } from "../ui/HideOnScroll"
 import {

@@ -1,6 +1,6 @@
 import React from "react"
 import { ButtonProps } from "@mui/material"
-import { Button as GatsbyButton } from "gatsby-theme-material-ui"
+import { Button as GatsbyButton } from "./GatsbyMuiCompat"
 import useAnalytics, { EventProperties } from "../hooks/useAnalytics"
 
 export default function Button(

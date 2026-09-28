@@ -143,6 +143,7 @@
     "buildpxt": "cd pxt-jacdac && sh mk.sh",
     "buildmodels": "cd static/models && sh mk.sh",
     "builddocsts": "node node_modules/typescript/bin/tsc -b src",
+    "componentdeps": "node scripts/generate-component-dependency-mermaid.mjs",
     "buildworkercsv": "cd src/workers/csv && node ../../../node_modules/microbundle/dist/cli.js build -f modern --no-compress --types --ts-config tsconfig.json",
     "buildworkerdata": "cd src/workers/data && node ../../../node_modules/microbundle/dist/cli.js build -f modern --no-compress --types --ts-config tsconfig.json",
     "buildworkervm": "cd src/workers/vm && node ../../../node_modules/esbuild/bin/esbuild --bundle vm-worker.ts --outdir=dist/node_modules --sourcemap",

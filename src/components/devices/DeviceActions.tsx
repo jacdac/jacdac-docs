@@ -11,7 +11,7 @@ import {
     SRV_UNIQUE_BRAIN,
 } from "../../../jacdac-ts/jacdac-spec/dist/specconstants"
 import useChange from "../../jacdac/useChange"
-import { navigate } from "gatsby-link"
+import { navigate } from "../../compat/navigate"
 import CableIcon from "@mui/icons-material/Cable"
 import DeviceResetButton from "./DeviceResetButton"
 import useHostedSimulators from "../HostedSimulatorsContext"

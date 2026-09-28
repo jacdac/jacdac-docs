@@ -1,4 +1,4 @@
-import { Link } from "gatsby-theme-material-ui"
+import { Link } from "../../components/ui/GatsbyMuiCompat"
 import React from "react"
 import ServiceSpecificationEditor from "../../components/tools/ServiceSpecificationEditor"
 

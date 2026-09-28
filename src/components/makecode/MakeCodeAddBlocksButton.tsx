@@ -1,5 +1,5 @@
 import Tooltip from "../ui/Tooltip"
-import { Button } from "gatsby-theme-material-ui"
+import { Button } from "../ui/GatsbyMuiCompat"
 import React, { useMemo } from "react"
 import useChange from "../../jacdac/useChange"
 import IFrameBridgeClient from "./iframebridgeclient"

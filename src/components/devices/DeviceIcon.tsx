@@ -7,7 +7,7 @@ import KindIcon from "../KindIcon"
 import useDeviceImage from "./useDeviceImage"
 import { JDServerServiceProvider } from "../../../jacdac-ts/src/jdom/servers/serverserviceprovider"
 import ImageAvatar from "../tools/ImageAvatar"
-import { withPrefix } from "gatsby"
+import { withPrefix } from "../../compat/withPrefix"
 
 export default function DeviceIcon(props: {
     device: JDDevice

@@ -2,7 +2,7 @@ import React from "react"
 import { useDeviceSpecificationFromProductIdentifier } from "../../jacdac/useDeviceSpecification"
 import useDeviceImage from "./useDeviceImage"
 import ImageAvatar from "../tools/ImageAvatar"
-import { withPrefix } from "gatsby"
+import { withPrefix } from "../../compat/withPrefix"
 
 export default function DeviceIconFromProductIdentifier(props: {
     productIdentifier: number

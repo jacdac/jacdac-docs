@@ -1,0 +1,54 @@
+name: Astro Preview
+
+on:
+  pull_request:
+    paths:
+      - "astro-starlight/**"
+      - "docs/migration/astro-island-provider-checklist.md"
+      - "scripts/check-astro-island-checklist.mjs"
+      - "scripts/check-astro-migrated-routes.mjs"
+      - ".github/workflows/astro-preview.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: astro-starlight/package-lock.json
+
+      - name: Verify Astro island checklist coverage
+        run: node scripts/check-astro-island-checklist.mjs
+
+      - name: Install dependencies
+        working-directory: astro-starlight
+        run: npm ci
+
+      - name: Build
+        working-directory: astro-starlight
+        run: npm run build
+
+      - name: Verify migrated route output
+        run: node scripts/check-astro-migrated-routes.mjs
+
+      - name: Verify base path output
+        run: |
+          test -f astro-starlight/dist/index.html
+          grep -q '/jacdac-docs/' astro-starlight/dist/index.html
+
+      - name: Upload preview artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: astro-starlight-dist
+          path: astro-starlight/dist
+          if-no-files-found: error

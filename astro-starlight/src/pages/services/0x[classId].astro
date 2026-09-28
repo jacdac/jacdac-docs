@@ -1,0 +1,14 @@
+---
+import { getServices } from '../../lib/specData';
+const base = import.meta.env.BASE_URL;
+
+export function getStaticPaths() {
+  return getServices().map((service) => ({
+    params: { classId: service.classIdentifier.toString(16) },
+    props: { shortId: service.shortId },
+  }));
+}
+
+const { shortId } = Astro.props;
+return Astro.redirect(`${base}services/${shortId}/`, 302);
+---

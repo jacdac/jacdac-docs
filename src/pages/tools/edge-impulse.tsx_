@@ -13,7 +13,7 @@ import {
     Typography,
     useTheme,
 } from "@material-ui/core"
-import { Link } from "gatsby-theme-material-ui"
+import { Link } from "../../components/ui/GatsbyMuiCompat"
 import JacdacContext, { JacdacContextProps } from "../../jacdac/Context"
 import useChange from "../../jacdac/useChange"
 import useGridBreakpoints from "../../components/useGridBreakpoints"

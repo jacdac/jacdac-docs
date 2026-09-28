@@ -1,5 +1,5 @@
 import React, { lazy, useMemo } from "react"
-import { Link } from "gatsby-theme-material-ui"
+import { Link } from "./ui/GatsbyMuiCompat"
 import {
     Box,
     Paper,

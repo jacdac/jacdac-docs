@@ -1,4 +1,4 @@
-import { withPrefix } from "gatsby-link"
+import { withPrefix } from "../../compat/withPrefix"
 import { identifierToUrlPath } from "../../../jacdac-ts/src/jdom/catalog"
 
 export default function useDeviceImage(

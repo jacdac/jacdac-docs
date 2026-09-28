@@ -1,0 +1,25 @@
+---
+import LegacyDashboardIsland from '../../components/dashboard/LegacyDashboardIsland';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Device Dashboard</title>
+  </head>
+  <body>
+    <main style="max-width: 1080px; margin: 2rem auto 4rem; padding: 0 1rem; font-family: ui-sans-serif, system-ui, sans-serif; display: grid; gap: 1rem;">
+      <p style="margin: 0; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.75rem; color: #6b7280;">Device Dashboard</p>
+      <h1 style="margin: 0; font-size: clamp(2.1rem, 4vw, 3.2rem); line-height: 1.05;">Device Dashboard</h1>
+      <p style="margin: 0; color: #4b5563; max-width: 56rem;">
+        This page mounts the legacy React dashboard component tree directly inside Astro.
+      </p>
+
+      <section style="padding: 1rem; background: #fff;">
+        <LegacyDashboardIsland client:only="react" />
+      </section>
+
+    </main>
+  </body>
+</html>

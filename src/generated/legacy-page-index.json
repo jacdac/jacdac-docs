@@ -1,0 +1,1102 @@
+{
+  "pages": [
+    {
+      "slug": "/blog/",
+      "title": "Jacdac Blog",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "import BlogEntries from \"../components/blog/BlogEntries\" This blog is also cross-posted on [medium](https://medium.com/@jacdac)."
+    },
+    {
+      "slug": "/blog/jacdac-for-makecode-and-microbit/",
+      "title": "Jacdac for MakeCode and the micro:bit",
+      "description": "Posted on June 17th, 2022 by Jacdac Team",
+      "date": "2022-06-03T22:10:31.474Z",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "![Kittenbot's Jacdac Starter Kit A](./blog-header-june-2022.jpg) **Posted on June 17th, 2022 by Jacdac Team** We are delighted to announce the public debut of Microsoft's [Jacdac](https://aka.ms/jacdac) platform for plug-and-play creation a"
+    },
+    {
+      "slug": "/clients/cli/",
+      "title": "CLI",
+      "description": "",
+      "order": 99,
+      "date": "",
+      "services": "",
+      "hideToc": true,
+      "excerpt": "The [Jacdac Command Line Interface (CLI)](https://github.com/jacdac/jacdac-cli) provides various tools to work with Jacdac. - Install [nodejs.org](https://nodejs.org/) 14+ - Install the tool globally. ```bash copy npm install -g jacdac-cli "
+    },
+    {
+      "slug": "/clients/embed/",
+      "title": "Embed",
+      "description": "",
+      "order": 7,
+      "date": "",
+      "services": "",
+      "hideToc": true,
+      "excerpt": "This tools page can be hosted in HTML IFrame elements in order to integrate Jacdac into your web site with a minimum of JavaScript. The following HTML snippet inserts a Jacdac IFrame in the page (skinning the IFrame is beyond this guide as "
+    },
+    {
+      "slug": "/clients/javascript/",
+      "title": "JavaScript",
+      "description": "",
+      "order": 1,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "Jacdac provides a rich Javascript package to interact with physical and simulated devices over USB, Serial or Bluetooth. This package is powering this web site. The JDOM module is a dependency-free JavaScript object model that reflects the "
+    },
+    {
+      "slug": "/clients/javascript/debugging/",
+      "title": "Debugging",
+      "description": "",
+      "order": 100,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "import DevToolsLauncher from \"../../../components/tools/DevToolsLauncher\" Jacdac provides various tools in this web site to diagnose issues with modules. The dashboard also provides the ability to start virtual modules which tends to be ver"
+    },
+    {
+      "slug": "/clients/javascript/jdom/",
+      "title": "JDOM",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "The JDOM module is a dependency-free JavaScript object model that reflects the state of the Jacdac elements: - A **[bus](/clients/javascript/jdom/bus/)** is made of connected devices. - A **[device](/clients/javascript/jdom/device/)** may h"
+    },
+    {
+      "slug": "/clients/javascript/jdom/bus/",
+      "title": "JDBus",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "A **bus** is the top-level [JDOM](/clients/javascript/jdom/) [node](/clients/javascript/jdom/node/). It processes the incoming and outcoming packets, handles the connection to the underlying communiction transport and maintains a set of act"
+    },
+    {
+      "slug": "/clients/javascript/jdom/device/",
+      "title": "JDDevice",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "A **device** is a [JDOM](/clients/javascript/jdom/) [node](/clients/javascript/jdom/node/) that hosts [services](/clients/javascript/jdom/service/). A device is hosted in a [bus](/clients/javascript/jdom/bus/). This object inherits methods "
+    },
+    {
+      "slug": "/clients/javascript/jdom/event/",
+      "title": "JDEvent",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "An **event** is a [JDOM](/clients/javascript/jdom/) [node](/clients/javascript/jdom/node/) that represents an addressed event on a [service](/clients/javascript/jdom/service/). This object inherits methods and properties from [node](/client"
+    },
+    {
+      "slug": "/clients/javascript/jdom/field/",
+      "title": "JDField",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "A **field** is a [JDOM](/clients/javascript/jdom/) [node](/clients/javascript/jdom/node/) that represents a data field in a [register](/clients/javascript/jdom/register/). This object inherits methods and properties from [node](/clients/jav"
+    },
+    {
+      "slug": "/clients/javascript/jdom/node/",
+      "title": "JDNode",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "**JDNode** (node) is the base class of all elements in the [JDOM](/clients/javascript/jdom/). A node is globally uniquely identifiable in the JDOM, implements an event emitter pattern, and is observable. The ``id`` identifier can be used to"
+    },
+    {
+      "slug": "/clients/javascript/jdom/register/",
+      "title": "JDRegister",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "A **register** is a [JDOM](/clients/javascript/jdom/) [node](/clients/javascript/jdom/node/) that represents an addressed data location on a [service](/clients/javascript/jdom/service/), that may be get, set or streamed. This object inherit"
+    },
+    {
+      "slug": "/clients/javascript/jdom/service/",
+      "title": "JDService",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "A **service** is a [JDOM](/clients/javascript/jdom/) [node](/clients/javascript/jdom/node/) that has [registers](/clients/javascript/jdom/register/), [events](/clients/javascript/jdom/event/), accept **commands** and may return **acks**. A "
+    },
+    {
+      "slug": "/clients/javascript/p5js/",
+      "title": "p5.jacdac",
+      "description": "",
+      "order": 10,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "**p5.jacdac** integrates Jacdac with [p5\\*js](https://p5js.org) to create creative coding with physical devices with installing any drivers! - no driver or installation needed - just works from your browser - [Try it in the p5js editor!](ht"
+    },
+    {
+      "slug": "/clients/javascript/p5js/events/",
+      "title": "Events",
+      "description": "",
+      "order": 2,
+      "date": "",
+      "services": "",
+      "hideToc": true,
+      "excerpt": "Similarly to mouse events, you can register handler for Jacdac events through the `jacdac.events` object. The registeration function are grouped into per service type and keyed with the service camel name (`button`, `potentiometer`, ...). T"
+    },
+    {
+      "slug": "/clients/javascript/p5js/sensors/",
+      "title": "Sensors",
+      "description": "",
+      "order": 1,
+      "date": "",
+      "services": "",
+      "hideToc": true,
+      "excerpt": "The state of all sensor readings connected to the bus can be access through the `jacdac.sensors` object. The readings are grouped per service type and keyed with the service camel name (`button`, `potentiometer`, ...). ```javascript jacdac."
+    },
+    {
+      "slug": "/clients/javascript/react/",
+      "title": "React",
+      "description": "",
+      "order": 5,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "This package provides a [context](/clients/javascript/react/setup/) and [hooks](/clients/javascript/react/hooks/) to interact with the bus within a [React](https://reactjs.org/) application. It is built on top of the [JavaScript package](/c"
+    },
+    {
+      "slug": "/clients/javascript/react/hooks/",
+      "title": "",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "All the hooks rely on the ``JacdacContext`` configured in [setup](/clients/javascript/react/setup/). The `useBus` hook ensures that the context is setup and returns the Jacdac bus. ```tsx const Connected = () => { const bus = useBus() ... }"
+    },
+    {
+      "slug": "/clients/javascript/react/setup/",
+      "title": "",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "Most of the samples in this document can be loaded with a single click into codesandbox! You don't have to worry about this section until you're ready to build Jacdac into your app... Add the [react-jacdac npm package](https://www.npmjs.com"
+    },
+    {
+      "slug": "/clients/makecode/",
+      "title": "MakeCode",
+      "description": "",
+      "order": 0,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "This guide focuses on integration of Jacdac with the [micro:bit V2](/devices/microbit-educational-foundation/microbitv2/) via [MakeCode for micro:bit](https://makecode.microbit.org/), You can also program with Jacdac simulators in MakeCode "
+    },
+    {
+      "slug": "/clients/makecode/code/",
+      "title": "Visual Studio Code",
+      "description": "",
+      "order": 99,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "This guide is for developers wanting to edit MakeCode programs in Visual Studio Code (VS Code). MakeCode program are authored in **Static TypeScript**, a subset of TypeScript suitable for micro-controllers. Those programs can be authored an"
+    },
+    {
+      "slug": "/clients/makecode/extensions/",
+      "title": "Extensions",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "import MakeCodeExtensions from \"../../../components/makecode/MakeCodeExtensions\" Most Jacdac [services](/services) have a corresponding [MakeCode extension](https://makecode.com/extensions). Visit the links below to learn how to program wit"
+    },
+    {
+      "slug": "/clients/makecode/extensions/accelerometer/",
+      "title": "Accelerometer",
+      "description": "",
+      "date": "",
+      "services": "accelerometer",
+      "hideToc": false,
+      "excerpt": "This extension supports 3-axis accelerometers. The current forces acting on the accelerometer are read via the methods `x`, `y`, and `z`, which return values in earth gravities (g). A Jacdac accelerometer module translate acceleration value"
+    },
+    {
+      "slug": "/clients/makecode/extensions/airpressure/",
+      "title": "Air Pressure",
+      "description": "",
+      "date": "",
+      "services": "airpressure",
+      "hideToc": false,
+      "excerpt": "The air-pressure extension (barometer) reports the air pressure in hPa (the abbreviated name for a hectopascal pressure unit, which is exactly equal to a millibar). The `pressure` method returns the current barometric pressure. The followin"
+    },
+    {
+      "slug": "/clients/makecode/extensions/brailledisplay/",
+      "title": "Braille Display",
+      "description": "",
+      "date": "",
+      "services": "brailledisplay",
+      "hideToc": false,
+      "excerpt": "A Braille display module \"visualizes\" braille characters for This program implements a counter using button A and display the counter on the Braille display. ```blocks let count = 0 input.onButtonPressed(Button.A, function() { count +=1 // "
+    },
+    {
+      "slug": "/clients/makecode/extensions/button/",
+      "title": "Button",
+      "description": "",
+      "date": "",
+      "services": "button",
+      "hideToc": false,
+      "excerpt": "The button extension provides event handlers for the events _down_, _up_, and _hold_, as well as methods for accessing the underlying state of a button. The (unbounced) _down_ event is raised when the button is pressed, while the (unbounced"
+    },
+    {
+      "slug": "/clients/makecode/extensions/characterscreen/",
+      "title": "Character Screen",
+      "description": "",
+      "date": "",
+      "services": "characterscreen",
+      "hideToc": false,
+      "excerpt": "The characterscreen extension controls a simple text display, such as a LCD screen or Braille dot matrix. The following program is a counter where button A increments by 1 and button B decrements by 1. ```blocks input.onButtonPressed(Button"
+    },
+    {
+      "slug": "/clients/makecode/extensions/cloudadapter/",
+      "title": "Cloud Adapter",
+      "description": "",
+      "date": "",
+      "services": "cloudadapter",
+      "hideToc": false,
+      "excerpt": "Allows to upload data to an IoT cloud provider or receive commands from the cloud. The upload number block allows to upload a label and up to 5 numbers (you can have more in TypeScript). The data will be cached with a timestamp if the adapt"
+    },
+    {
+      "slug": "/clients/makecode/extensions/color/",
+      "title": "Color Detector",
+      "description": "",
+      "date": "",
+      "services": "color",
+      "hideToc": false,
+      "excerpt": "The color detection extension provides three methods (`red`, `green`, and `blue`), each of which returns a value in the range of 0.0 to 100.0 ```blocks basic.forever(() => { let red = modules.color1.red() let blue = modules.color1.blue() le"
+    },
+    {
+      "slug": "/clients/makecode/extensions/dotmatrix/",
+      "title": "Dot Matrix",
+      "description": "",
+      "date": "",
+      "services": "dotmatrix",
+      "hideToc": false,
+      "excerpt": "The dot matrix service controls a LED matrix or Braille dot display. ```blocks basic.forever(function () { modules.dotMatrix1.toggleDot(randint(0, 4), randint(0, 4)) }) ```"
+    },
+    {
+      "slug": "/clients/makecode/extensions/eco2/",
+      "title": "eCO2",
+      "description": "",
+      "date": "",
+      "services": "eco2",
+      "hideToc": false,
+      "excerpt": "The CO₂ extension reports the equivalent CO₂ (eCO₂) in parts per million (ppm), where a typical minimum is 400 and the maximum is 8192. The `eCO2` method returns the eCO₂ reading. The following program outputs the eCO₂ reading whenever it c"
+    },
+    {
+      "slug": "/clients/makecode/extensions/humidity/",
+      "title": "Humidity",
+      "description": "",
+      "date": "",
+      "services": "humidity",
+      "hideToc": false,
+      "excerpt": "The humidity extension reports the relative humidity in percentage of full water saturation (0.0 to 100.0). The `humidity` method returns the current humidity. The program below outputs the humidity whenever the humidity changes by 5 percen"
+    },
+    {
+      "slug": "/clients/makecode/extensions/led/",
+      "title": "LED",
+      "description": "",
+      "date": "",
+      "services": "led",
+      "hideToc": false,
+      "excerpt": "The LED pixel extension provides methods for working with a fixed, small strip of programmable RGB LEDs. For module with a large or variable number of LEDs, see the [LED strip](/clients/makecode/extensions/ledstrip/) service. All the pixels"
+    },
+    {
+      "slug": "/clients/makecode/extensions/ledstrip/",
+      "title": "LED strip",
+      "description": "",
+      "date": "",
+      "services": "ledstrip",
+      "hideToc": false,
+      "excerpt": "The LED pixel extension provides methods for working with a strip of programmable RGB LEDs. For module with a fixed, small number of LEDs, see the [LED](/clients/makecode/extensions/led/) service. All the pixels on a strip can be set to a c"
+    },
+    {
+      "slug": "/clients/makecode/extensions/lightlevel/",
+      "title": "Light level",
+      "description": "",
+      "date": "",
+      "services": "lightlevel",
+      "hideToc": false,
+      "excerpt": "The light level extension reports light level as a floating point value between 0.0 and 100.0. The `lightLevel` method returns the current light level. The following program outputs the light level whenever the light level changes by 5 perc"
+    },
+    {
+      "slug": "/clients/makecode/extensions/magneticfieldlevel/",
+      "title": "Magnetic field level",
+      "description": "",
+      "date": "",
+      "services": "magneticfieldlevel",
+      "hideToc": false,
+      "excerpt": "The following event handlers are invoked when the magnetic field transitions from low to high (active) or high to low (inactive): ```blocks modules.magneticFieldLevel1.onEvent(jacdac.MagneticFieldLevelEvent.Active, () => { led.stopAnimation"
+    },
+    {
+      "slug": "/clients/makecode/extensions/planarposition/",
+      "title": "Planar Position",
+      "description": "",
+      "date": "",
+      "services": "planarposition",
+      "hideToc": false,
+      "excerpt": "The planar position sensor typically measures movement on a 2D plane. An arbitrary origin is selected and the distance from the origin is reported by the service. In this example, we use the `x` position to change the frequency of tones pla"
+    },
+    {
+      "slug": "/clients/makecode/extensions/potentiometer/",
+      "title": "Potentiometer",
+      "description": "",
+      "date": "",
+      "services": "potentiometer",
+      "hideToc": false,
+      "excerpt": "The potentiometer extension reports position as a floating point value between 0.0 and 100.0. The `position` method returns the current position of the potentiometer. The following program outputs the position whenever the position changes "
+    },
+    {
+      "slug": "/clients/makecode/extensions/relay/",
+      "title": "Relay",
+      "description": "",
+      "date": "",
+      "services": "relay",
+      "hideToc": false,
+      "excerpt": "The relay extension exposes the state of the relay via the method `active`, which returns the value true when the circuit is energized. The following program uses the `setActive` method to close the relay (on press of button A) and to open "
+    },
+    {
+      "slug": "/clients/makecode/extensions/rotaryencoder/",
+      "title": "Rotary encoder",
+      "description": "",
+      "date": "",
+      "services": "rotaryencoder",
+      "hideToc": false,
+      "excerpt": "The rotary encoder extension reports the position of an incremental rotary encoder in number of clicks from the initial position (0), where clockwise motion increases the position and counter-clockwise motion decreases the position. The `po"
+    },
+    {
+      "slug": "/clients/makecode/extensions/servo/",
+      "title": "Servo",
+      "description": "",
+      "date": "",
+      "services": "servo",
+      "hideToc": false,
+      "excerpt": "The `servo` extension controls the angle of a servo or the rotation speed of a continuous servo ```blocks modules.servo1.setAngle(90) ``` Sets the angle in degrees. ```blocks modules.servo1.setAngle(90) ``` Run at 100% throttle. ```blocks m"
+    },
+    {
+      "slug": "/clients/makecode/extensions/temperature/",
+      "title": "Temperature",
+      "description": "",
+      "date": "",
+      "services": "temperature",
+      "hideToc": false,
+      "excerpt": "The temperature extension reports the temperature in degrees Celsius. The `temperature` method returns the current temperature. The following program outputs the current temperature whenever it changes by one degree Celsius: ```blocks modul"
+    },
+    {
+      "slug": "/clients/makecode/extensions/tvoc/",
+      "title": "Total Volatile Organic Compound",
+      "description": "",
+      "date": "",
+      "services": "tvoc",
+      "hideToc": false,
+      "excerpt": "This extension supports a sensor that measures equivalent Total Volatile Organic Compound (TVOV) levels, in parts-per-billion (ppb). The `tVOC` method returns the current TVOC level. The following program outputs the current TVOC whenever i"
+    },
+    {
+      "slug": "/clients/makecode/extensions/vibrationmotor/",
+      "title": "Vibration Motor",
+      "description": "",
+      "date": "",
+      "services": "vibrationmotor",
+      "hideToc": false,
+      "excerpt": "This extension supports vibration motors, typically used for haptic feedback. Vibrates for the given duration (millis) and intensity (%) ```blocks modules.vibrationMotor1.vibrate(500, 50) ``` The vibration pattern is a morse like encoding o"
+    },
+    {
+      "slug": "/clients/makecode/microbit-jukebox/",
+      "title": "Micro:bit Jukebox",
+      "description": "",
+      "order": 100,
+      "date": "",
+      "services": "",
+      "hideToc": true,
+      "excerpt": "import DownloadFirmwareButton from \"../../../components/ui/DownloadFirmwareButton\" The micro:bit jukebox is a program that reacts to Jacdac modules that are connected to the micro:bit V2 over the Jacdac bus. label=\"Animation of a button con"
+    },
+    {
+      "slug": "/clients/makecode/projects/",
+      "title": "Projects",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": ""
+    },
+    {
+      "slug": "/clients/makecode/projects/button-smasher/",
+      "title": "Button smasher",
+      "description": "How many times can you smash the button in 10 seconds?",
+      "order": 1,
+      "date": "",
+      "services": "button",
+      "hideToc": false,
+      "excerpt": "This little application is a **button smasher** game for the micro:bit V2. It allows you to increment the counter for 10 seconds... good luck! The button smasher game is about counting button clicks, so let's start by adding a counter varia"
+    },
+    {
+      "slug": "/clients/makecode/projects/gamepad-mouse/",
+      "title": "Gamepad Mouse",
+      "description": "Convert the stick position of a gamepad into mouse movements.",
+      "order": 51,
+      "date": "",
+      "services": "gamepad,hidmouse",
+      "hideToc": false,
+      "excerpt": "This simple example uses two Jacdac modules to translate the (x,y) position of a joysick to HID mouse motion. In addition to a brain module (such as micro:bit V2) to run the following program, you will need: - the [JM Analog Joystick v0.2]("
+    },
+    {
+      "slug": "/clients/makecode/projects/light-sound-bender/",
+      "title": "Light Sound Bender",
+      "description": "Create twisted sounds using light levels",
+      "order": 4,
+      "date": "",
+      "services": "lightlevel",
+      "hideToc": false,
+      "excerpt": "Bending sounds by changing the start frequency and end frequency of `play sound` using the micro:bit light sensor and a [Jacdac light level sensor](/clients/makecode/extensions/lightlevel). Let's start by dragging `play sound` block from th"
+    },
+    {
+      "slug": "/clients/makecode/projects/magnetic-sound-bender/",
+      "title": "Magnetic Sound Bender",
+      "description": "Create twisted sounds using a magnet",
+      "order": 5,
+      "date": "",
+      "services": "magneticfieldlevel",
+      "hideToc": false,
+      "excerpt": "Bending sounds by changing the start frequency and end frequency of `play sound` a [Jacdac magnetic field level sensor](/clients/makecode/extensions/magneticfieldlevel). Let's start by dragging `play sound` block from the `music` toolbox in"
+    },
+    {
+      "slug": "/clients/makecode/projects/rotary-mouse-wheel/",
+      "title": "Rotary Mouse Wheel",
+      "description": "Scroll like a mouse wheel using a rotary encoder module.",
+      "order": 52,
+      "date": "",
+      "services": "rotaryencoder,hidmouse",
+      "hideToc": false,
+      "excerpt": "This sample uses a special HID server module, so that you can use a Jacdac rotary module to act as a mouse wheel. In addition to a brain module (such as micro:bit V2) you will need: - the [JM Rotary Control](/devices/microsoft-research/jmro"
+    },
+    {
+      "slug": "/clients/makecode/projects/rotary-sound-bender/",
+      "title": "Rotary Sound Bender",
+      "description": "Create twisted sounds using a rotary encoder module.",
+      "order": 4,
+      "date": "",
+      "services": "rotaryencoder",
+      "hideToc": false,
+      "excerpt": "Bending sounds by changing the start frequency of `play sound` using a [rotary encoder](/clients/makecode/extensions/rotaryencoder). Let's start by dragging `play sound` block from the `music` toolbox into the `forever` loop. ```blocks basi"
+    },
+    {
+      "slug": "/clients/makecode/projects/slider-graph/",
+      "title": "Slider Graph",
+      "description": "Visualize the position of a slider using the micro:bit screen.",
+      "order": 10,
+      "date": "",
+      "services": "potentiometer",
+      "hideToc": false,
+      "excerpt": "Whenever you need to \"see\" the values of a sensor, `led plot bar graph` is a great tool to turn the micro:bit screen into a visualization tool. Place the `led plot bar graph` in a `forever` loop and drop the block you want to `see`. In this"
+    },
+    {
+      "slug": "/clients/makecode/projects/slider-sound-bender/",
+      "title": "Slider Sound Bender",
+      "description": "Create twisted sounds using a slider module.",
+      "order": 3,
+      "date": "",
+      "services": "potentiometer",
+      "hideToc": false,
+      "excerpt": "Bending sounds by changing the start frequency of `play sound` using a [potentiometer (slider)](/clients/makecode/extensions/slider). Let's start by dragging `play sound` block from the `music` toolbox into the `forever` loop. ```blocks bas"
+    },
+    {
+      "slug": "/clients/makecode/projects/sound-led/",
+      "title": "Sound LED",
+      "description": "Show the sound level on a LED ring",
+      "order": 4,
+      "date": "",
+      "services": "led",
+      "hideToc": false,
+      "excerpt": "Use the `plot bar graph` block from the Jacdac LED module to visualize the sound level around you. It works similarly as the block for the micro:bit screen. Let's start by adding a Jacdac plot bar graph block for the LED module. - drag a `l"
+    },
+    {
+      "slug": "/clients/makecode/servers/",
+      "title": "Servers",
+      "description": "",
+      "order": 100,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "It is possible to expose the features of your micro:bit V2 via Jacdac by running Jacdac servers on it that use commonly defined Jacdac [services](/services). **This approach is used extensively to retrofit existing accessories into Jacdac s"
+    },
+    {
+      "slug": "/clients/makecode/servers/codalmessagebus/",
+      "title": "",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "This extension turns the micro:bit into a server for the [CODAL Message Bus](/services/codalmessagebus) service. This service allows to raise events registered in the MakeCode program (using the `control.onEvent` block) from Jacdac. This is"
+    },
+    {
+      "slug": "/clients/makecode/tutorials/study/",
+      "title": "User study",
+      "description": "",
+      "order": 0,
+      "date": "",
+      "services": "",
+      "hideToc": true,
+      "excerpt": "The **[Out of the box program](/clients/makecode/microbit-jukebox/)** is a Jacdac program that automatically reacts to Jacdac modules connected to the micro:bit v2. The micro:bit you were sent should already be loaded with this program. Bef"
+    },
+    {
+      "slug": "/clients/makecode/user-guide/",
+      "title": "User guide",
+      "description": "",
+      "order": 0,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "Please remember that Jacdac only works with the micro:bit V2, though you can create programs that use the micro:bit and Jacdac simulators without any hardware. You can use a mix of Jacdac simulators or actual Jacdac modules when programming"
+    },
+    {
+      "slug": "/clients/microcode/",
+      "title": "MicroCode",
+      "description": "",
+      "order": 4,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "Microsoft MicroCode is a tile-based programming language and editor for young learners on the [BBC micro:bit V2](https://microbit.org). MicroCode runs in the browser or directly on the micro:bit V2 with an [Arcade shield](https://www.kitten"
+    },
+    {
+      "slug": "/clients/more/",
+      "title": "More Programming",
+      "description": "",
+      "order": 100,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "- [Embedding the dashboard](/clients/embed) - [CLI](/clients/cli)"
+    },
+    {
+      "slug": "/ddk/",
+      "title": "Device Development",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "The documentation in these pages form the basis for the Jacdac Device Development Kit (DDK). The DDK is for hardware designers, firmware developers and manufacturers who wish to create their own Jacdac [devices](/devices). Important additio"
+    },
+    {
+      "slug": "/ddk/design/",
+      "title": "Hardware Design",
+      "description": "",
+      "order": 2,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "The hardware design guidelines break down into the following sections: - [Electrical](./electrical) - [Electro-mechanical](./electro-mechanical) - [Mechanical](./mechanical) - [EC30 form factor](./ec30): if you are considering creating a Ja"
+    },
+    {
+      "slug": "/ddk/design/cables/",
+      "title": "Cables",
+      "description": "",
+      "order": 2.5,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "![Jacdac cable being unplugged and replugged animated image](./reversibleconnectoranimation.gif) A purpose-built cable connector is used to interface with the Jacdac PCB edge connector described above. The cable connector is reversible (i.e"
+    },
+    {
+      "slug": "/ddk/design/components/",
+      "title": "Component Selection",
+      "description": "",
+      "order": 5,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "This page presents some information about part selection for some of the key components of many Jacdac devices. For some components we provide [specific part numbers](https://github.com/jacdac/jacdac-ddk/tree/main/electronics/generic/sugges"
+    },
+    {
+      "slug": "/ddk/design/ec30/",
+      "title": "EC30 Form Factor",
+      "description": "",
+      "order": 4,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "[![EC30 schematics screenshot](./ec30.png)](https://aka.ms/jacdac-ec30) To make it easier for users to recognize Jacdac devices, and for the devices to work with various electro-mechanical and mechanical accessories, we recommend the use of"
+    },
+    {
+      "slug": "/ddk/design/electrical/",
+      "title": "Electrical",
+      "description": "",
+      "order": 1,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "Jacdac data transmission occurs on a single wire (JD_DATA) using a half duplex asynchronous serial protocol called [single wire serial](/reference/single-wire-serial/) (SWS). Data bytes are 10 bits long and are composed of 1 start bit, 8 da"
+    },
+    {
+      "slug": "/ddk/design/electro-mechanical/",
+      "title": "Electro-mechanical",
+      "description": "",
+      "order": 2,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "[![Jacdac PCB edge connector technical drawing](./pcbfootprint.png)](https://aka.ms/jacdac-edge-connector) A PCB edge connector was chosen for Jacdac primarily because it is cheap and easy to implement. The PCB must be 1.6mm ±10% thick from"
+    },
+    {
+      "slug": "/ddk/design/manufacturing/",
+      "title": "Manufacturing",
+      "description": "",
+      "order": 6,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "The **[Device Tester](/tools/device-tester/)** will load and run compliance tests for the connected devices and services. You can use this page to validate that your device is behaving correctly. ![The device tester tool using on a ](./devi"
+    },
+    {
+      "slug": "/ddk/design/mechanical/",
+      "title": "Mechanical",
+      "description": "",
+      "order": 3,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "All devices should include silkscreen that allows a user to easily identify the name of the device, its manufacturer, and its version number. This way a user can be absolutely sure about the identity of any device. Devices may optionally in"
+    },
+    {
+      "slug": "/ddk/device-definition/",
+      "title": "Device Definition",
+      "description": "",
+      "order": 90,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "The Jacdac project maintains a catalog of known [devices](/devices/) in the [Jacdac repository](https://github.com/jacdac/jacdac). Any manufacturer of Jacdac device is encouraged to add their own devices to the catalog following the instruc"
+    },
+    {
+      "slug": "/ddk/firmware/",
+      "title": "Firmware",
+      "description": "",
+      "order": 10,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "To date, we have firmware support for modules created using the following MCU families: STM32 and PADUAK. We also provide a portable C SDK, `jacdac-c`, that can be integrated in other platforms. The [jacdac/jacdac-stm32x0](https://github.co"
+    },
+    {
+      "slug": "/ddk/firmware/arm-tooling/",
+      "title": "ARM MCU Tooling",
+      "description": "",
+      "order": 9,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "There are instructions on [deploying firmware](https://github.com/jacdac/jacdac-stm32x0#deploying-firmware) in the repository that contains [firmware for STM32F0xx and STM32G0xx](https://github.com/jacdac/jacdac-stm32x0) MCUs."
+    },
+    {
+      "slug": "/ddk/firmware/github-repos/",
+      "title": "Github Repository List",
+      "description": "",
+      "order": 3,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "The Jacdac stack is layered, top-down, into Github repos as follows: - [Jacdac spec](https://github.com/jacdac/jacdac) repository has pre-generated [C header files](https://github.com/jacdac/jacdac/tree/main/dist/c) (JSON, TypeScript, and P"
+    },
+    {
+      "slug": "/ddk/firmware/jac-connect/",
+      "title": "JacConnect Programming Header",
+      "description": "",
+      "order": 6,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "For prototypes and small production quantities, we often use a 5 pin through-hole PCB header footprint for MCU programming and debugging. However, we don't solder a through-hole header into this footprint; instead we design the footprint so"
+    },
+    {
+      "slug": "/ddk/firmware/padauk-tooling/",
+      "title": "PADAUK MCU Tooling",
+      "description": "",
+      "order": 9,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "This page describes one way of setting up and using the [PADAUK MCU programmer PDK5S-P-003](http://www.padauk.com.tw//upload/WRITERmanual/PDK5S-P-003-UM_EN_V006_20181030.pdf) for use with [Jacdac](https://aka.ms/jacdac) modules. This unit m"
+    },
+    {
+      "slug": "/ddk/microbit/",
+      "title": "micro:bit interoperability",
+      "description": "",
+      "order": 101,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "In addition to the instant 'connect and code' nature of Jacdac, it brings three additional key features to all sensors and actuators that might be used with micro:bit: - **simulators** allows users to easily test sensors and actuators, even"
+    },
+    {
+      "slug": "/ddk/microbit/pr-template/",
+      "title": "",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": true,
+      "excerpt": "(grab the original source of this page at https://raw.githubusercontent.com/jacdac/jacdac-docs/main/src/pages/ddk/microbit/pr-template.mdx) --- This pull requests add support for Jacdac for this accessory which allows users to use simulator"
+    },
+    {
+      "slug": "/ddk/microbit/software-only-accessory/",
+      "title": "Implementing Software-only Jacdac",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "With software-only support for Jacdac, sensors and actuators built into accessories are surfaced as Jacdac servers by wrapping the existing accessory extension with a Jacdac compatibility layer. This solution adds no cost and will work for "
+    },
+    {
+      "slug": "/ddk/raspberry-pi/",
+      "title": "Raspberry Pi Interoperability",
+      "description": "",
+      "order": 102,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "Users of Raspberry Pi can take advantage of the instant 'connect and code' nature of Jacdac via support for [Python](/clients/python), [.NET](/clients/dotnet), or [JavaScript](/clients/javascript), with the help of a Raspberry Pi [Jacdaptor"
+    },
+    {
+      "slug": "/ddk/services/",
+      "title": "Service Definition",
+      "description": "",
+      "order": 5,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "Jacdac modules must run an instance of the [control service](/services/control) in order to advertise themselves, as well as the services they support, on the Jacdac bus. A platform-independent [control service implementation](https://githu"
+    },
+    {
+      "slug": "/ddk/services/creating/",
+      "title": "Creating a Service",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "To create a service, please start as follows: - copy and edit an [existing](https://github.com/jacdac/jacdac/tree/main/services) service specification in the [service editor](/tools/service-editor/) - submit a pull request (PR), using the s"
+    },
+    {
+      "slug": "/faq/",
+      "title": "Frequently Asked Questions",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": ""
+    },
+    {
+      "slug": "/faq/device-development/",
+      "title": "Device Development",
+      "description": "Help with Jacdac device development",
+      "order": 200,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "Yes! Jacdac is designed to be interoperable with a wide range of existing platforms via [Jacdaptors](/reference/jacdaptors/). In some cases it's possible to use Jacdac without any new hardware at all! See how Jacdac provides a [software-onl"
+    },
+    {
+      "slug": "/faq/errors/",
+      "title": "Errors",
+      "description": "List of Jacdac error codes",
+      "order": 100,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": ""
+    },
+    {
+      "slug": "/faq/errors/microbit/invalid-memory/",
+      "title": "Error Invalid memory",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": true,
+      "excerpt": "It seems that the memory of the micro:bit got corrupted. Unplug the micro:bit from all sources of power, including battery, USB cable, dongles. Then plug it in."
+    },
+    {
+      "slug": "/faq/errors/microbit/jacdac-missing/",
+      "title": "Error Jacdac missing",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": true,
+      "excerpt": "Jacdac is not installed by default on your micro:bit so you need to download a program using the Jacdac library to enabled it. Essentially, you need to add the **Jacdac** extension to any of your micro:bit V2 project to add Jacdac support. "
+    },
+    {
+      "slug": "/faq/errors/microbit/unknown-hardware-revision/",
+      "title": "Error Unknown micro:bit hardware revision",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": true,
+      "excerpt": "We were unable to determine the hardware revision of your micro:bit. This is probably an issue with your firmware on the micro:bit. Try updating the firmware on your micro:bit by following these instructions. * [Upgrade the firmware on the "
+    },
+    {
+      "slug": "/faq/errors/microbit/v1-not-supported/",
+      "title": "Error micro:bit V1 not supported",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": true,
+      "excerpt": "Jacdac does not support the micro:bit V1 hardware. Please try again with a micro:bit V2 or higher hardware revision. Unfortunately there is no software fix for this issue. You will need to get a micro:bit V2 or newer board in order to get J"
+    },
+    {
+      "slug": "/faq/errors/transport/device-locked/",
+      "title": "Error Device Locked",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": true,
+      "excerpt": "The Jacdac USB, Serial or Bluetooth connection is already used by another browser tab or application. Close other tabs and applications connected to the Jacdac device."
+    },
+    {
+      "slug": "/faq/getting-started/",
+      "title": "Getting Started",
+      "description": "Common question when getting started",
+      "order": 1,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "Please visit the Jacdac [device catalog](/devices) to find what devices are available and where to purchase them. Yes! Jacdac provides web-based simulators for most of its [services](/services), and has been integrated with web-based progra"
+    },
+    {
+      "slug": "/faq/history-of-jacdac/",
+      "title": "History of Jacdac",
+      "description": "Why did we build Jacdac",
+      "order": 120,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "Good question! Over the years we have experimented with and used many existing solutions, but we found they weren't as low-cost, reliable, robust, and dynamic as we'd like. We wanted a instant, 'plug-and-play' experience that 'just works' e"
+    },
+    {
+      "slug": "/faq/led-status/",
+      "title": "LED Status",
+      "description": "What the LED status color/pattern means",
+      "order": 4,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "Jacdac modules typically have a status LED that is very useful to quickly troubleshoot them. The sections below details the blinking patterns and their associated states. Some modules have color LEDs and some monochrome orange LEDs. The col"
+    },
+    {
+      "slug": "/makeaccessible/challenges/",
+      "title": "MakeAccessible Challenges",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": true,
+      "excerpt": "Switch access allows people with limited mobility and/or reach to use phones, tablets, and PC's via the use of switches. The switches are of many forms (big buttons, capapcitive-buttons, sip&puff switches, etc). While the software is common"
+    },
+    {
+      "slug": "/privacy/",
+      "title": "Privacy",
+      "description": "",
+      "order": 1000,
+      "date": "",
+      "services": "",
+      "hideToc": true,
+      "excerpt": "This web site does not collect any telemetry. More about Privacy &amp; Cookies at https://go.microsoft.com/fwlink/?LinkId=521839 ."
+    },
+    {
+      "slug": "/reference/",
+      "title": "Specification",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "Jacdac is an integrated hardware and software stack that makes it easier to connect programmable microcontrollers, sensors, actuators, and peripherals together in a [client/server architecture](/reference/clientserver). It also provides a b"
+    },
+    {
+      "slug": "/reference/clientserver/",
+      "title": "Client/Server Architecture",
+      "description": "",
+      "order": 0,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "Architecturally, a key idea behind Jacdac is a separation of concerns between the worlds of _client_ code (applications) and _server_ firmware that interfaces with sensors/actuators. Jacdac [services](/services) are abstractions that achiev"
+    },
+    {
+      "slug": "/reference/electrical-spec/",
+      "title": "Electrical Specification",
+      "description": "",
+      "order": 4,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "All Jacdac devices should observe the following signalling voltages: | parameter | min | typ | max | unit | | :-- | :-- | :-- | :-- | :-- | | V<sub>IH</sub> on JD_DATA | 3.0 | 3.3 | 3.5 | V | | V<sub>IL</sub> on JD_DATA | 0.0 | 0.0 | 0.3 | "
+    },
+    {
+      "slug": "/reference/glossary/",
+      "title": "Glossary",
+      "description": "",
+      "order": 150,
+      "date": "",
+      "services": "",
+      "hideToc": true,
+      "excerpt": "Below are a list of some Jacdac and GitHub specific terms we use across our sites and documentation. A device is any hardware that exposes one or more services with Jacdac. An addressed data location on a **service**, that may be get, set o"
+    },
+    {
+      "slug": "/reference/protocol/",
+      "title": "Protocol Specification",
+      "description": "",
+      "order": 1,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "The Jacdac protocol consists of three layers: - [service layer](#service-layer) - [transport layer](#transport-layer) - [network layer](#network-interface-layer) A service is globally and uniquely identified by its service class, which shou"
+    },
+    {
+      "slug": "/reference/service-specification/",
+      "title": "Service Specification",
+      "description": "",
+      "order": 2,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "A service specification describes the three main types of Jacdac packets that a service recognizes: registers, commands, and events. Service specifications are written in a literate form of markdown, for consumption by both human and machin"
+    },
+    {
+      "slug": "/reference/single-wire-serial/",
+      "title": "Single Wire Serial Specification",
+      "description": "",
+      "order": 3,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "Jacdac connects microcontrollers (MCUs) to each other using a UART-based protocol on a single (common) data wire and common ground that form a shared bus. Communications can be implemented on nearly all MCUs, including very low cost ones, a"
+    },
+    {
+      "slug": "/start/",
+      "title": "Getting Started",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "Jacdac is a platform for quick and easy prototyping of new electronic experiences. This page reviews how to get started if you have hardware, as well as how get started programming using Jacdac device simulators, which doesn't require hardw"
+    },
+    {
+      "slug": "/start/brains/",
+      "title": "Brains",
+      "description": "",
+      "order": 1,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "cols={3} ids={[ \"microbit-educational-foundation-microbitv2\", \"kittenbot-nanoscript2040v10\", \"calliope-ggmbh-calliopeminiv3v30\" ]} showName={true} /> A Jacdac brain is a programmable Jacdac device that runs [client code](/clients) that make"
+    },
+    {
+      "slug": "/start/edgeconnector/",
+      "title": "Hubs and edge connectors",
+      "description": "",
+      "order": 20,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "![Hub with 8 Jacdac edge connectors](./hubv10.jpg) Most Jacdac devices have at least one edge connector, which is the tab with three metal fingers integrated into the device's printed circuit board (PCB). The PCB above is a Jacdac hub with "
+    },
+    {
+      "slug": "/start/jacdaptors/",
+      "title": "Jacdaptors",
+      "description": "",
+      "order": 10,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "cols={2} ids={[ \"kittenbot-jacdaptorformicrobitv2v10\", \"forward-education-breakoutboardrelaypumpv10\", \"icshop-gamebitexpansionboardv10\" ]} /> Jacdac can provide a convenient way to add functionality to existing electronics prototyping platf"
+    },
+    {
+      "slug": "/start/modules/",
+      "title": "Modules",
+      "description": "",
+      "order": 5,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "ids={[ \"kittenbot-keycapbuttonv10\", \"forward-education/phsensorv10\", \"elecfreaks-jacdacledring8v10\" ]} /> Jacdac modules have one more hardware components, represented by one or more Jacdac [services](/services), as well as one or more Jacd"
+    },
+    {
+      "slug": "/tools/device-tree/",
+      "title": "Device Tree",
+      "description": "",
+      "order": 5,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "The device tree is available at all times in the Jacdac web site. It allows to explore the Jacdac Object Model (JDOM) tree: devices -> services -> registers, events. - Click on the Tree icon on the upper left of the editor - Expand device a"
+    },
+    {
+      "slug": "/tools/ec30/",
+      "title": "",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "[EC30](/ddk/design/ec30/) is a PCB form factor system for Jacdac modules."
+    },
+    {
+      "slug": "/tools/enclosure/",
+      "title": "Enclosure generator",
+      "description": "",
+      "date": "",
+      "services": "",
+      "hideToc": true,
+      "excerpt": "import EnclosureEditor from \"../../components/tools/EnclosureEditor\" This page generates 3D printeable models for the standard 10mm, grid sizes Jacdac devices. - [slider knob head](/models/slidersknob.stl)"
+    },
+    {
+      "slug": "/tools/firmware/",
+      "title": "Firmware Updater",
+      "description": "",
+      "order": 7,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "The [firmware updater tool](/tools/updater) allow to update the firmware on Jacdac modules. ![An animation that shows how to update a module](./updater/flashfirmware.gif)"
+    },
+    {
+      "slug": "/tools/more/",
+      "title": "More Web Tools",
+      "description": "",
+      "order": 100,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "- [data collector](/tools/collector/), collect sensor data to files - [packet player](/tools/player/), record traces in your logic analyser and replay them to test your services - [service editor](/tools/service-editor/), interactive servic"
+    },
+    {
+      "slug": "/tools/packet-console/",
+      "title": "Packet Console",
+      "description": "",
+      "order": 6,
+      "date": "",
+      "services": "",
+      "hideToc": false,
+      "excerpt": "The **packet console** provides a low-level log view over the packets being sent and received for the protocol. This is an advanced view for a user trying to understand how the communication is hapenning (or not) in the protocol. - Open the"
+    },
+    {
+      "slug": "/tools/traces/",
+      "title": "Traces",
+      "description": "",
+      "order": 10,
+      "date": "",
+      "services": "",
+      "hideToc": true,
+      "excerpt": "Record traces in your logic analyser and replay them to test your services. * open [trace analyzer](/tools/player) * import or paste trace You will find a \"save trace\" button at the bottom on this web site to save the current trace to a fil"
+    }
+  ]
+}

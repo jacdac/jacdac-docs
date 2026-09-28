@@ -56,6 +56,13 @@ import {
 } from "../../../jacdac-ts/src/jdom/constants"
 import { JDService } from "../../../jacdac-ts/src/jdom/service"
 import { CircularProgress, SvgIconProps } from "@mui/material"
+import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew"
+import MusicNoteIcon from "@mui/icons-material/MusicNote"
+import AppsIcon from "@mui/icons-material/Apps"
+import SensorsIcon from "@mui/icons-material/Sensors"
+import MemoryIcon from "@mui/icons-material/Memory"
+import CloudQueueIcon from "@mui/icons-material/CloudQueue"
+import SerialIcon from "../icons/SerialIcon"
 
 import {
     FwdEduSubstituteWidget,
@@ -137,17 +144,6 @@ const DashboardPlanarPosition = lazy(() => import("./DashboardPlanarPosition"))
 const DashboardSerial = lazy(() => import("./DashboardSerial"))
 const DashboardRos = lazy(() => import("./DashboardRos"))
 const DashboardIndexedScreen = lazy(() => import("./DashboardIndexedScreen"))
-
-// icons
-const PowerSettingsNewIcon = lazy(
-    () => import("@mui/icons-material/PowerSettingsNew")
-)
-const MusicNoteIcon = lazy(() => import("@mui/icons-material/MusicNote"))
-const AppsIcon = lazy(() => import("@mui/icons-material/Apps"))
-const SensorsIcon = lazy(() => import("@mui/icons-material/Sensors"))
-const MemoryIcon = lazy(() => import("@mui/icons-material/Memory"))
-const CloudQueueIcon = lazy(() => import("@mui/icons-material/CloudQueue"))
-const SerialIcon = lazy(() => import("../icons/SerialIcon"))
 
 export interface DashboardServiceProps {
     service: JDService

@@ -1,4 +1,4 @@
-import { Link } from "gatsby-theme-material-ui"
+import { Link } from "../ui/GatsbyMuiCompat"
 import React, { Fragment } from "react"
 import { serviceSpecificationFromName } from "../../../jacdac-ts/src/jdom/spec"
 import DeviceSpecificationList from "../specification/DeviceSpecificationList"

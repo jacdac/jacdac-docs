@@ -1,7 +1,7 @@
 import React from "react"
 import Markdown from "./ui/Markdown"
 import ServiceSpecificationStatusAlert from "./specification/ServiceSpecificationStatusAlert"
-import { Button, Link } from "gatsby-theme-material-ui"
+import { Button, Link } from "./ui/GatsbyMuiCompat"
 import DeviceSpecificationList from "./specification/DeviceSpecificationList"
 import { serviceSpecificationFromClassIdentifier } from "../../jacdac-ts/src/jdom/spec"
 import { Grid } from "@mui/material"

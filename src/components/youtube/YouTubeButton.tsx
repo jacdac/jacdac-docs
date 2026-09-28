@@ -1,5 +1,5 @@
 import { ButtonProps } from "@mui/material"
-import { Button } from "gatsby-theme-material-ui"
+import { Button } from "../ui/GatsbyMuiCompat"
 import React, { useContext } from "react"
 import useMediaQueries from "../hooks/useMediaQueries"
 import YouTubeContext from "./YouTubeContext"

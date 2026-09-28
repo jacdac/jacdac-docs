@@ -6,7 +6,7 @@ import { uniqueMap } from "../../../jacdac-ts/src/jdom/utils"
 import { serviceProviderDefinitions } from "../../../jacdac-ts/src/servers/servers"
 import { hasServiceView } from "../../components/dashboard/DashboardServiceWidget"
 import { serviceSpecificationFromClassIdentifier } from "../../../jacdac-ts/src/jdom/spec"
-import { withPrefix } from "gatsby-link"
+import { withPrefix } from "../../compat/withPrefix"
 
 // run scripts/collecticons.js to refresh
 

@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material"
-import { Button } from "gatsby-theme-material-ui"
+import { Button } from "../ui/GatsbyMuiCompat"
 import React, { useEffect, useState } from "react"
 import { SatNavReg } from "../../../jacdac-ts/src/jdom/constants"
 import {

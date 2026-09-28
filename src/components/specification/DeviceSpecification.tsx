@@ -10,7 +10,7 @@ import DownloadFirmwareButton from "../ui/DownloadFirmwareButton"
 import MemoryIcon from "@mui/icons-material/Memory"
 import ChipList from "../ui/ChipList"
 import useDeviceSpecifications from "../devices/useDeviceSpecifications"
-import { Link } from "gatsby-theme-material-ui"
+import { Link } from "../ui/GatsbyMuiCompat"
 import {
     arrayify,
     ellipseFirstSentence,
@@ -258,7 +258,7 @@ export default function DeviceSpecification(props: {
                                 ? "kit"
                                 : "device"}{" "}
                             requires a{" "}
-                            <Link to={`/devices/${identifierToUrlPath(id)}`}>
+                            <Link to={`/devices/${identifierToUrlPath(id)}/`}>
                                 {name}
                             </Link>{" "}
                             (sold separately).

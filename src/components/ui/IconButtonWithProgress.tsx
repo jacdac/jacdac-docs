@@ -1,5 +1,5 @@
 import { Badge, IconButtonProps } from "@mui/material"
-import { IconButton } from "gatsby-theme-material-ui"
+import { IconButton } from "./GatsbyMuiCompat"
 import React from "react"
 import CircularProgressBox, {
     CircularProgressBoxProps,

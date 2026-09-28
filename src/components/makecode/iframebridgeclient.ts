@@ -113,6 +113,8 @@ export class IFrameBridgeClient extends JDClient {
     private _serialMessages: { data: string; time: number; sim: boolean }[] = []
 
     private _runOptions: SimulatorRunOptions
+    private _runId = 0
+    private _mode: "simulator" | "device" = "simulator"
 
     constructor(readonly bus: JDBus, readonly frameId: string) {
         super()
@@ -137,6 +139,14 @@ export class IFrameBridgeClient extends JDClient {
 
     get dependencies() {
         return this._runOptions?.dependencies
+    }
+
+    get mode() {
+        return this._mode
+    }
+
+    get runId() {
+        return this._runId
     }
 
     private registerEvents() {
@@ -250,11 +260,12 @@ export class IFrameBridgeClient extends JDClient {
     }
 
     private handleDriverMessage(msg: { type: string }) {
-        //console.log("pxt message", msg)
+        console.log("pxt message", msg)
         switch (msg.type) {
             case "run": {
                 // simulation is starting
                 this._runOptions = msg as SimulatorRunOptions
+                this._runId++
                 this.bus.broadcastDisconnectRequest()
                 this.emit(CHANGE)
                 break
@@ -262,6 +273,14 @@ export class IFrameBridgeClient extends JDClient {
             case "stop": // start again
                 // remember options
                 // this._runOptions = undefined
+                break
+            case "simulatorMode":
+                this._mode = "simulator"
+                this.emit(CHANGE)
+                break
+            case "devicesMode":
+                this._mode = "device"
+                this.emit(CHANGE)
                 break
         }
     }

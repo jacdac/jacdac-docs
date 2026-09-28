@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material"
-import { Link } from "gatsby-material-ui-components"
+import { Link } from "../ui/GatsbyMuiCompat"
 import React from "react"
 import { identifierToUrlPath } from "../../../jacdac-ts/src/jdom/catalog"
 import { JDDevice } from "../../../jacdac-ts/src/jdom/device"

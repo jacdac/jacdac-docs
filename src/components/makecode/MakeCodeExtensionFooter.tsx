@@ -1,4 +1,4 @@
-import { Link } from "gatsby-theme-material-ui"
+import { Link } from "../ui/GatsbyMuiCompat"
 import React from "react"
 import DeviceSpecificationList from "../specification/DeviceSpecificationList"
 import MakeCodeProjects from "./MakeCodeProjects"

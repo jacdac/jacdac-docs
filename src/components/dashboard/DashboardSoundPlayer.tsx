@@ -17,7 +17,7 @@ import VolumeWidget from "../widgets/VolumeWidget"
 import SelectWithLabel from "../ui/SelectWithLabel"
 import PlayArrowIcon from "@mui/icons-material/PlayArrow"
 import CmdButton from "../CmdButton"
-import { withPrefix } from "gatsby"
+import { withPrefix } from "../../compat/withPrefix"
 
 export default function DashboardSoundPlayer(props: DashboardServiceProps) {
     const { service, expanded } = props

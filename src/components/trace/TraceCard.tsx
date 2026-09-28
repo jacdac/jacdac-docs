@@ -10,7 +10,7 @@ import { prettyDuration } from "../../../jacdac-ts/src/jdom/pretty"
 import { Trace } from "../../../jacdac-ts/src/jdom/trace/trace"
 import Markdown from "../ui/Markdown"
 import PacketsContext from "../PacketsContext"
-import { navigate } from "gatsby"
+import { navigate } from "../../compat/navigate"
 
 export default function TraceCard(props: { name: string; trace: Trace }) {
     const { name, trace } = props

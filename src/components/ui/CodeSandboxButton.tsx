@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import EditIcon from "@mui/icons-material/Edit"
 import IconButtonWithTooltip from "./IconButtonWithTooltip"
 import useMediaQueries from "../hooks/useMediaQueries"
-import { Button } from "gatsby-material-ui-components"
+import { Button } from "./GatsbyMuiCompat"
 import useSnackbar from "../hooks/useSnackbar"
 
 export default function CodeSandboxButton(props: {

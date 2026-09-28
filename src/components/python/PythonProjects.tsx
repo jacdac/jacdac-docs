@@ -1,4 +1,4 @@
-import { graphql, useStaticQuery } from "gatsby"
+import { listLegacyPagesByPrefix } from "../../compat/pageData"
 import React, { useMemo } from "react"
 import { ReactNode } from "react"
 import { serviceSpecificationFromClassIdentifier } from "../../../jacdac-ts/src/jdom/spec"
@@ -18,72 +18,31 @@ export default function PythonProjects(props: {
             .filter(s => !!s) || []),
     ])
 
-    const query = useStaticQuery<{
-        allMdx: {
-            edges: {
-                node: {
-                    fields: {
-                        slug: string
-                    }
-                    frontmatter: {
-                        title?: string
-                        order?: number
-                        services?: string
-                        description?: string
-                    }
-                }
-            }[]
-        }
-    }>(graphql`
-        {
-            allMdx(
-                filter: {
-                    fields: { slug: { glob: "/clients/python/projects/*" } }
-                }
-            ) {
-                edges {
-                    node {
-                        id
-                        fields {
-                            slug
-                        }
-                        frontmatter {
-                            title
-                            order
-                            services
-                            description
-                        }
-                    }
-                }
-            }
-        }
-    `)
+    const projectPages = listLegacyPagesByPrefix("/clients/python/projects/")
 
     const nodes = useMemo(() => {
         // grab the nodes
-        let nodes = query.allMdx.edges.map(edge => edge.node)
+        let nodes = projectPages
         // filter out
         if (serviceNames?.length)
             nodes = nodes.filter(node =>
-                serviceNames.some(
-                    n => node.frontmatter.services?.indexOf(n) > -1
-                )
+                serviceNames.some(n => node.services?.indexOf(n) > -1)
             )
         // order nodes
         nodes = nodes.sort((l, r) => {
-            const lo = Number(l.frontmatter?.order) || 50
-            const ro = Number(r.frontmatter?.order) || 50
+            const lo = Number(l.order) || 50
+            const ro = Number(r.order) || 50
             const c = lo - ro
             if (c) return c
-            return l.fields.slug.localeCompare(r.fields.slug)
+            return l.slug.localeCompare(r.slug)
         })
-        return nodes.map(({ fields, frontmatter }) => ({
-            slug: fields.slug,
-            title: frontmatter.title,
-            description: frontmatter.description,
-            services: frontmatter.services,
+        return nodes.map(page => ({
+            slug: page.slug,
+            title: page.title,
+            description: page.description,
+            services: page.services,
         }))
-    }, [serviceNames.join(",")])
+    }, [serviceNames.join(","), projectPages.length])
 
     return <PageLinkList header={header} nodes={nodes} />
 }
