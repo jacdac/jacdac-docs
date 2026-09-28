@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://jacdac.github.io/jacdac-docs/sitemap/sitemap-index.xml
+Host: https://jacdac.github.io
