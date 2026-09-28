@@ -13,7 +13,22 @@ import {
     JDEventSource,
     LightBulbReg,
     MotionReg,
+    I2CReg,
+    I2CCmd,
+    RealTimeClockReg,
+    RealTimeClockCmd,
+    COMMAND_RECEIVE,
+    Packet,
+    TemperatureReg,
+    HumidityReg,
+    AirPressureReg,
+    GamepadReg,
+    GamepadButtons,
+    SRV_HUMIDITY,
+    SRV_AIR_PRESSURE,
 } from "../../../jacdac-ts/src/jacdac"
+import { RealTimeClockReadingType } from "../../../jacdac-ts/src/servers/realtimeclockserver"
+import { GamepadServer } from "../../../jacdac-ts/src/servers/gamepadserver"
 import { DashboardServiceProps } from "./DashboardServiceWidget"
 import useServiceServer from "../hooks/useServiceServer"
 import useRegister from "../hooks/useRegister"
@@ -27,12 +42,19 @@ import { FormControlLabel, Grid, Slider, Switch, Box } from "@mui/material"
 import FwdLEDWidget from "../widgets/FwdLEDWidget"
 import FwdPumpWidget from "../widgets/FwdPumpWidget"
 import FwdServoWidget from "../widgets/FwdServoWidget"
+import FwdBme280Widget from "../widgets/FwdBme280Widget"
+import FwdDpadWidget from "../widgets/FwdDpadWidget"
 import DashboardRegisterValueFallback from "./DashboardRegisterValueFallback"
 import SwitchWithLabel from "../ui/SwitchWithLabel"
 import useChange from "../../jacdac/useChange"
 import ColorButtons from "../widgets/ColorButtons"
 import FwdLightsWidget from "../widgets/FwdLightsWidget"
 import FwdPirWidget from "../widgets/FwdPirWidget"
+import FwdNeopixelWidget from "../widgets/FwdNeopixelWidget"
+import FwdI2cWidget from "../widgets/FwdI2cWidget"
+import FwdTimeRtcWidget from "../widgets/FwdTimeRtcWidget"
+import CmdButton from "../CmdButton"
+import SyncIcon from "@mui/icons-material/Sync"
 
 export function createLightsWidget(props: DashboardServiceProps) {
     const { service } = props
@@ -84,6 +106,76 @@ export function createPirWidget(props: DashboardServiceProps) {
     const moving = useRegisterBoolValue(movingRegister, props)
 
     return <FwdPirWidget moving={moving}></FwdPirWidget>
+}
+
+// draws all three BME280 readings; the humidity and pressure services are hidden
+export function createBme280Widget(props: DashboardServiceProps) {
+    const { service } = props
+    const { device } = service
+    const [humidityService] = device.services({ serviceClass: SRV_HUMIDITY })
+    const [pressureService] = device.services({
+        serviceClass: SRV_AIR_PRESSURE,
+    })
+
+    const temperatureRegister = useRegister(service, TemperatureReg.Temperature)
+    const humidityRegister = useRegister(humidityService, HumidityReg.Humidity)
+    const pressureRegister = useRegister(
+        pressureService,
+        AirPressureReg.Pressure
+    )
+    const [temperature] = useRegisterUnpackedValue<[number]>(
+        temperatureRegister,
+        props
+    )
+    const [humidity] = useRegisterUnpackedValue<[number]>(
+        humidityRegister,
+        props
+    )
+    const [pressure] = useRegisterUnpackedValue<[number]>(
+        pressureRegister,
+        props
+    )
+
+    return (
+        <FwdBme280Widget
+            temperature={temperature}
+            humidity={humidity}
+            pressure={pressure}
+        />
+    )
+}
+
+export function createDpadWidget(props: DashboardServiceProps) {
+    const { service } = props
+    const directionRegister = useRegister(service, GamepadReg.Direction)
+    const [buttons] = useRegisterUnpackedValue<[GamepadButtons]>(
+        directionRegister,
+        props
+    )
+    const server = useServiceServer<GamepadServer>(service)
+    const color = server ? "secondary" : "primary"
+
+    const handleDown = server
+        ? (button: GamepadButtons) => {
+              server.down(button)
+              directionRegister.refresh()
+          }
+        : undefined
+    const handleUp = server
+        ? (button: GamepadButtons) => {
+              server.up(button)
+              directionRegister.refresh()
+          }
+        : undefined
+
+    return (
+        <FwdDpadWidget
+            buttons={buttons}
+            color={color}
+            onDown={handleDown}
+            onUp={handleUp}
+        />
+    )
 }
 
 export function createPumpWidget(props: DashboardServiceProps) {
@@ -378,6 +470,91 @@ export function createLEDWidget(props: DashboardServiceProps) {
                     />
                 )}
             </Grid>
+        </Grid>
+    )
+}
+
+export function createNeopixelWidget(props: DashboardServiceProps) {
+    const { service } = props
+    const pixelsRegister = useRegister(service, LedReg.Pixels)
+    const [pixels] = useRegisterUnpackedValue<[Uint8Array]>(
+        pixelsRegister,
+        props
+    )
+    const numPixelsRegister = useRegister(service, LedReg.NumPixels)
+    const [numPixels] = useRegisterUnpackedValue<[number]>(
+        numPixelsRegister,
+        props
+    )
+
+    return <FwdNeopixelWidget pixels={pixels} numPixels={numPixels} />
+}
+
+export function createI2cWidget(props: DashboardServiceProps) {
+    const { service } = props
+    const okRegister = useRegister(service, I2CReg.Ok)
+    const ok = useRegisterBoolValue(okRegister, props)
+    const [transactions, setTransactions] = useState(0)
+    const [address, setAddress] = useState<number>(undefined)
+
+    // transaction commands from other clients carry the target device address
+    useEffect(
+        () =>
+            service?.subscribe(COMMAND_RECEIVE, (pkt: Packet) => {
+                if (pkt.serviceCommand !== I2CCmd.Transaction) return
+                setAddress(pkt.data[0])
+                setTransactions(n => n + 1)
+            }),
+        [service]
+    )
+
+    return (
+        <FwdI2cWidget address={address} transactions={transactions} ok={ok} />
+    )
+}
+
+export function createTimeRtcWidget(props: DashboardServiceProps) {
+    const { service, expanded } = props
+    const localTimeRegister = useRegister(service, RealTimeClockReg.LocalTime)
+    const [year, month, dayOfMonth, , hour, min, seconds] =
+        useRegisterUnpackedValue<RealTimeClockReadingType>(
+            localTimeRegister,
+            props
+        )
+    const time =
+        year === undefined
+            ? undefined
+            : new Date(year, month - 1, dayOfMonth, hour, min, seconds)
+
+    const handleSync = async () => {
+        const now = new Date()
+        await service.sendCmdPackedAsync(RealTimeClockCmd.SetTime, [
+            now.getFullYear(),
+            now.getMonth() + 1,
+            now.getDate(),
+            now.getDay(),
+            now.getHours(),
+            now.getMinutes(),
+            now.getSeconds(),
+        ])
+    }
+
+    return (
+        <Grid container direction="column" alignItems="center">
+            <Grid item>
+                <FwdTimeRtcWidget time={time} />
+            </Grid>
+            {expanded && (
+                <Grid item>
+                    <CmdButton
+                        trackName="realtimeclock.sync"
+                        onClick={handleSync}
+                        icon={<SyncIcon />}
+                    >
+                        sync time
+                    </CmdButton>
+                </Grid>
+            )}
         </Grid>
     )
 }

@@ -6,6 +6,7 @@ import DashboardServiceWidget, {
 } from "./DashboardServiceWidget"
 import StatusCodeAlert from "../services/StatusCodeAlert"
 import DashboardServiceWidgetItemHeader from "./DashboardServiceWidgetItemHeader"
+import { useHiddenFwdService } from "./DashboardFwdEduWidgets"
 
 export default function DashboardServiceWidgetItem(
     props: React.Attributes & DashboardServiceProps
@@ -21,6 +22,9 @@ export default function DashboardServiceWidgetItem(
     useEffect(() => {
         setExpanded(!controlled && expandable ? false : undefined)
     }, [controlled, expandable])
+    const hidden = useHiddenFwdService(service)
+
+    if (hidden) return null
 
     return (
         <Grid item>
