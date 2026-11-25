@@ -12,6 +12,11 @@ import { DeviceSpecificationIcon } from "../devices/DeviceIcon"
 import IconButtonWithTooltip from "../ui/IconButtonWithTooltip"
 import useDeveloperMode from "../hooks/useDeveloperMode"
 import { identifierToUrlPath } from "../../../jacdac-ts/src/jdom/catalog"
+import { BLUETOOTH_TRANSPORT } from "../../../jacdac-ts/src/jdom/constants"
+import {
+    isWebBluetoothEnabled,
+    isWebBluetoothSupported,
+} from "../../../jacdac-ts/src/jdom/transport/bluetooth"
 
 function ConnectTransport(props: {
     transport: Transport
@@ -25,7 +30,13 @@ function ConnectTransport(props: {
         includeExperimental: developerMode,
         includeDeprecated: developerMode,
     })
-    if (!devices?.length && !Flags.diagnostics) return null
+    // Bluetooth has no device in the catalog yet (e.g. micro:bit V2, Calliope mini 3
+    // running the Jacdac Bluetooth transport); show it whenever it can be used
+    const bluetooth =
+        transportType === BLUETOOTH_TRANSPORT &&
+        isWebBluetoothEnabled() &&
+        isWebBluetoothSupported()
+    if (!devices?.length && !bluetooth && !Flags.diagnostics) return null
     return (
         <Grid item xs={12}>
             <Grid container spacing={1} alignContent="flex-end">
@@ -40,7 +51,7 @@ function ConnectTransport(props: {
                 </Grid>
                 <Grid item xs>
                     <Grid container spacing={1}>
-                        {devices.map(device => (
+                        {devices?.map(device => (
                             <Grid item key={device.id}>
                                 <IconButtonWithTooltip
                                     title={device.name}

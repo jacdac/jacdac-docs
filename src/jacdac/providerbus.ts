@@ -71,7 +71,8 @@ function sniffQueryArguments() {
         webBluetooth:
             isWebBluetoothSupported() &&
             params.get(`webble`) !== "0" &&
-            !toolsMakecode &&
+            // MakeCode pages get their devices from the editor; ?webble=1 opts in to Bluetooth
+            (!toolsMakecode || params.get(`webble`) === "1") &&
             !toolsDeviceScriptVsCode,
         webSerial:
             isWebSerialSupported() &&

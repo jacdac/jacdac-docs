@@ -10,6 +10,7 @@ import IFrameBridgeClient from "../../components/makecode/iframebridgeclient"
 import useBus from "../../jacdac/useBus"
 import MakeCodeBlocksAndSimsBox from "../../components/makecode/MakeCodeBlocksAndSimsBox"
 import { usePersistentSimulators } from "../../jacdac/usePersistentSimulators"
+import { Flags } from "../../../jacdac-ts/src/jdom/flags"
 
 /**
  * To debug locally:
@@ -73,6 +74,7 @@ function Carousel() {
                 deviceFilter={deviceFilter}
                 serviceFilter={serviceFilter}
                 showStartRoleSimulators={false}
+                showConnect={Flags.webBluetooth}
                 alwaysVisible={true}
                 variant="icon"
                 controlled={true}

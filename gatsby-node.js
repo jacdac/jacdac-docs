@@ -386,6 +386,20 @@ exports.onCreateWebpackConfig = ({ stage, actions, getConfig }) => {
             plugins,
         })
     }
+    if (stage === "develop") {
+        // @pmmmwh/react-refresh-webpack-plugin 0.5 reads the package.json "type" of the first
+        // module it processes and reuses it for every module. react-jacdac is "type": "module",
+        // so Gatsby's CommonJS .cache/async-requires.js could get ESM refresh code
+        // ("exports is not defined", blank page). Only react-jacdac is ESM.
+        const refresh = getConfig().plugins.find(
+            p => p?.constructor?.name === "ReactRefreshPlugin"
+        )
+        if (refresh)
+            refresh.options.esModule = {
+                include: /[\\/]react-jacdac[\\/]/,
+                exclude: /./,
+            }
+    }
     if (stage === "build-javascript" || stage === "build-html") {
         console.log(`enabling ignore filters`)
         setWebpackConfig({
